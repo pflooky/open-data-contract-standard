@@ -6,12 +6,12 @@ Welcome! Thanks for your interest and for taking the time to come here! ❤️
 This project describes the **data contract** being used in the implementation of Data Mesh at [PayPal](https://about.pypl.com/). It is available for you as an Apache 2.0 license. Contributions are welcome!
 
 ## Discover the template
-Discover the [template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md). This file contains the explanation and several examples.
+Discover the [template](https://github.com/paypal/data-contract-template/blob/main/docs/README.md). This file contains some explanations and several examples.
 
 ## What is a Data Contract?
 
 ### The basics of a data contract
-A data contract defines the agreement between a data producer and consumer. A data contract contains several sections:
+A data contract defines the agreement between a data producer and consumers. A data contract contains several sections:
 * Fundamentals.
 * Schema.
 * Data quality.
