@@ -21,7 +21,7 @@ A data contract defines the agreement between a data producer and consumers. A d
 * Security & stakeholders.
 * Custom properties.
 
-![Data contract schema](https://github.com/AIDAUserGroup/data-contract-template/blob/main/docs/img/data-contract-v2-schema.png "Data contract schema")
+![Data contract schema](https://github.com/AIDAUserGroup/data-contract-template/blob/main/docs/img/data-contract-v2.2-schema.png "Data contract schema")
 
 *Figure 1: illustration of a data contract, its principal contributors, sections, and usage.*
 

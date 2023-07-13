@@ -38,10 +38,10 @@ description:
   purpose: Views built on top of the seller tables.
   limitations: null
   usage: null
-tenant: ClimateOpenData
+tenant: ClimateQuantumInc
 
 # Getting support
-productDl: product-dl@ClimateOpenData.org
+productDl: product-dl@ClimateQuantum.org
 productSlackChannel: '#product-help'
 productFeedbackUrl: null
 
@@ -79,12 +79,12 @@ tags: null
 | userConsumptionMode | Consumption mode | No | List of data modes for which the dataset may be used.  Expected sample values might be Analytical or Operational. <br/>Note: in the future, this will probably be replaced by ports. |
 | type | Type | Yes | Identifies the types of objects in the dataset.  For BigQuery the expected value would be tables. |
 | tenant | Tenant | No | Indicates the property the data is primarily associated with. Value is case insensitive. |
-tags|Tags|No|a list of tags that may be assigned to the dataset, table or column; the `tags` keyword may appear at any level.
-status|Status|Yes|Current status of the dataset.
-sourceSystem|Source system|Yes|The system where the dataset resides.  Expected value is bigQuery
-sourcePlatform|Source platform|Yes|The platform where the dataset resides. Expected value is googleCloudPlatform
-server|Server|Yes|The server where the dataset resides.|
-quantumName|Quantum name|Yes|The name of the data quantum or data product.
+| tags|Tags|No|a list of tags that may be assigned to the dataset, table or column; the `tags` keyword may appear at any level.
+| status|Status|Yes|Current status of the dataset.
+| sourceSystem|Source system|Yes|The system where the dataset resides.  Expected value is bigQuery
+| sourcePlatform|Source platform|Yes|The platform where the dataset resides. Expected value is googleCloudPlatform
+| server|Server|Yes|The server where the dataset resides.|
+| quantumName|Quantum name|Yes|The name of the data quantum or data product.
 productSlackChannel|Support Slack channel|No|Slack channel of the team responsible for maintaining the dataset.
 productFeedbackUrl|Feedback URL|No|The URL for submitting feedback to the team responsible for maintaining the dataset.|
 productDl|E-mail distribution list|No|The email distribution list (DL) of the persons or team responsible for maintaining the dataset.
@@ -466,7 +466,7 @@ customProperties:
   - property: dataprocClusterName # Used for specific applications like Elevate
     value: [cluster name]
 
-systemInstance: someinstance.example.com
+systemInstance: instance.ClimateQuantum.org
 contractCreatedTs: 2022-11-15 02:59:43
 ```
 
