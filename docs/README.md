@@ -4,8 +4,8 @@
 This document describes the keys and values expected in a YAML data contract. It is divided in multiple sections: [demographics](#Demographics), [dataset & schema](#Dataset-&-schema), [data quality](#Data-quality), [pricing](#Pricing), [stakeholders](#Stakeholders), [roles](#Roles), [service-level agreement](#Service-level-agreement), and [other properties](#Other-properties). Each section starts with at least an example followed by definition of each field/key.
 
 ## Table of content
-* [Demographics](#Demographics)
-* [Dataset & schema](#Dataset-&-schema)
+* [Fundamentals & demographics](#Demographics)
+* [Datasets & schema](#Dataset-&-schema)
 * [Data quality](#Data-quality)
 * [Pricing](#Pricing)
 * [Stakeholders](#Stakeholders)
@@ -14,9 +14,9 @@ This document describes the keys and values expected in a YAML data contract. It
 * [Other properties](#Other-properties)
 
 ## Notes
-* This contract is containing example values, we reviewed very carefully the consistency of those values, but we cannot guarantee that there are no errors. If you spot one, please raise an [issue](https://github.com/paypal/data-contract-template/issues).
+* This contract is containing example values, we reviewed very carefully the consistency of those values, but we cannot guarantee that there are no errors. If you spot one, please raise an [issue](https://github.com/AIDAUserGroup/data-contract-template/issues).
 * Some fields have `null` value: even if it is equivalent to not having the field in the contract, we wanted to have the field for illustration purpose.
-* This contract leverages BigQuery but should be **platform agnostic**. If you think it is not the case, please raise an [issue](https://github.com/paypal/data-contract-template/issues).
+* This contract leverages BigQuery but should be **platform agnostic**. If you think it is not the case, please raise an [issue](https://github.com/AIDAUserGroup/data-contract-template/issues).
 
 ## Demographics
 This section contains general information about the contract.
@@ -38,10 +38,10 @@ description:
   purpose: Views built on top of the seller tables.
   limitations: null
   usage: null
-tenant: paypal
+tenant: ClimateQuantumInc
 
 # Getting support
-productDl: product-dl@paypal.com
+productDl: product-dl@ClimateQuantum.org
 productSlackChannel: '#product-help'
 productFeedbackUrl: null
 
@@ -78,13 +78,13 @@ tags: null
 | username | Username | Yes | User credentials for connecting to the dataset; how the credentials will be stored/passed is outside of the scope of the contract. |
 | userConsumptionMode | Consumption mode | No | List of data modes for which the dataset may be used.  Expected sample values might be Analytical or Operational. <br/>Note: in the future, this will probably be replaced by ports. |
 | type | Type | Yes | Identifies the types of objects in the dataset.  For BigQuery the expected value would be tables. |
-| tenant | Tenant | No | Indicates the property the data is primarily associated with. Value is case insensitive. For PayPal, the expected sample values might be PayPal, Venmo, PPWC, etc. |
-tags|Tags|No|a list of tags that may be assigned to the dataset, table or column; the `tags` keyword may appear at any level.
-status|Status|Yes|Current status of the dataset.
-sourceSystem|Source system|Yes|The system where the dataset resides.  Expected value is bigQuery
-sourcePlatform|Source platform|Yes|The platform where the dataset resides. Expected value is googleCloudPlatform
-server|Server|Yes|The server where the dataset resides.|
-quantumName|Quantum name|Yes|The name of the data quantum or data product.
+| tenant | Tenant | No | Indicates the property the data is primarily associated with. Value is case insensitive. |
+| tags|Tags|No|a list of tags that may be assigned to the dataset, table or column; the `tags` keyword may appear at any level.
+| status|Status|Yes|Current status of the dataset.
+| sourceSystem|Source system|Yes|The system where the dataset resides.  Expected value is bigQuery
+| sourcePlatform|Source platform|Yes|The platform where the dataset resides. Expected value is googleCloudPlatform
+| server|Server|Yes|The server where the dataset resides.|
+| quantumName|Quantum name|Yes|The name of the data quantum or data product.
 productSlackChannel|Support Slack channel|No|Slack channel of the team responsible for maintaining the dataset.
 productFeedbackUrl|Feedback URL|No|The URL for submitting feedback to the team responsible for maintaining the dataset.|
 productDl|E-mail distribution list|No|The email distribution list (DL) of the persons or team responsible for maintaining the dataset.
@@ -185,10 +185,10 @@ dataset.columns.isPrimaryKey||No|Boolean value specifying whether the column is 
 dataset.columns.businessName||Yes|the business name of the column.|
 dataset.columns.logicalType||Yes|the logical column datatype.|
 dataset.columns.physicalType||Yes|the physical column datatype.|
-dataset.columns.isNullable||Yes|indicates if the column may contain Null values; possible values are true and false.|
-dataset.columns.partitionStatus||Yes|indicates if the column is partitioned; possible values are true and false.|
-dataset.columns.clusterStatus||Yes|indicates of the column is clustered; possible values are true and false.|
-dataset.columns.classification||Yes|the PayPal data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.|
+|dataset.columns.isNullable||Yes|indicates if the column may contain Null values; possible values are true and false.|
+|dataset.columns.partitionStatus||Yes|indicates if the column is partitioned; possible values are true and false.|
+|dataset.columns.clusterStatus||Yes|indicates of the column is clustered; possible values are true and false.|
+|dataset.columns.classification||Yes|Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.|
 |dataset.columns.authoritativeDefinitions||No|list of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.|
 dataset.columns.encryptedColumnName||Yes|The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`.
 dataset.columns.transformSourceTables||No|List of sources used in column transformation.|
@@ -204,7 +204,7 @@ This section describes data quality rules & parameters. They are tightly linked 
 ### Example of data quality at the dataset level
 
 Note:
-* This example relies on a data quality tool called Elevate. It should be easily transformed to any other tool. If you have questions, please raise an [issue](https://github.com/paypal/data-contract-template/issues).
+* This example relies on a data quality tool called Elevate. It should be easily transformed to any other tool. If you have questions, please raise an [issue](https://github.com/AISAUserGroup/data-contract-template/issues).
 * The data contract template has a provision for supporting multiple data quality tools.
 
 ```YAML
@@ -221,7 +221,7 @@ dataset:
         type: reconciliation                                                # Optional NEW in v2.1.0 default value for column level check - dataQuality and for table level reconciliation
         severity: error                                                     # Optional NEW in v2.1.0, default value is error
         businessImpact: operational                                         # Optional NEW in v2.1.0
-        scheduleCronExpression: 0 20 * * *                                  # Optional NEW in v2.1.0 default schedule - every day 10 a.m. PST
+        scheduleCronExpression: 0 20 * * *                                  # Optional NEW in v2.1.0 default schedule - every day 10 a.m. UTC
       - code: distinctCheck    
         description: enforce distinct values
         toolName: Elevate
@@ -466,7 +466,7 @@ customProperties:
   - property: dataprocClusterName # Used for specific applications like Elevate
     value: [cluster name]
 
-systemInstance: someinstance.paypal.com
+systemInstance: instance.ClimateQuantum.org
 contractCreatedTs: 2022-11-15 02:59:43
 ```
 
@@ -479,4 +479,4 @@ customProperties||No|A list of key/value pairs for custom properties. Initially 
 customProperties.property||No|The name of the key. Names should be in camel case–the same as if they were permanent properties in the contract.
 customProperties.value||No|The value of the key.
 systemInstance||No|System Instance name where the dataset resides.
-contractCreatedTs||No|Timestamp in PST of when the data contract was created.
+contractCreatedTs||No|Timestamp in UTC of when the data contract was created.
