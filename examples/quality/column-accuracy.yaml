@@ -1,0 +1,20 @@
+- table: Air_Quality
+  description: Air quality of the city of New York - https://catalog.data.gov/dataset/air-quality 
+  dataGranularity: Raw records
+  columns:
+  - column: DataValue
+    businessName: Measured value
+    logicalType: number
+    physicalType: float(3,2)
+        quality:
+        - templateName: RangeCheck
+          toolName: ClimateQuantumDataQualityPackage
+          description: This column should not contain positive values under 500
+          dimension: accuracy
+          severity: error
+          businessImpact: operational
+          customProperties:
+            - property: min
+              value: 0
+            - property: max
+              value: 500
