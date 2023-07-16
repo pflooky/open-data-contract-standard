@@ -1,0 +1,16 @@
+- table: Air_Quality
+  description: Air quality of the city of New York - https://catalog.data.gov/dataset/air-quality 
+  dataGranularity: Raw records
+  columns:
+  - column: UniqueID
+    isPrimary: true
+    businessName: Unique identifier
+    logicalType: number
+    physicalType: int
+        quality:
+        - templateName: NullCheck
+          toolName: ClimateQuantumDataQualityPackage
+          description: This column should not contain null values
+          dimension: completeness
+          severity: error
+          businessImpact: operational
