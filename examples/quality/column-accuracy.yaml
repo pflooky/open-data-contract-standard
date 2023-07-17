@@ -1,5 +1,8 @@
 - table: Air_Quality
-  description: Air quality of the city of New York - https://catalog.data.gov/dataset/air-quality 
+  description: Air quality of the city of New York
+  authoritativeDefinitions: 
+    - url: https://catalog.data.gov/dataset/air-quality 
+      type: Reference definition on Data.gov
   dataGranularity: Raw records
   columns:
   - column: DataValue
@@ -9,7 +12,7 @@
         quality:
         - templateName: RangeCheck
           toolName: ClimateQuantumDataQualityPackage
-          description: This column should not contain positive values under 500
+          description: 'This column should contain positive values under 500'
           dimension: accuracy
           severity: error
           businessImpact: operational

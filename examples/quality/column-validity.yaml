@@ -1,5 +1,8 @@
 - table: Air_Quality
-  description: Air quality of the city of New York - https://catalog.data.gov/dataset/air-quality 
+  description: Air quality of the city of New York
+  authoritativeDefinitions: 
+    - url: https://catalog.data.gov/dataset/air-quality 
+      type: Reference definition on Data.gov
   dataGranularity: Raw records
   columns:
   - column: UniqueID
