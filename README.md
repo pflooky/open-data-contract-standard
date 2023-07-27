@@ -8,7 +8,7 @@ Thanks for your interest and for taking the time to come here! ❤️
 This standard describes a structure for a **data contract**. It's current version is 2.2.0. It is available for you as an Apache 2.0 license. Contributions are welcome!
 
 ## Discover the template
-Discover the [template](https://github.com/AIDAUserGroup/data-contract-template/blob/main/docs/README.md). This file contains some explanations and several examples. More [examples](./examples/README.md) have been added to v2.2.
+Discover the [template](./docs/README.md). This file contains some explanations and several examples. More [examples](./examples/README.md) have been added to v2.2.
 
 ## What is a Data Contract?
 
@@ -26,7 +26,7 @@ A data contract defines the agreement between a data producer and consumers. A d
 *Figure 1: illustration of a data contract, its principal contributors, sections, and usage.*
 
 ## Contributing to the project
-Check out the [CONTRIBUTING](https://github.com/AIDAUserGroup/data-contract-template/blob/main/CONTRIBUTING.md) file.
+Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
 ## Articles 
 

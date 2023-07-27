@@ -1,7 +1,7 @@
-# Data Contract Template
+# Open Data Contract Standard
 
 ## Executive summary
-This document describes the keys and values expected in a YAML data contract. It is divided in multiple sections: [demographics](#Demographics), [dataset & schema](#Dataset-&-schema), [data quality](#Data-quality), [pricing](#Pricing), [stakeholders](#Stakeholders), [roles](#Roles), [service-level agreement](#Service-level-agreement), and [other properties](#Other-properties). Each section starts with at least an example followed by definition of each field/key.
+This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [demographics](#Demographics), [dataset & schema](#Dataset-&-schema), [data quality](#Data-quality), [pricing](#Pricing), [stakeholders](#Stakeholders), [roles](#Roles), [service-level agreement](#Service-level-agreement), and [other properties](#Other-properties). Each section starts with at least an example followed by definition of each field/key.
 
 ## Table of content
 * [Fundamentals & demographics](#Demographics)
