@@ -1,4 +1,13 @@
-This document tracks the history and evolution of the data contract template. It precedes 
+This document tracks the history and evolution of the **Open Data Contract Standard**.
+
+# v2.2.0 - 2023-07-27 - APPROVED
+
+* New name to Open Data Contract Standard.
+* `templateName` is now called `standardVersion`, v2.2.0 parsers should account for this change and support both to avoid a breaking change.
+* Added support for `authoritativeDefinitions` at the table level.
+* Added many examples.
+* Various improvements and typo corrections.
+* Finalization of fork under AIDA User Group.
 
 # v2.1.1 - 2023-04-26 - APPROVED
 
@@ -12,7 +21,7 @@ The data contract adds elements specifically for interfacing with the Data Quali
 
 Additions:
 * quality (table level & column level check):
-* templateName
+* templateName (called standardVersion since v2.2.0)
 * dimension
 * type
 * severity
