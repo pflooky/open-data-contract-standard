@@ -17,17 +17,22 @@ This folder contains mainly excerpt of data contracts to illustrate specific sec
 Look in the [`fundamentals`](./fundamentals) directory.
 
 ## Dataset & schema
+Look in the [`schema`](./schema) directory.
 
 ## Data quality 
-Look in the [quality](./quality) directory.
+Look in the [`quality`](./quality) directory.
 
 ## Pricing
 This section covers pricing when you bill your customer for using this data product. Pricing is experimental in v2.2.0 of the data contract.
 
 ## Stakeholders
+Look in the [`stakeholders`](./stakeholders) directory.
 
 ## Roles
+Coming soon.
 
 ## Service-level agreement
+Coming soon.
 
 ## Other properties
+Coming soon.
