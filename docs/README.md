@@ -112,6 +112,11 @@ dataset:
     physicalName: tbl_1 # NEW in v2.1.0, Optional, default value is table name + version separated by underscores, as table_1_2_0
     priorTableName: null # if needed
     description: Provides core payment metrics 
+    authoritativeDefinitions: # NEW in v2.2.0, inspired by the column-level authoritative links
+      - url: https://catalog.data.gov/dataset/air-quality 
+        type: Reference definition
+      - url: https://youtu.be/jbY1BKFj9ec
+        type: Video tutorial
     tags: null
     dataGranularity: Aggregation on columns txn_ref_dt, pmt_txn_id
     columns:
