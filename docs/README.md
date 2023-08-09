@@ -29,7 +29,6 @@ datasetDomain: seller # Domain
 quantumName: my quantum # Data product name
 userConsumptionMode: Analytical
 version: 1.1.0 # Version (follows semantic versioning)
-standardVersion: 2.2.0 # Standard version (follows semantic versioning, previously known as templateVersion)
 status: current
 uuid: 53581432-6c55-4ba2-a65f-72344a91553a
 
@@ -51,7 +50,9 @@ sourceSystem: bigQuery
 datasetProject: edw # BQ dataset
 datasetName: access_views # BQ dataset
 
-kind: virtualDataset
+kind: DataContract
+apiVersion: 2.3.0 # Standard version (follows semantic versioning, previously known as templateVersion)
+
 type: tables
 
 # Physical access
@@ -73,10 +74,12 @@ tags: null
 |Key                    |UX label           |Required|Description|
 | --- | --- | --- | --- | 
 |version                |Version                 |Yes|Current version of the data contract.|
-|standardVersion        |Standard version        |No |Version of the standard used to build data contract. Default value is v2.2.0. |
+|kind                   |Kind                    |Yes|The kind of file this is. Valid value is `DataContract`.
+|apiVersion             |Standard version        |No |Version of the standard used to build data contract. Default value is v2.3.0. |
 |uuid                   |Identifier              |Yes|A unique identifier used to reduce the risk of dataset name collisions; initially the UUID will be created using a UUID generator tool ([example](https://www.uuidgenerator.net/)). However, we may want to develop a method that accepts a seed value using a combination of fields–such as name, kind and source–to create a repeatable value. |
+|datasetKind            |Dataset Kind            |No |The kind of dataset being cataloged; Expected values are `virtualDataset` or `managedDataset`.
 |userConsumptionMode    |Consumption mode        |No |List of data modes for which the dataset may be used.  Expected sample values might be `analytical` or `operational`. <br/>Note: in the future, this will probably be replaced by ports. |
-|type                   |Type                    |Yes|Identifies the types of objects in the dataset. For BigQuery, the expected value would be Tables. |
+|type                   |Type                    |Yes|Identifies the types of objects in the dataset. For BigQuery or anyother database, the expected value would be Tables. |
 |tenant                 |Tenant                  |No |Indicates the property the data is primarily associated with. Value is case insensitive. |
 |tags                   |Tags                    |No |a list of tags that may be assigned to the dataset, table or column; the `tags` keyword may appear at any level.
 |status                 |Status                  |Yes|Current status of the dataset. Valid values are `production`, `test`, or `development`.
@@ -89,7 +92,6 @@ tags: null
 |productDl              |E-mail distribution list|No |The email distribution list (DL) of the persons or team responsible for maintaining the dataset.
 |username               |Username                |No |User credentials for connecting to the dataset; how the credentials will be stored/passed is outside of the scope of the contract. |
 |password               |Password                |No |User credentials for connecting to the dataset; how the credentials will be stored/passed is out of the scope of this contract.
-|kind                   |Kind                    |No |The kind of dataset being cataloged; Expected values are `virtualDataset` or `managedDataset`.
 |driverVersion          |Driver version          |No |The version of the connection driver to be used to connect to the dataset.|
 |driver                 |Driver                  |No |The connection driver required to connect to the dataset.|
 |description            |N/A                     |No |Object.|
@@ -114,9 +116,9 @@ dataset:
     description: Provides core payment metrics 
     authoritativeDefinitions: # NEW in v2.2.0, inspired by the column-level authoritative links
       - url: https://catalog.data.gov/dataset/air-quality 
-        type: Reference definition
+        type: businessDefinition
       - url: https://youtu.be/jbY1BKFj9ec
-        type: Video tutorial
+        type: videoTutorial
     tags: null
     dataGranularity: Aggregation on columns txn_ref_dt, pmt_txn_id
     columns:
@@ -169,41 +171,53 @@ dataset:
         classification: null
         authoritativeDefinitions:
           - url: https://collibra.com/asset/742b358f-71a5-4ab1-bda4-dcdba9418c25
-            type: Business definition
+            type: businessDefinition
           - url: https://github.com/myorg/myrepo
-            type: Reference implementation
+            type: transformationImplementation
+          - url: jdbc:postgresql://localhost:5432/adventureworks/tbl_1/rcvr_cntry_code
+            type: implementation
         encryptedColumnName: rcvr_cntry_code_encrypted
 ```
 
 ### Definitions
 
-|Key                                                |UX label|Required|Description|
+|Key                                                    |UX label|Required|Description|
 | ---  | --- | --- | --- | 
-|dataset                                                ||Yes|Array. A list of tables within the dataset to be cataloged.|
-|dataset.table                                          ||Yes|Name of the table being cataloged; the value should only contain the table name. Do not include the project or dataset name in the value.
-|dataset.table.physicalName                             ||No |Physical name of the table, default value is table name + version separated by underscores, as `table_1_2_0`.|
-|dataset.table.priorTableName                           ||No |Name of the previous version of the dataset, if applicable.|
-|dataset.table.description                              ||No |List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.|
-|dataset.table.authoritativeDefinitions                 ||No |List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. Authoritative definitions follow the same structure in the standard.|
-|dataset.table.dataGranularity                          ||No |Granular level of the data in the table. Example would be `pmt_txn_id`.|
-|dataset.table.columns                                  ||Yes|Array. A list of columns in the table.|
-|dataset.table.columns.column                           ||Yes|The name of the column.|
-|dataset.table.columns.column.isPrimaryKey              ||No |Boolean value specifying whether the column is primary or not. Default is false.|
-|dataset.table.columns.column.businessName              ||No |the business name of the column.|
-|dataset.table.columns.column.logicalType               ||Yes|the logical column datatype.|
-|dataset.table.columns.column.physicalType              ||Yes|the physical column datatype.|
-|dataset.table.columns.column.isNullable                ||No |indicates if the column may contain Null values; possible values are true and false. Default is false.|
-|dataset.table.columns.column.partitionStatus           ||No |indicates if the column is partitioned; possible values are true and false.|
-|dataset.table.columns.column.clusterStatus             ||No |indicates of the column is clustered; possible values are true and false.|
-|dataset.table.columns.column.classification            ||No |Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.|
-|dataset.table.columns.column.authoritativeDefinitions  ||No |list of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.|
-|dataset.table.columns.column.encryptedColumnName       ||No |The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`.|
-|dataset.table.columns.column.transformSourceTables     ||No |List of sources used in column transformation.|
-|dataset.table.columns.column.transformLogic            ||No |Logic used in the column transformation.|
-|dataset.table.columns.column.transformDescription      ||No |Describes the transform logic in very simple terms.|
-|dataset.table.columns.column.sampleValues              ||No |List of sample column values.|
-|dataset.table.columns.column.criticalDataElementStatus ||No |True or false indicator; If element is considered a critical data element (CDE) then true else false.|
-|dataset.table.columns.column.tags                      ||No |A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.|
+|dataset                                                |             |Yes|Array. A list of tables within the dataset to be cataloged.|
+|dataset.table                                          |             |Yes|Name of the table being cataloged; the value should only contain the table name. Do not include the project or dataset name in the value.
+|dataset.table.physicalName                             |             |No |Physical name of the table, default value is table name + version separated by underscores, as `table_1_2_0`.|
+|dataset.table.priorTableName                           |             |No |Name of the previous version of the dataset, if applicable.|
+|dataset.table.description                              |             |No |List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.|
+|dataset.table.authoritativeDefinitions                 |             |No |List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. Authoritative definitions follow the same structure in the standard.|
+|dataset.table.dataGranularity                          |             |No |Granular level of the data in the table. Example would be `pmt_txn_id`.|
+|dataset.table.columns                                  |             |Yes|Array. A list of columns in the table.|
+|dataset.table.columns.column                           |             |Yes|The name of the column.|
+|dataset.table.columns.column.isPrimaryKey              |             |No |Boolean value specifying whether the column is primary or not. Default is false.|
+|dataset.table.columns.column.businessName              |             |No |the business name of the column.|
+|dataset.table.columns.column.logicalType               |             |Yes|the logical column datatype.|
+|dataset.table.columns.column.physicalType              |             |Yes|the physical column datatype.|
+|dataset.table.columns.column.description               |Description  |No |Description of the column.|
+|dataset.table.columns.column.isNullable                |             |No |indicates if the column may contain Null values; possible values are true and false. Default is false.|
+|dataset.table.columns.column.partitionStatus           |             |No |indicates if the column is partitioned; possible values are true and false.|
+|dataset.table.columns.column.clusterStatus             |             |No |indicates of the column is clustered; possible values are true and false.|
+|dataset.table.columns.column.classification            |             |No |Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.|
+|dataset.table.columns.column.authoritativeDefinitions  |             |No |list of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.|
+|dataset.table.columns.column.encryptedColumnName       |             |No |The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`.|
+|dataset.table.columns.column.transformSourceTables     |             |No |List of sources used in column transformation.|
+|dataset.table.columns.column.transformLogic            |             |No |Logic used in the column transformation.|
+|dataset.table.columns.column.transformDescription      |             |No |Describes the transform logic in very simple terms.|
+|dataset.table.columns.column.sampleValues              |             |No |List of sample column values.|
+|dataset.table.columns.column.criticalDataElementStatus |             |No |True or false indicator; If element is considered a critical data element (CDE) then true else false.|
+|dataset.table.columns.column.tags                      |             |No |A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.|
+
+### Authorative definitions
+
+Updated in ODCS (Open Data Contract Standard) v2.3.0.
+
+|Key              |UX label     |Required|Description|
+| ---  | --- | --- | --- | 
+|type             |Definition type   |Yes|Type of definition for authority: v2.3 adds standard values: `businessDefinition`, `transformationImplementation`, `videoTutorial`, `tutorial`, and `implementation`.|
+|url              |URL to definition |Yes|URL to the authority.|
 
 ## Data quality 
 This section describes data quality rules & parameters. They are tightly linked to the schema described in the previous section.
@@ -326,12 +340,12 @@ price:
 
 ### Definitions
 
-|Key|UX label|Required|Description|
+|Key|        UX label|Required|Description|
 | --- | --- | --- | --- | 
-price||No|Object
-price.priceAmount||No|Subscription price per unit of measure in `priceUnit`.|
-price.priceCurrency||No|Currency of the subscription price in `price.priceAmount`.|
-price.priceUnit||No|The unit of measure for calculating cost. Examples megabyte, gigabyte.|
+|price               ||No |Object
+|price.priceAmount   ||No |Subscription price per unit of measure in `priceUnit`.|
+|price.priceCurrency ||No |Currency of the subscription price in `price.priceAmount`.|
+|price.priceUnit     ||No |The unit of measure for calculating cost. Examples megabyte, gigabyte.|
 
 ## Stakeholders
 This section lists stakeholders and the history of their relation with this data contract.
@@ -362,12 +376,12 @@ The UX label is the label used in the UI and other user experiences. It is not l
 
 |Key|UX label|Required|Description|
 | --- | --- | --- | --- |
-stakeholders||No|Array
-stakeholders.username||No|The stakeholder's username or email.|
-stakeholders.role||No|The stakeholder's job role; Examples might be owner, data steward. There is no limit on the role.|
-stakeholders.dateIn||No|The date when the user became a stakeholder.|
-stakeholders.dateOut||No|The date when the user ceased to be a stakeholder|
-stakeholders.replacedByUsername||No|The username of the user who replaced the stakeholder|
+|stakeholders||No|Array
+|stakeholders.username||No|The stakeholder's username or email.|
+|stakeholders.role||No|The stakeholder's job role; Examples might be owner, data steward. There is no limit on the role.|
+|stakeholders.dateIn||No|The date when the user became a stakeholder.|
+|stakeholders.dateOut||No|The date when the user ceased to be a stakeholder|
+|stakeholders.replacedByUsername||No|The username of the user who replaced the stakeholder|
 
 ## Roles
 This section lists the roles that a consumer may need to access the dataset depending on the type of access they require.
@@ -398,11 +412,11 @@ roles:
 
 |Key|UX label|Required|Description|
 | --- | --- | --- | --- |
-roles||Yes|Array. A list of roles that will provide user access to the dataset.|
-roles.role||Yes|name of the IAM role that provides access to the dataset; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.|
-roles.access||Yes|the type of access provided by the IAM role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.|
-roles.firstLevelApprovers||No|the name(s) of the first level approver(s) of the role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.|
-roles.secondLevelApprovers||No|the name(s) of the second level approver(s) of the role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.|
+|roles                      ||Yes|Array. A list of roles that will provide user access to the dataset.|
+|roles.role                 ||Yes|name of the IAM role that provides access to the dataset; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.|
+|roles.access               ||Yes|the type of access provided by the IAM role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.|
+|roles.firstLevelApprovers  ||No |the name(s) of the first level approver(s) of the role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.|
+|roles.secondLevelApprovers ||No |the name(s) of the second level approver(s) of the role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.|
 
 
 ## Service-level agreement
@@ -448,16 +462,16 @@ slaProperties:
 
 ### Definitions
 
-|Key|UX label|Required|Description|
+|Key                    |UX label             |Required                       |Description|
 | --- | --- | --- | --- |
-|slaDefaultColumn|Default SLA column(s)|No|Columns (using the Table.Column notation) to do the checks on. By default, it is the partition column.|
-|slaProperties|SLA|No|A list of key/value pairs for SLA specific properties. There is no limit on the type of properties (more details to come).|
-|slaProperties.property|Property|Yes|Specific property in SLA, check the periodic table. May requires units (more details to come).|
-|slaProperties.value|Value|Yes|Agreement value. The label will change based on the property itself.|
-|slaProperties.valueExt|Extended value|No - unless needed by property|Extended agreement value. The label will change based on the property itself.|
-|slaProperties.unit|Unit|No - unless needed by property|**d**, day, days for days; **y**, yr, years for years, etc. Units use the ISO standard.|
-|slaProperties.column|Column(s)|No|Column(s) to check on. Multiple columns should be extremely rare and, if so, separated by commas.|
-|slaProperties.driver|Driver|No|Describes the importance of the SLA from the list of: regulatory, analytics, operational.|
+|slaDefaultColumn       |Default SLA column(s)|No                             |Columns (using the Table.Column notation) to do the checks on. By default, it is the partition column.|
+|slaProperties          |SLA                  |No                             |A list of key/value pairs for SLA specific properties. There is no limit on the type of properties (more details to come).|
+|slaProperties.property |Property             |Yes                            |Specific property in SLA, check the periodic table. May requires units (more details to come).|
+|slaProperties.value    |Value                |Yes                            |Agreement value. The label will change based on the property itself.|
+|slaProperties.valueExt |Extended value       |No - unless needed by property |Extended agreement value. The label will change based on the property itself.|
+|slaProperties.unit     |Unit                 |No - unless needed by property |**d**, day, days for days; **y**, yr, years for years, etc. Units use the ISO standard.|
+|slaProperties.column   |Column(s)            |No                             |Column(s) to check on. Multiple columns should be extremely rare and, if so, separated by commas.|
+|slaProperties.driver   |Driver               |No                             |Describes the importance of the SLA from the list of: `regulatory`, `analytics`, or `operational`.|
 
 ## Other properties
 This section covers other properties you may find in a data contract.
@@ -481,9 +495,9 @@ contractCreatedTs: 2022-11-15 02:59:43
 ### Definitions
 
 |Key|UX label|Required|Description|
-| --- | --- | --- | --- |
-customProperties||No|A list of key/value pairs for custom properties. Initially created to support the REF ruleset property.
-customProperties.property||No|The name of the key. Names should be in camel case–the same as if they were permanent properties in the contract.
-customProperties.value||No|The value of the key.
-systemInstance||No|System Instance name where the dataset resides.
-contractCreatedTs||No|Timestamp in UTC of when the data contract was created.
+| ---  | --- | --- | --- |
+|customProperties           ||No|A list of key/value pairs for custom properties. Initially created to support the REF ruleset property.
+|customProperties.property  ||No|The name of the key. Names should be in camel case–the same as if they were permanent properties in the contract.
+|customProperties.value     ||No|The value of the key.
+|systemInstance             ||No|System Instance name where the dataset resides.
+|contractCreatedTs          ||No|Timestamp in UTC of when the data contract was created.
