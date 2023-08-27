@@ -24,7 +24,7 @@ This section contains general information about the contract.
 ### Example
 
 ```YAML
-# What's this data  identification?
+# What's this data contract about?
 datasetDomain: seller # Domain
 quantumName: my quantum # Data product name
 userConsumptionMode: Analytical
