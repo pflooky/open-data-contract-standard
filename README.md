@@ -30,6 +30,7 @@ Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
 ## Articles 
 
+ * 2023-09-10 - [Data Contracts 101](https://medium.com/p/568a9adbf9a9)
  * 2023-08-10 - [Welcome to the Open Data Contract Standard](https://jgp.ai/2023/08/09/welcome-to-the-open-data-contract-standard/)
  * 2023-05-11 - [Data Contracts – Everything You Need to Know](https://www.montecarlodata.com/blog-data-contracts-explained/)
  * 2023-05-07 - [Data Engineering Weekly #130 - Data Contract in the Wild with PayPal’s Data Contract Template](https://www.dataengineeringweekly.com/p/data-engineering-weekly-130)
