@@ -12,4 +12,4 @@
 | Hongxin Jiang | PayPal | Developer |
 | [Kim Thies](https://www.linkedin.com/in/vtkthies/) | ProfitOptics | Advisor |
 | James Peterson |  | Contributor |
-| [Bart Vandekerckhove]([url](https://www.linkedin.com/in/bartvandekerckhove/)https://www.linkedin.com/in/bartvandekerckhove/) | [Raito]([url](https://www.raito.io/)https://www.raito.io/) | Contributor |
+| [Bart Vandekerckhove](https://www.linkedin.com/in/bartvandekerckhove/) | [Raito](https://www.raito.io/) | Contributor |
