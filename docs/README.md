@@ -5,7 +5,7 @@ This document describes the keys and values expected in a YAML data contract, pe
 
 ## Table of content
 * [Fundamentals & demographics](#Demographics)
-* [Datasets & schema](#Dataset-&-schema)
+* [Datasets & schema](#Dataset--schema)
 * [Data quality](#Data-quality)
 * [Pricing](#Pricing)
 * [Stakeholders](#Stakeholders)
