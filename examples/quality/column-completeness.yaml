@@ -6,7 +6,7 @@
   dataGranularity: Raw records
   columns:
     - column: UniqueID
-      isPrimary: true
+      isPrimaryKey: true
       businessName: Unique identifier
       logicalType: number
       physicalType: int

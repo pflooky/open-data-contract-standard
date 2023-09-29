@@ -294,8 +294,9 @@ dataset:
 ```YAML
 dataset:
   - table: tab1
+    columns:
       - column: rcvr_id
-        isPrimary: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        isPrimaryKey: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
         businessName: receiver id
 # ...
         quality:
