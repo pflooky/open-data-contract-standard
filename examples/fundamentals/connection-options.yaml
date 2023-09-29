@@ -1,0 +1,11 @@
+# Physical access
+connectionType: "jdbc"  #type of connection could be jms, database, http, etc.
+connectionOptions:  #map of connection options that can be used based on connectionType
+  driver: null
+  driverVersion: null
+  server: null
+  database: pypl-edw.pp_access_views
+  url: "jdbc:postgresql://${env.host}:${env.port}"
+  username: "${env.username}"
+  password: "${env.password}"
+schedulerAppName: name_coming_from_scheduler # NEW 2.1.0 Required if you want to schedule stuff, comes from DataALM.
