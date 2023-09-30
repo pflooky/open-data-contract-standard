@@ -1,0 +1,43 @@
+relationships:
+  accounts.account_id:
+    - "transactions.account_id"
+    - "balances.account_number"
+    - "53581432-6c55-4ba2-a65f-72344a91553a.file_accounts.account_id" #can refer to columns in other datasets
+
+dataset:
+  - table: accounts
+    columns:
+    - column: account_id
+      businessName: Customer account ID
+      logicalType: string
+      physicalType: text
+      samples:
+        - "ACC12345678"
+    - column: name
+      businessName: Customer name
+      logicalType: string
+      physicalType: text
+  - table: transactions
+    columns:
+    - column: account_id
+      businessName: Customer account ID
+      logicalType: string
+      physicalType: text
+    - column: amount
+      businessName: Transaction amount
+      logicalType: double
+      physicalType: double
+  - table: balances
+    columns:
+    - column: account_number
+      businessName: Customer account number
+      logicalType: string
+      physicalType: text
+      transformSourceTables:
+        - accounts
+      transformLogic: "REPLACE(accounts.account_id, 'ACC', '')"
+      transformDescription: Remove the ACC prefix from the accounts account_id
+    - column: balance
+      businessName: Customer balance
+      logicalType: double
+      physicalType: double

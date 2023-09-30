@@ -1,0 +1,13 @@
+- table: tbl
+  columns:
+    - column: transaction_summary
+      businessName: Summary details of customer transactions
+      logicalType: string
+      physicalType: text
+      columns:
+        - column: last_txn_date
+          businessName: Date of the last transaction
+          logicalType: date
+        - column: last_3_months_spend
+          businessName: Aggregation of debit transaction amounts in the previous 3 months
+          logicalType: double
