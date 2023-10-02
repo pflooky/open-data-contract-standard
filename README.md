@@ -43,7 +43,7 @@ If you spot an article about the Open Data Contract Standard, make a pull reques
 ## More
 
 ### History
-Formerly known as the data contract template, this standard is used to implement Data Mesh at [PayPal](https://about.pypl.com/). Today, started with v2.2.0, it is maintained by a 501c6 non-profit organization called AIDA User Group (Articifial Intelligence, Data, and Analytics User Group).
+Formerly known as the data contract template, this standard is used to implement Data Mesh at [PayPal](https://about.pypl.com/). Today, starting with v2.2.0, it is maintained by a 501c6 non-profit organization called AIDA User Group (Artificial Intelligence, Data, and Analytics User Group).
 
 ### How does PayPal use Data Contracts?
 PayPal uses data contracts in many ways, but this [article](https://medium.com/paypal-tech/the-next-generation-of-data-platforms-is-the-data-mesh-b7df4b825522) from the [PayPal Technology blog](https://medium.com/paypal-tech) gives a good introduction.
