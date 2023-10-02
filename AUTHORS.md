@@ -11,3 +11,5 @@
 | Shiqi Guo | PayPal | Developer |
 | Hongxin Jiang | PayPal | Developer |
 | [Kim Thies](https://www.linkedin.com/in/vtkthies/) | ProfitOptics | Advisor |
+| James Peterson |  | Contributor |
+| [Bart Vandekerckhove](https://www.linkedin.com/in/bartvandekerckhove/) | [Raito](https://www.raito.io/) | Contributor |
