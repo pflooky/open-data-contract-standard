@@ -1,5 +1,10 @@
 This document tracks the history and evolution of the **Open Data Contract Standard**.
 
+# v2.2.1 - 2023-10-03 - OPEN
+
+* Reformat Markdown tables
+* Reformat quality examples to be valid YAML
+
 # v2.2.0 - 2023-07-27 - APPROVED
 
 * New name to Open Data Contract Standard.
