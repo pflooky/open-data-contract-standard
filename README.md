@@ -30,6 +30,8 @@ Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
 ## Articles 
 
+ * 2023-09-10 - [Data Contracts 101](https://medium.com/p/568a9adbf9a9)
+ * 2023-08-10 - [Welcome to the Open Data Contract Standard](https://jgp.ai/2023/08/09/welcome-to-the-open-data-contract-standard/)
  * 2023-05-11 - [Data Contracts – Everything You Need to Know](https://www.montecarlodata.com/blog-data-contracts-explained/)
  * 2023-05-07 - [Data Engineering Weekly #130 - Data Contract in the Wild with PayPal’s Data Contract Template](https://www.dataengineeringweekly.com/p/data-engineering-weekly-130)
  * 2023-05-06 - [PayPal เปิด Data Contract เป็น Open Source Template ให้ไปใช้งานกัน](https://discuss.dataengineercafe.io/t/paypal-data-contract-open-source-template/581/1)
@@ -41,7 +43,7 @@ If you spot an article about the Open Data Contract Standard, make a pull reques
 ## More
 
 ### History
-Formerly known as the data contract template, this standard is used to implement Data Mesh at [PayPal](https://about.pypl.com/). Today, started with v2.2.0, it is maintained by a 501c6 non-profit organization called AIDA User Group (Articifial Intelligence, Data, and Analytics User Group).
+Formerly known as the data contract template, this standard is used to implement Data Mesh at [PayPal](https://about.pypl.com/). Today, starting with v2.2.0, it is maintained by a 501c6 non-profit organization called AIDA User Group (Artificial Intelligence, Data, and Analytics User Group).
 
 ### How does PayPal use Data Contracts?
 PayPal uses data contracts in many ways, but this [article](https://medium.com/paypal-tech/the-next-generation-of-data-platforms-is-the-data-mesh-b7df4b825522) from the [PayPal Technology blog](https://medium.com/paypal-tech) gives a good introduction.
