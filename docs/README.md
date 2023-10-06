@@ -124,13 +124,16 @@ dataset:
     columns:
       - column: txn_ref_dt
         isPrimary: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        primaryKeyPosition: -1
         businessName: transaction reference date
         logicalType: date
         physicalType: date
         isNullable: false
         description: null
         partitionStatus: true
+        partitionKeyPosition: 1
         clusterStatus: false
+        clusterKeyPosition: -1
         criticalDataElementStatus: false
         tags: null
         classification: null
@@ -146,26 +149,32 @@ dataset:
           - 2020-01-28
       - column: rcvr_id
         isPrimary: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        primaryKeyPosition: 1
         businessName: receiver id
         logicalType: string
         physicalType: varchar(18)
         isNullable: false
         description: A description for column rcvr_id.
         partitionStatus: false
+        partitionKeyPosition: -1
         clusterStatus: true
+        clusterKeyPosition: 1
         criticalDataElementStatus: false
         tags: null
         classification: null
         encryptedColumnName: null
       - column: rcvr_cntry_code
         isPrimary: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        primaryKeyPosition: -1
         businessName: receiver country code
         logicalType: string
         physicalType: varchar(2)
         isNullable: false
         description: null
         partitionStatus: false
+        partitionKeyPosition: -1
         clusterStatus: false
+        clusterKeyPosition: -1
         criticalDataElementStatus: false
         tags: null
         classification: null
@@ -193,15 +202,19 @@ dataset:
 | dataset.table.columns                                  |             | Yes      | Array. A list of columns in the table.                                                                                                                                                                                                                |
 | dataset.table.columns.column                           |             | Yes      | The name of the column.                                                                                                                                                                                                                               |
 | dataset.table.columns.column.isPrimaryKey              |             | No       | Boolean value specifying whether the column is primary or not. Default is false.                                                                                                                                                                      |
-| dataset.table.columns.column.businessName              |             | No       | the business name of the column.                                                                                                                                                                                                                      |
-| dataset.table.columns.column.logicalType               |             | Yes      | the logical column datatype.                                                                                                                                                                                                                          |
-| dataset.table.columns.column.physicalType              |             | Yes      | the physical column datatype.                                                                                                                                                                                                                         |
+| dataset.table.columns.column.primaryKeyPosition        |             | No       | If column is a primary key, the position of the primary key column. Starts from 1. Example of `account_id, name` being primary key columns, `account_id` has primaryKeyPosition 1 and `name` primaryKeyPosition 2. Default to -1.                     |
+| dataset.table.columns.column.businessName              |             | No       | The business name of the column.                                                                                                                                                                                                                      |
+| dataset.table.columns.column.logicalType               |             | Yes      | The logical column datatype.                                                                                                                                                                                                                          |
+| dataset.table.columns.column.physicalType              |             | Yes      | The physical column datatype.                                                                                                                                                                                                                         |
 | dataset.table.columns.column.description               | Description | No       | Description of the column.                                                                                                                                                                                                                            |
-| dataset.table.columns.column.isNullable                |             | No       | indicates if the column may contain Null values; possible values are true and false. Default is false.                                                                                                                                                |
-| dataset.table.columns.column.partitionStatus           |             | No       | indicates if the column is partitioned; possible values are true and false.                                                                                                                                                                           |
-| dataset.table.columns.column.clusterStatus             |             | No       | indicates of the column is clustered; possible values are true and false.                                                                                                                                                                             |
+| dataset.table.columns.column.isNullable                |             | No       | Indicates if the column may contain Null values; possible values are true and false. Default is false.                                                                                                                                                |
+| dataset.table.columns.column.isUnique                  |             | No       | Indicates if the column contains unique values; possible values are true and false. Default is false.                                                                                                                                                 |
+| dataset.table.columns.column.partitionStatus           |             | No       | Indicates if the column is partitioned; possible values are true and false.                                                                                                                                                                           |
+| dataset.table.columns.column.partitionKeyPosition      |             | No       | If column is used for partitioning, the position of the partition column. Starts from 1. Example of `country, year` being partition columns, `country` has partitionKeyPosition 1 and `year` partitionKeyPosition 2. Default to -1.                   |
+| dataset.table.columns.column.clusterStatus             |             | No       | Indicates of the column is clustered; possible values are true and false.                                                                                                                                                                             |
+| dataset.table.columns.column.clusterKeyPosition        |             | No       | If column is used for clustering, the position of the cluster column. Starts from 1. Example of `year, date` being cluster columns, `year` has clusterKeyPosition 1 and `date` clusterKeyPosition 2. Default to -1.                                   |
 | dataset.table.columns.column.classification            |             | No       | Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.                     |
-| dataset.table.columns.column.authoritativeDefinitions  |             | No       | list of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.                                                                                                       |
+| dataset.table.columns.column.authoritativeDefinitions  |             | No       | List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.                                                                                                       |
 | dataset.table.columns.column.encryptedColumnName       |             | No       | The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`.                                                              |
 | dataset.table.columns.column.transformSourceTables     |             | No       | List of sources used in column transformation.                                                                                                                                                                                                        |
 | dataset.table.columns.column.transformLogic            |             | No       | Logic used in the column transformation.                                                                                                                                                                                                              |
