@@ -1,3 +1,5 @@
+sourcePlatform: kubernetes
+sourceSystem: solace
 type: jms-destination
 
 connectionProperties:

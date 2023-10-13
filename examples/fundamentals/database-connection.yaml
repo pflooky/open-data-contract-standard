@@ -1,3 +1,5 @@
+sourcePlatform: aws-rds
+sourceSystem: postgres
 type: tables
 
 # based on the type of the dataset, connection properties will be different. For example, database connection will have driver, server, database

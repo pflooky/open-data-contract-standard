@@ -1,3 +1,5 @@
+sourcePlatform: aws-s3
+sourceSystem: s3
 type: files
 
 connectionProperties:
