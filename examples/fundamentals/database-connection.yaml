@@ -1,0 +1,12 @@
+type: tables
+
+# based on the type of the dataset, connection properties will be different. For example, database connection will have driver, server, database
+# Kafka would have bootstrapServers, etc.
+# need to define common set of valid connection properties per type
+connectionProperties:
+  driver: null
+  driverVersion: null
+  server: null
+  database: pypl-edw.pp_access_views
+  username: '${env.username}'
+  password: '${env.password}'

@@ -1,0 +1,9 @@
+type: jms-destination
+
+connectionProperties:
+  connectionFactory: /jms/cf/default
+  initialContextFactory: com.solacesystems.jndi.SolJNDIInitialContextFactory
+  url: smf://localhost:55554
+  vpnName: default
+  username: admin
+  password: admin

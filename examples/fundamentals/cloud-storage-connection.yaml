@@ -1,0 +1,8 @@
+type: files
+
+connectionProperties:
+  bucket: my-big-data-bucket
+  endpoint: s3.us-east-1.amazonaws.com
+  credentialsProvider: org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider
+  accessKey: my-access
+  secretKey: my-secret

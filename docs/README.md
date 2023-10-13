@@ -223,7 +223,7 @@ dataset:
 | dataset.table.columns.column.criticalDataElementStatus |             | No       | True or false indicator; If element is considered a critical data element (CDE) then true else false.                                                                                                                                                 |
 | dataset.table.columns.column.tags                      |             | No       | A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.                                                                                                                                        |
 
-### Authorative definitions
+### Authoritative definitions
 
 Updated in ODCS (Open Data Contract Standard) v2.3.0.
 
