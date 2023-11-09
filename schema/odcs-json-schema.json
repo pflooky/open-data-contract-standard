@@ -170,7 +170,7 @@
       }
     }
   },
-  "required": ["version", "kind", "uuid", "type", "status", "quantumName"],
+  "required": ["version", "kind", "uuid", "type", "status", "dataset", "datasetName", "quantumName"],
   "$defs": {
     "Dataset": {
       "type": "object",
