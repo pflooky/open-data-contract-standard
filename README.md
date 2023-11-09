@@ -25,6 +25,14 @@ A data contract defines the agreement between a data producer and consumers. A d
 
 *Figure 1: illustration of a data contract, its principal contributors, sections, and usage.*
 
+### JSON Schema
+
+JSON Schema for ODCS can be found [here](schema/odcs-json-schema.json). You can import this schema into your IDE for 
+validation of your YAML files. Links below show how you can import the schema:
+
+- [Intellij](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom)
+- [VSCode](https://code.visualstudio.com/docs/languages/json#_json-schemas-and-settings)
+
 ## Contributing to the project
 Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
