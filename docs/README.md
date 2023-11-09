@@ -138,7 +138,7 @@ dataset:
           - table_name_2
           - table_name_3
         transformLogic: sel t1.txn_dt as txn_ref_dt from table_name_1 as t1, table_name_2 as t2, table_name_3 as t3 where t1.txn_dt=date-3
-        transformDescription: defines the logic in business terms; logic for dummies
+        transformDescription: Defines the logic in business terms. 
         sampleValues:
           - 2022-10-03
           - 2020-01-28
@@ -200,7 +200,7 @@ dataset:
 |dataset.table.columns.column.encryptedColumnName       ||No |The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`.|
 |dataset.table.columns.column.transformSourceTables     ||No |List of sources used in column transformation.|
 |dataset.table.columns.column.transformLogic            ||No |Logic used in the column transformation.|
-|dataset.table.columns.column.transformDescription      ||No |Describes the transform logic in very simple terms.|
+|dataset.table.columns.column.transformDescription      ||No |Describes the transform logic in very simple terms for everybody to understand. Avoid technology terms or complex business definitions.|
 |dataset.table.columns.column.sampleValues              ||No |List of sample column values.|
 |dataset.table.columns.column.criticalDataElementStatus ||No |True or false indicator; If element is considered a critical data element (CDE) then true else false.|
 |dataset.table.columns.column.tags                      ||No |A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.|
