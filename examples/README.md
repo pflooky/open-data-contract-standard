@@ -4,6 +4,7 @@
 This folder contains mainly excerpt of data contracts to illustrate specific sections & behaviors.
 
 ## Table of content
+* [Full example](#full-example)
 * [Fundamentals & demographics](#Demographics)
 * [Datasets & schema](#Dataset-&-schema)
 * [Data quality](#Data-quality)
@@ -12,6 +13,9 @@ This folder contains mainly excerpt of data contracts to illustrate specific sec
 * [Roles](#Roles)
 * [Service-level agreement](#Service-level-agreement)
 * [Other properties](#Other-properties)
+
+## Full example
+Look in the [`all`](./all) directory.
 
 ## Demographics
 Look in the [`fundamentals`](./fundamentals) directory.
@@ -29,10 +33,10 @@ This section covers pricing when you bill your customer for using this data prod
 Look in the [`stakeholders`](./stakeholders) directory.
 
 ## Roles
-Coming soon.
+Look in the [`roles`](./roles) directory.
 
 ## Service-level agreement
-Coming soon.
+Look in the [`sla`](./sla) directory.
 
 ## Other properties
 Coming soon.
