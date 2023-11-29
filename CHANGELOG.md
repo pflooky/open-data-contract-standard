@@ -4,6 +4,8 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 
 * Reformat Markdown tables
 * Reformat quality examples to be valid YAML
+* Add in isUnique, primaryKeyPosition, partitionKeyPosition and clusterKeyPosition to `column` definition
+* Add [JSON schema](schema/odcs-json-schema.json) to validate YAML files
 
 # v2.2.0 - 2023-07-27 - APPROVED
 
