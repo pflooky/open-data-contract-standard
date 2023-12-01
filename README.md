@@ -1,11 +1,13 @@
-# Open Data Contract Standard
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8149/badge)](https://www.bestpractices.dev/projects/8149)
+
+# Open Data Contract Standard (ODCS)
 
 Welcome! 
 
 Thanks for your interest and for taking the time to come here! ❤️
 
 ## Executive summary
-This standard describes a structure for a **data contract**. It's current version is 2.2.0. It is available for you as an Apache 2.0 license. Contributions are welcome!
+This standard describes a structure for a **data contract**. Its current version is 2.2.0. It is available for you as an Apache 2.0 license. Contributions are welcome!
 
 ## Discover the open standard
 Discover the [Open Data Contract Standard](./docs/README.md). This file contains some explanations and several examples. More [examples](./examples/README.md) have been added to v2.2.
