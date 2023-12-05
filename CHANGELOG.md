@@ -2,8 +2,10 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 
 # v2.2.1 - 2023-10-03 - OPEN
 
-* Reformat Markdown tables
-* Reformat quality examples to be valid YAML
+* Reformat Markdown tables.
+* Reformat quality examples to be valid YAML.
+* Added JSON schema for v2.2.1.
+* Integrated as part of [Bitol](https://lfaidata.foundation/projects/bitol/).
 
 # v2.2.0 - 2023-07-27 - APPROVED
 
