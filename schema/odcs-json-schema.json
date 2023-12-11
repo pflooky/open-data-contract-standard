@@ -130,7 +130,7 @@
     "datasetDomain": {
       "type": "string",
       "description": "Name of the logical domain dataset the contract describes. This field is only required for output data contracts.",
-      "examples": ["imdb_ds_aggregate", "receiver_profile_out",  "transaction_profile_out"]
+      "examples": ["imdb_ds_aggregate", "receiver_profile_out", "transaction_profile_out"]
     },
     "database": {
       "type": "string",
@@ -196,23 +196,7 @@
           }
         },
         "authoritativeDefinitions": {
-          "type": "array",
-          "description": "List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. Authoritative definitions follow the same structure in the standard.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "url": {
-                "type": "string",
-                "description": "URL to the authority."
-              },
-              "type": {
-                "type": "string",
-                "description": "Type of definition for authority: v2.3 adds standard values: `businessDefinition`, `transformationImplementation`, `videoTutorial`, `tutorial`, and `implementation`.",
-                "examples": ["businessDefinition", "transformationImplementation", "videoTutorial", "tutorial", "implementation"]
-              }
-            },
-            "required": ["url", "type"]
-          }
+          "$ref": "#/$defs/AuthoritativeDefinitions"
         },
         "dataGranularity": {
           "type": "string",
@@ -304,8 +288,7 @@
           "examples": ["confidential", "restricted", "public"]
         },
         "authoritativeDefinitions": {
-          "type": "string",
-          "description": "List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool."
+          "$ref": "#/$defs/AuthoritativeDefinitions"
         },
         "encryptedColumnName": {
           "type": "string",
@@ -408,6 +391,25 @@
         }
       },
       "required": ["templateName", "toolName"]
+    },
+    "AuthoritativeDefinitions": {
+      "type": "array",
+      "description": "List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. Authoritative definitions follow the same structure in the standard.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL to the authority."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of definition for authority: v2.3 adds standard values: `businessDefinition`, `transformationImplementation`, `videoTutorial`, `tutorial`, and `implementation`.",
+            "examples": ["businessDefinition", "transformationImplementation", "videoTutorial", "tutorial", "implementation"]
+          }
+        },
+        "required": ["url", "type"]
+      }
     },
     "Pricing": {
       "type": "object",
