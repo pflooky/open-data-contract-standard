@@ -10,10 +10,10 @@
     businessName: Unique identifier
     logicalType: number
     physicalType: int
-        quality:
-        - templateName: NullCheck
-          toolName: ClimateQuantumDataQualityPackage
-          description: This column should not contain null values
-          dimension: completeness
-          severity: error
-          businessImpact: operational
+    quality:
+    - templateName: NullCheck
+      toolName: ClimateQuantumDataQualityPackage
+      description: This column should not contain null values
+      dimension: completeness
+      severity: error
+      businessImpact: operational

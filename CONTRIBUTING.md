@@ -5,6 +5,8 @@ First off, thanks for taking the time to contribute! ❤️
 
 All types of contributions are encouraged and valued. See the [Table of Contents](#table-of-contents) for different ways to help and details about how this project handles them. Please make sure to read the relevant section before making your contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. The community looks forward to your contributions. 🎉
 
+You do not have to be a member of AIDA User Group to contribute, although becoming a member is free. Strength is always in the number. Check [it out](https://aidausergroup.org/join/).
+
 > And if you like the project, but just don't have time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about:
 > - Star the project.
 > - Tweet about it.
@@ -31,6 +33,12 @@ to [@jgperrin](https://github.com/jgperrin).
 
 
 ## I Have a Question
+
+** New **
+
+AIDA User Group also opened its Slack for Data Contract discussion. It is an alternate way of contributing to this project. The Slack channel is now [available](https://aidaug.slack.com/archives/C05UZRSBKLY).
+
+You have to be a member of AIDA User Group (it's free) to have access to our Slack channel. All the details are [here](https://aidausergroup.org/welcome/).
 
 > If you want to ask a question, we assume that you have read the available [Documentation](https://github.com/AIDAUserGroup/open-data-contract-standard).
 

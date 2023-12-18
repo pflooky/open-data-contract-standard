@@ -1,5 +1,13 @@
 This document tracks the history and evolution of the **Open Data Contract Standard**.
 
+# v2.2.1 - 2023-12-15 - OPEN
+
+* Reformat Markdown tables
+* Reformat quality examples to be valid YAML
+* Add in isUnique, primaryKeyPosition, partitionKeyPosition and clusterKeyPosition to `column` definition
+* Add [JSON schema](schema/odcs-json-schema.json) to validate YAML files for v2.2.1.
+* Integrated as part of [Bitol](https://lfaidata.foundation/projects/bitol/).
+
 # v2.2.0 - 2023-07-27 - APPROVED
 
 * New name to Open Data Contract Standard.
