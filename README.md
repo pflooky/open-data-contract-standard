@@ -1,4 +1,6 @@
-# Open Data Contract Standard
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8149/badge)](https://www.bestpractices.dev/projects/8149)
+
+# Open Data Contract Standard (ODCS)
 
 Welcome! 
 
@@ -30,14 +32,16 @@ A data contract defines the agreement between a data producer and consumers. A d
 JSON Schema for ODCS can be found [here](schema/odcs-json-schema.json). You can import this schema into your IDE for 
 validation of your YAML files. Links below show how you can import the schema:
 
-- [Intellij](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom)
-- [VSCode](https://code.visualstudio.com/docs/languages/json#_json-schemas-and-settings)
+- [IntelliJ](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom)
+- [VS Code](https://code.visualstudio.com/docs/languages/json#_json-schemas-and-settings)
 
 ## Contributing to the project
 Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
 ## Articles 
-
+ * 2023-11-30 - [Linux Foundation AI & Data - Bitol Joins LF AI & Data as New Sandbox Project](https://lfaidata.foundation/blog/2023/11/30/bitol-joins-lf-ai-data-as-new-sandbox-project/)
+ * 2023-11-30 - [AIDAUG - Bitol Joins LF AI & Data as New Sandbox Project](https://aidausergroup.org/2023/11/30/bitol-joins-lf-ai-data-as-new-sandbox-project/)
+ * 2023-10-01 - [Data Contracts: A Bridge Connecting Two Worlds](https://medium.com/@atanas.iliev.ai/data-contracts-a-bridge-connecting-two-worlds-404eff1d970d)
  * 2023-09-10 - [Data Contracts 101](https://medium.com/p/568a9adbf9a9)
  * 2023-08-10 - [Welcome to the Open Data Contract Standard](https://jgp.ai/2023/08/09/welcome-to-the-open-data-contract-standard/)
  * 2023-05-11 - [Data Contracts – Everything You Need to Know](https://www.montecarlodata.com/blog-data-contracts-explained/)
