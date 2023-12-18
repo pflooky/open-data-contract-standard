@@ -10,7 +10,7 @@ Thanks for your interest and for taking the time to come here! ❤️
 This standard describes a structure for a **data contract**. It's current version is 2.2.1. It is available for you as an Apache 2.0 license. Contributions are welcome!
 
 ## Discover the open standard
-Discover the [Open Data Contract Standard](./docs/README.md). This file contains some explanations and several examples. More [examples](./examples/README.md) have been added to v2.2.
+Discover the [Open Data Contract Standard](./docs/README.md). This file contains some explanations and several examples. More [examples](./examples/README.md) have been added to v2.2.1.
 
 ## What is a Data Contract?
 
@@ -23,7 +23,7 @@ A data contract defines the agreement between a data producer and consumers. A d
 * Security & stakeholders.
 * Custom properties.
 
-![Data contract schema](./docs/img/data-contract-v2.2.1-schema.png "Data contract schema")
+![Data contract schema](./docs/img/data-contract-v2.2.1-schema.svg "Data contract schema")
 
 *Figure 1: illustration of a data contract, its principal contributors, sections, and usage.*
 
