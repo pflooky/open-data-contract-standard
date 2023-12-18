@@ -5,7 +5,7 @@ Welcome!
 Thanks for your interest and for taking the time to come here! ❤️
 
 ## Executive summary
-This standard describes a structure for a **data contract**. It's current version is 2.2.0. It is available for you as an Apache 2.0 license. Contributions are welcome!
+This standard describes a structure for a **data contract**. It's current version is 2.2.1. It is available for you as an Apache 2.0 license. Contributions are welcome!
 
 ## Discover the open standard
 Discover the [Open Data Contract Standard](./docs/README.md). This file contains some explanations and several examples. More [examples](./examples/README.md) have been added to v2.2.
@@ -51,7 +51,7 @@ If you spot an article about the Open Data Contract Standard, make a pull reques
 ## More
 
 ### History
-Formerly known as the data contract template, this standard is used to implement Data Mesh at [PayPal](https://about.pypl.com/). Today, starting with v2.2.0, it is maintained by a 501c6 non-profit organization called AIDA User Group (Artificial Intelligence, Data, and Analytics User Group).
+Formerly known as the data contract template, this standard is used to implement Data Mesh at [PayPal](https://about.pypl.com/). Today, starting with v2.2.0, it is maintained by a 501c6 non-profit organization called AIDA User Group (Artificial Intelligence, Data, and Analytics User Group). On November 30th, 2023, [AIDA User Group](https://aidaug.org) and the [Linux Foundation AI & Data](https://lfaidata.foundation/) joined forces to create [Bitol](https://bitol.io). Bitol englobes ODCS and future standards & tools.
 
 ### How does PayPal use Data Contracts?
 PayPal uses data contracts in many ways, but this [article](https://medium.com/paypal-tech/the-next-generation-of-data-platforms-is-the-data-mesh-b7df4b825522) from the [PayPal Technology blog](https://medium.com/paypal-tech) gives a good introduction.
