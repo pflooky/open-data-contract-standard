@@ -10,12 +10,14 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 * Update [examples](examples) to adhere to JSON schema
 * Full example from README directs to [full-example.yaml](examples/all/full-example.yaml)
 
-# v2.2.1 - 2023-10-03 - APPROVED
+# v2.2.1 - 2023-12-18 - APPROVED
 
-* Reformat Markdown tables
-* Reformat quality examples to be valid YAML
-* Add in isUnique, primaryKeyPosition, partitionKeyPosition and clusterKeyPosition to `column` definition
-* Add [JSON schema](schema/odcs-json-schema.json) to validate YAML files
+* Reformat quality examples to be valid YAML.
+* Type of definition for authority have standard values: `businessDefinition`, `transformationImplementation`, `videoTutorial`, `tutorial`, and `implementation`.
+* Add in `isUnique`, `primaryKeyPosition`, `partitionKeyPosition`, and `clusterKeyPosition` to `column` definition.
+* Add [JSON schema](schema/odcs-json-schema.json) to validate YAML files for v2.2.1.
+* Integrated as part of [Bitol](https://lfaidata.foundation/projects/bitol/).
+* Reformat Markdown tables.
 
 # v2.2.0 - 2023-07-27 - APPROVED
 

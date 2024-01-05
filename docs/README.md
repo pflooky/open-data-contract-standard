@@ -143,7 +143,7 @@ dataset:
           - table_name_2
           - table_name_3
         transformLogic: sel t1.txn_dt as txn_ref_dt from table_name_1 as t1, table_name_2 as t2, table_name_3 as t3 where t1.txn_dt=date-3
-        transformDescription: defines the logic in business terms; logic for dummies
+        transformDescription: Defines the logic in business terms. 
         sampleValues:
           - 2022-10-03
           - 2020-01-28
@@ -225,11 +225,11 @@ dataset:
 
 ### Authorative definitions
 
-Updated in ODCS (Open Data Contract Standard) v2.3.0.
+Updated in ODCS (Open Data Contract Standard) v2.2.1.
 
 | Key  | UX label          | Required | Description                                                                                                                                                           |
 |------|-------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type | Definition type   | Yes      | Type of definition for authority: v2.3 adds standard values: `businessDefinition`, `transformationImplementation`, `videoTutorial`, `tutorial`, and `implementation`. |
+| type | Definition type   | Yes      | Type of definition for authority: v2.2.1 adds standard values: `businessDefinition`, `transformationImplementation`, `videoTutorial`, `tutorial`, and `implementation`. |
 | url  | URL to definition | Yes      | URL to the authority.                                                                                                                                                 |
 
 ## Data quality 
