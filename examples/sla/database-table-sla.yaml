@@ -1,3 +1,11 @@
+version: 1.0.0
+kind: DataContract
+uuid: 53581432-6c55-4ba2-a65f-72344a91553a
+type: tables
+status: current
+datasetName: my_table
+quantumName: my_quantum
+dataset: []
 # SLA
 slaDefaultColumn: tab1.txn_ref_dt # Optional, default value is partitionColumn.
 slaProperties:
