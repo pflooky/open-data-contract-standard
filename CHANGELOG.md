@@ -1,6 +1,16 @@
 This document tracks the history and evolution of the **Open Data Contract Standard**.
 
-# v2.2.1 - 2023-10-03 - OPEN
+# v2.2.2 - 2024-01-05 - OPEN
+
+* Change `dataset.description` data type from `array` to `string`
+* Change `dataset.column.isPrimaryKey` data type from `string` to `boolean`
+* Change `price.priceAmount` data type from `string` to `number`
+* Change `slaProperties.value` data type from `string` to `oneOf[string, number]`
+* Change `slaProperties.valueExt` data type from `string` to `oneOf[string, number]`
+* Update [examples](examples) to adhere to JSON schema
+* Full example from README directs to [full-example.yaml](examples/all/full-example.yaml)
+
+# v2.2.1 - 2023-10-03 - APPROVED
 
 * Reformat Markdown tables
 * Reformat quality examples to be valid YAML
