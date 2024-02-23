@@ -1,0 +1,2046 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../examples/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../img/Bitol_Logo_icon_color.svg">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.2+insiders-4.42.0">
+    
+    
+      
+        <title>Standard - Open Data Contract Standard</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.63a9ca82.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.46987102.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#open-data-contract-standard" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Open Data Contract Standard" class="md-header__button md-logo" aria-label="Open Data Contract Standard" data-md-component="logo">
+      
+  <img src="../img/Bitol_Logo_icon_color.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Open Data Contract Standard
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Standard
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/bitol-io/open-data-contract-standard" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    open-data-contract-standard
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Standard
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../examples/" class="md-tabs__link">
+        
+  
+    
+  
+  Examples
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../contributing/" class="md-tabs__link">
+        
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Open Data Contract Standard" class="md-nav__button md-logo" aria-label="Open Data Contract Standard" data-md-component="logo">
+      
+  <img src="../img/Bitol_Logo_icon_color.svg" alt="logo">
+
+    </a>
+    Open Data Contract Standard
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/bitol-io/open-data-contract-standard" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    open-data-contract-standard
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    
+  
+    Standard
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Standard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Executive summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of content
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#demographics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Demographics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Demographics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataset-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset &amp; schema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dataset & schema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definitions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorative-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authorative definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data quality
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data quality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-of-data-quality-at-the-dataset-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example of data quality at the dataset level
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-of-data-quality-at-the-column-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example of data quality at the column level
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definitions_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pricing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pricing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pricing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definitions_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stakeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stakeholders
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stakeholders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definitions_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definitions_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service-level-agreement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service-level agreement
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Service-level agreement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definitions_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other properties
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definitions_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full example
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="open-data-contract-standard">Open Data Contract Standard</h1>
+<h2 id="executive-summary">Executive summary</h2>
+<p>This document describes the keys and values expected in a YAML data contract, per the <strong>Open Data Contract Standard</strong>. It is divided in multiple sections: <a href="#Demographics">demographics</a>, <a href="#Dataset-&amp;-schema">dataset &amp; schema</a>, <a href="#Data-quality">data quality</a>, <a href="#Pricing">pricing</a>, <a href="#Stakeholders">stakeholders</a>, <a href="#Roles">roles</a>, <a href="#Service-level-agreement">service-level agreement</a>, and <a href="#Other-properties">other properties</a>. Each section starts with at least an example followed by definition of each field/key.</p>
+<h2 id="table-of-content">Table of content</h2>
+<ul>
+<li><a href="#Demographics">Fundamentals &amp; demographics</a></li>
+<li><a href="#dataset--schema">Datasets &amp; schema</a></li>
+<li><a href="#Data-quality">Data quality</a></li>
+<li><a href="#Pricing">Pricing</a></li>
+<li><a href="#Stakeholders">Stakeholders</a></li>
+<li><a href="#Roles">Roles</a></li>
+<li><a href="#service-level-agreement">Service-level agreement</a></li>
+<li><a href="#Other-properties">Other properties</a></li>
+<li><a href="#full-example">Full example</a></li>
+</ul>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>This contract is containing example values, we reviewed very carefully the consistency of those values, but we cannot guarantee that there are no errors. If you spot one, please raise an <a href="https://github.com/AIDAUserGroup/open-data-contract-standard/issues">issue</a>.</li>
+<li>Some fields have <code>null</code> value: even if it is equivalent to not having the field in the contract, we wanted to have the field for illustration purpose.</li>
+<li>This contract leverages BigQuery but should be <strong>platform agnostic</strong>. If you think it is not the case, please raise an <a href="https://github.com/AIDAUserGroup/open-data-contract-standard/issues">issue</a>.</li>
+</ul>
+<h2 id="demographics">Demographics</h2>
+<p>This section contains general information about the contract.</p>
+<h3 id="example">Example</h3>
+<pre><code class="language-YAML"># What's this data contract about?
+datasetDomain: seller # Domain
+quantumName: my quantum # Data product name
+userConsumptionMode: Analytical
+version: 1.1.0 # Version (follows semantic versioning)
+status: current
+uuid: 53581432-6c55-4ba2-a65f-72344a91553a
+
+# Lots of information
+description:
+  purpose: Views built on top of the seller tables.
+  limitations: null
+  usage: null
+tenant: ClimateQuantumInc
+
+# Getting support
+productDl: product-dl@ClimateQuantum.org
+productSlackChannel: '#product-help'
+productFeedbackUrl: null
+
+# Physical parts / GCP / BigQuery specific
+sourcePlatform: googleCloudPlatform
+sourceSystem: bigQuery
+project: edw # BQ dataset
+datasetName: access_views # BQ dataset
+
+kind: DataContract
+apiVersion: 2.3.0 # Standard version (follows semantic versioning, previously known as templateVersion)
+
+type: tables
+
+# Physical access
+driver: null
+driverVersion: null
+server: null
+database: pypl-edw.pp_access_views
+username: '${env.username}'
+password: '${env.password}'
+schedulerAppName: name_coming_from_scheduler # NEW 2.1.0 Required if you want to schedule stuff, comes from DataALM.
+
+# Data Quality
+quality: null # See more information below
+
+# Tags
+tags: null
+</code></pre>
+<h3 id="definitions">Definitions</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>UX label</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>datasetDomain</td>
+<td>Dataset domain</td>
+<td>No</td>
+<td>Name of the logical domain dataset the contract describes. This field is only required for output data contracts. Examples: <code>imdb_ds_aggregate</code>, <code>receiver_profile_out</code>,  <code>transaction_profile_out</code>.</td>
+</tr>
+<tr>
+<td>quantumName</td>
+<td>Quantum name</td>
+<td>Yes</td>
+<td>The name of the data quantum or data product.</td>
+</tr>
+<tr>
+<td>userConsumptionMode</td>
+<td>Consumption mode</td>
+<td>No</td>
+<td>List of data modes for which the dataset may be used.  Expected sample values might be <code>analytical</code> or <code>operational</code>. <br/>Note: in the future, this will probably be replaced by ports.</td>
+</tr>
+<tr>
+<td>version</td>
+<td>Version</td>
+<td>Yes</td>
+<td>Current version of the data contract.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Status</td>
+<td>Yes</td>
+<td>Current status of the dataset. Valid values are <code>production</code>, <code>test</code>, or <code>development</code>.</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>Identifier</td>
+<td>Yes</td>
+<td>A unique identifier used to reduce the risk of dataset name collisions; initially the UUID will be created using a UUID generator tool (<a href="https://www.uuidgenerator.net/">example</a>). However, we may want to develop a method that accepts a seed value using a combination of fields–such as name, kind and source–to create a repeatable value.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description</td>
+<td>No</td>
+<td>Object.</td>
+</tr>
+<tr>
+<td>description.purpose</td>
+<td>Purpose</td>
+<td>No</td>
+<td>Purpose of the dataset, table, or column (depending on the level); the key may appear at the dataset, table, or column level.</td>
+</tr>
+<tr>
+<td>description.limitations</td>
+<td>Limitations</td>
+<td>No</td>
+<td>Limitations of the dataset, table, or column (depending on the level); the key may appear at the dataset, table, or column level.</td>
+</tr>
+<tr>
+<td>description.usage</td>
+<td>Usage</td>
+<td>No</td>
+<td>Intended usage of the dataset, table, or column (depending on the level); the key may appear at the dataset, table, or column level.</td>
+</tr>
+<tr>
+<td>tenant</td>
+<td>Tenant</td>
+<td>No</td>
+<td>Indicates the property the data is primarily associated with. Value is case insensitive.</td>
+</tr>
+<tr>
+<td>productDl</td>
+<td>E-mail distribution list</td>
+<td>No</td>
+<td>The email distribution list (DL) of the persons or team responsible for maintaining the dataset.</td>
+</tr>
+<tr>
+<td>productSlackChannel</td>
+<td>Support Slack channel</td>
+<td>No</td>
+<td>Slack channel of the team responsible for maintaining the dataset.</td>
+</tr>
+<tr>
+<td>productFeedbackUrl</td>
+<td>Feedback URL</td>
+<td>No</td>
+<td>The URL for submitting feedback to the team responsible for maintaining the dataset.</td>
+</tr>
+<tr>
+<td>sourcePlatform</td>
+<td>Source platform</td>
+<td>No</td>
+<td>The platform where the dataset resides. Expected value is GoogleCloudPlatform, IBMCloud, Azure...</td>
+</tr>
+<tr>
+<td>sourceSystem</td>
+<td>Source system</td>
+<td>No</td>
+<td>The system where the dataset resides. Expected value can be BigQuery.</td>
+</tr>
+<tr>
+<td>project</td>
+<td>Project</td>
+<td>No</td>
+<td>Associated cloud project name, can be used for billing or administrative purpose. Used to be datasetProject.</td>
+</tr>
+<tr>
+<td>datasetName</td>
+<td>Dataset name</td>
+<td>No</td>
+<td>May be required in cloud instance like GCP BigQuery dataset name.</td>
+</tr>
+<tr>
+<td>server</td>
+<td>Server</td>
+<td>No</td>
+<td>The server where the dataset resides.</td>
+</tr>
+<tr>
+<td>kind</td>
+<td>Kind</td>
+<td>Yes</td>
+<td>The kind of file this is. Valid value is <code>DataContract</code>.</td>
+</tr>
+<tr>
+<td>apiVersion</td>
+<td>Standard version</td>
+<td>No</td>
+<td>Version of the standard used to build data contract. Default value is v2.3.0.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Type</td>
+<td>Yes</td>
+<td>Identifies the types of objects in the dataset. For BigQuery or any other database, the expected value would be Tables.</td>
+</tr>
+<tr>
+<td>driver</td>
+<td>Driver</td>
+<td>No</td>
+<td>The connection driver required to connect to the dataset.</td>
+</tr>
+<tr>
+<td>driverVersion</td>
+<td>Driver version</td>
+<td>No</td>
+<td>The version of the connection driver to be used to connect to the dataset.</td>
+</tr>
+<tr>
+<td>username</td>
+<td>Username</td>
+<td>No</td>
+<td>User credentials for connecting to the dataset; how the credentials will be stored/passed is outside of the scope of the contract.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Password</td>
+<td>No</td>
+<td>User credentials for connecting to the dataset; how the credentials will be stored/passed is out of the scope of this contract.</td>
+</tr>
+<tr>
+<td>schedulerAppName</td>
+<td>Scheduler App Name</td>
+<td>No</td>
+<td>Required if you want to schedule stuff. The name of the application used to schedule jobs</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dataset-schema">Dataset &amp; schema</h2>
+<p>This section describes the dataset and the schema of the data contract. It is the support for data quality, which is detailed in the next section.</p>
+<h3 id="example_1">Example</h3>
+<pre><code class="language-YAML">dataset:
+  - table: tbl
+    physicalName: tbl_1 # NEW in v2.1.0, Optional, default value is table name + version separated by underscores, as table_1_2_0
+    priorTableName: null # if needed
+    description: Provides core payment metrics 
+    authoritativeDefinitions: # NEW in v2.2.0, inspired by the column-level authoritative links
+      - url: https://catalog.data.gov/dataset/air-quality 
+        type: businessDefinition
+      - url: https://youtu.be/jbY1BKFj9ec
+        type: videoTutorial
+    tags: null
+    dataGranularity: Aggregation on columns txn_ref_dt, pmt_txn_id
+    columns:
+      - column: txn_ref_dt
+        isPrimary: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        primaryKeyPosition: -1
+        businessName: transaction reference date
+        logicalType: date
+        physicalType: date
+        isNullable: false
+        description: null
+        partitionStatus: true
+        partitionKeyPosition: 1
+        clusterStatus: false
+        clusterKeyPosition: -1
+        criticalDataElementStatus: false
+        tags: []
+        classification: public
+        transformSourceTables:
+          - table_name_1
+          - table_name_2
+          - table_name_3
+        transformLogic: sel t1.txn_dt as txn_ref_dt from table_name_1 as t1, table_name_2 as t2, table_name_3 as t3 where t1.txn_dt=date-3
+        transformDescription: Defines the logic in business terms. 
+        sampleValues:
+          - 2022-10-03
+          - 2020-01-28
+      - column: rcvr_id
+        isPrimary: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        primaryKeyPosition: 1
+        businessName: receiver id
+        logicalType: string
+        physicalType: varchar(18)
+        isNullable: false
+        description: A description for column rcvr_id.
+        partitionStatus: false
+        partitionKeyPosition: -1
+        clusterStatus: true
+        clusterKeyPosition: 1
+        criticalDataElementStatus: false
+        tags: []
+        classification: restricted
+        encryptedColumnName: enc_rcvr_id
+      - column: rcvr_cntry_code
+        isPrimary: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        primaryKeyPosition: -1
+        businessName: receiver country code
+        logicalType: string
+        physicalType: varchar(2)
+        isNullable: false
+        description: null
+        partitionStatus: false
+        partitionKeyPosition: -1
+        clusterStatus: false
+        clusterKeyPosition: -1
+        criticalDataElementStatus: false
+        tags: []
+        classification: public
+        authoritativeDefinitions:
+          - url: https://collibra.com/asset/742b358f-71a5-4ab1-bda4-dcdba9418c25
+            type: businessDefinition
+          - url: https://github.com/myorg/myrepo
+            type: transformationImplementation
+          - url: jdbc:postgresql://localhost:5432/adventureworks/tbl_1/rcvr_cntry_code
+            type: implementation
+        encryptedColumnName: rcvr_cntry_code_encrypted
+</code></pre>
+<h3 id="definitions_1">Definitions</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>UX label</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dataset</td>
+<td>Dataset</td>
+<td>Yes</td>
+<td>Array. A list of tables within the dataset to be cataloged.</td>
+</tr>
+<tr>
+<td>dataset.table</td>
+<td>Table</td>
+<td>Yes</td>
+<td>Name of the table being cataloged; the value should only contain the table name. Do not include the project or dataset name in the value.</td>
+</tr>
+<tr>
+<td>dataset.table.physicalName</td>
+<td>Physical Name</td>
+<td>No</td>
+<td>Physical name of the table, default value is table name + version separated by underscores, as <code>table_1_2_0</code>.</td>
+</tr>
+<tr>
+<td>dataset.table.priorTableName</td>
+<td>Prior Table Name</td>
+<td>No</td>
+<td>Name of the previous version of the dataset, if applicable.</td>
+</tr>
+<tr>
+<td>dataset.table.description</td>
+<td>Description</td>
+<td>No</td>
+<td>Description of the dataset.</td>
+</tr>
+<tr>
+<td>dataset.table.authoritativeDefinitions</td>
+<td>Authoritative Definitions</td>
+<td>No</td>
+<td>List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. Authoritative definitions follow the same structure in the standard.</td>
+</tr>
+<tr>
+<td>dataset.table.dataGranularity</td>
+<td>Data Granularity</td>
+<td>No</td>
+<td>Granular level of the data in the table. Example would be <code>pmt_txn_id</code>.</td>
+</tr>
+<tr>
+<td>dataset.table.columns</td>
+<td>Columns</td>
+<td>Yes</td>
+<td>Array. A list of columns in the table.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column</td>
+<td>Column</td>
+<td>Yes</td>
+<td>The name of the column.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.isPrimaryKey</td>
+<td>Primary Key</td>
+<td>No</td>
+<td>Boolean value specifying whether the column is primary or not. Default is false.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.primaryKeyPosition</td>
+<td>Primary Key Position</td>
+<td>No</td>
+<td>If column is a primary key, the position of the primary key column. Starts from 1. Example of <code>account_id, name</code> being primary key columns, <code>account_id</code> has primaryKeyPosition 1 and <code>name</code> primaryKeyPosition 2. Default to -1.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.businessName</td>
+<td>Business Name</td>
+<td>No</td>
+<td>The business name of the column.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.logicalType</td>
+<td>Logical Type</td>
+<td>Yes</td>
+<td>The logical column datatype.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.physicalType</td>
+<td>Physical Type</td>
+<td>Yes</td>
+<td>The physical column datatype.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.description</td>
+<td>Description</td>
+<td>No</td>
+<td>Description of the column.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.isNullable</td>
+<td>Nullable</td>
+<td>No</td>
+<td>Indicates if the column may contain Null values; possible values are true and false. Default is false.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.isUnique</td>
+<td>Unique</td>
+<td>No</td>
+<td>Indicates if the column contains unique values; possible values are true and false. Default is false.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.partitionStatus</td>
+<td>Partition Status</td>
+<td>No</td>
+<td>Indicates if the column is partitioned; possible values are true and false.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.partitionKeyPosition</td>
+<td>Partition Key Position</td>
+<td>No</td>
+<td>If column is used for partitioning, the position of the partition column. Starts from 1. Example of <code>country, year</code> being partition columns, <code>country</code> has partitionKeyPosition 1 and <code>year</code> partitionKeyPosition 2. Default to -1.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.clusterStatus</td>
+<td>Cluster Status</td>
+<td>No</td>
+<td>Indicates of the column is clustered; possible values are true and false.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.clusterKeyPosition</td>
+<td>Cluster Key Position</td>
+<td>No</td>
+<td>If column is used for clustering, the position of the cluster column. Starts from 1. Example of <code>year, date</code> being cluster columns, <code>year</code> has clusterKeyPosition 1 and <code>date</code> clusterKeyPosition 2. Default to -1.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.classification</td>
+<td>Classification</td>
+<td>No</td>
+<td>Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.authoritativeDefinitions</td>
+<td>Authoritative Definitions</td>
+<td>No</td>
+<td>List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.encryptedColumnName</td>
+<td>Encrypted Column Name</td>
+<td>No</td>
+<td>The column name within the table that contains the encrypted column value. For example, unencrypted column <code>email_address</code> might have an encryptedColumnName of <code>email_address_encrypt</code>.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.transformSourceTables</td>
+<td>Transform Source Tables</td>
+<td>No</td>
+<td>List of sources used in column transformation.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.transformLogic</td>
+<td>Transform Logic</td>
+<td>No</td>
+<td>Logic used in the column transformation.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.transformDescription</td>
+<td>Transform Description</td>
+<td>No</td>
+<td>Describes the transform logic in very simple terms.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.sampleValues</td>
+<td>Sample Values</td>
+<td>No</td>
+<td>List of sample column values.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.criticalDataElementStatus</td>
+<td>Critical Data Element Status</td>
+<td>No</td>
+<td>True or false indicator; If element is considered a critical data element (CDE) then true else false.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.tags</td>
+<td>Tags</td>
+<td>No</td>
+<td>A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="authorative-definitions">Authorative definitions</h3>
+<p>Updated in ODCS (Open Data Contract Standard) v2.2.1.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>UX label</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>Definition type</td>
+<td>Yes</td>
+<td>Type of definition for authority: v2.2.1 adds standard values: <code>businessDefinition</code>, <code>transformationImplementation</code>, <code>videoTutorial</code>, <code>tutorial</code>, and <code>implementation</code>.</td>
+</tr>
+<tr>
+<td>url</td>
+<td>URL to definition</td>
+<td>Yes</td>
+<td>URL to the authority.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-quality">Data quality</h2>
+<p>This section describes data quality rules &amp; parameters. They are tightly linked to the schema described in the previous section.</p>
+<h3 id="example-of-data-quality-at-the-dataset-level">Example of data quality at the dataset level</h3>
+<p>Note:
+* This example relies on a data quality tool called Elevate. It should be easily transformed to any other tool. If you have questions, please raise an <a href="https://github.com/AIDAUserGroup/open-data-contract-standard/issues">issue</a>.
+* The Open Data Contract Standard has a provision for supporting multiple data quality tools.</p>
+<pre><code class="language-YAML">dataset:
+  - table: tab1
+# ...
+    quality:
+      - code: countCheck # Required, name of the rule
+        templateName: CountCheck # NEW in v2.1.0 Required
+        description: Ensure row count is within expected volume range       # Optional
+        toolName: Elevate # Required
+        toolRuleName: DQ.rw.tab1.CountCheck # NEW in v2.1.0 Optional (Available only to the users who can change in source code edition)
+        dimension: completeness                                             # Optional
+        type: reconciliation                                                # Optional NEW in v2.1.0 default value for column level check - dataQuality and for table level reconciliation
+        severity: error                                                     # Optional NEW in v2.1.0, default value is error
+        businessImpact: operational                                         # Optional NEW in v2.1.0
+        scheduleCronExpression: 0 20 * * *                                  # Optional NEW in v2.1.0 default schedule - every day 10 a.m. UTC
+      - code: distinctCheck    
+        description: enforce distinct values
+        toolName: Elevate
+        templateName: DistinctCheck
+        dimension: completeness
+        toolRuleName: DQ.rw.tab1.DistinctCheck
+        columns:
+          - txn_ref_dt
+          - rcvr_id
+        column: null
+        type: reconciliation
+        severity: error
+        businessImpact: operational
+        scheduleCronExpression: 0 20 * * *
+        customProperties:                     
+          - property: FIELD_NAME
+            value: rcvr_id
+          - property: FILTER_CONDITIONS
+            value: 1&gt;0
+      - code: piiCheck
+        description: null
+        toolName: Elevate
+        templateName: PIICheck
+        toolRuleName: DQ.rw.tab1_2_0_0.piiCheck
+        type: dataQuality
+        severity: error
+        businessImpact: operational
+        scheduleCronExpression: 0 20 * * *
+        customProperties:                     
+          - property: FIELD_NAME
+            value:
+          - property: FILTER_CONDITIONS
+            value:
+</code></pre>
+<h3 id="example-of-data-quality-at-the-column-level">Example of data quality at the column level</h3>
+<pre><code class="language-YAML">dataset:
+  - table: tab1
+      - column: rcvr_id
+        isPrimary: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        businessName: receiver id
+# ...
+        quality:
+          - code: nullCheck
+            templateName: NullCheck
+            description: column should not contain null values
+            toolName: Elevate
+            toolRuleName: DQ.rw.tab1_2_0_0.rcvr_cntry_code.NullCheck
+            dimension: completeness # dropdown 7 values
+            type: dataQuality
+            severity: error
+            businessImpact: operational
+            scheduleCronExpression: 0 20 * * *
+            customProperties:
+              - property: FIELD_NAME
+                value:
+              - property: COMPARE_TO
+                value:
+              - property: COMPARISON_TYPE
+                value: Greater than
+</code></pre>
+<h3 id="definitions_2">Definitions</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>UX label</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>quality</td>
+<td>Quality</td>
+<td>No</td>
+<td>Quality tag with all the relevant information for rule setup and execution.</td>
+</tr>
+<tr>
+<td>quality.code</td>
+<td>Quality Code</td>
+<td>No</td>
+<td>The Rosewall data quality code(s) indicating which quality checks need to be performed at the dataset, table, or column level. The quality keyword may appear at any level. Some quality checks require parameters, so the check can be completed (e.g., a list of fields used to identify a distinct row). Therefore, some quality checks may be followed by a single value or an array. See the appendix for a link to quality checks.</td>
+</tr>
+<tr>
+<td>quality.templateName</td>
+<td>Template Name</td>
+<td>Yes</td>
+<td>The template name that indicates what is the equivalent template from the tool.</td>
+</tr>
+<tr>
+<td>quality.description</td>
+<td>Description</td>
+<td>No</td>
+<td>Describe the quality check to be completed.</td>
+</tr>
+<tr>
+<td>quality.toolName</td>
+<td>Tool Name</td>
+<td>Yes</td>
+<td>Name of the tool used to complete the quality check; Most will be Elevate initially.</td>
+</tr>
+<tr>
+<td>quality.toolRuleName</td>
+<td>Tool Rule Name</td>
+<td>No</td>
+<td>Name of the quality tool's rule created to complete the quality check.</td>
+</tr>
+<tr>
+<td>quality.dimension</td>
+<td>Dimension</td>
+<td>No</td>
+<td>The key performance indicator (KPI) or dimension for data quality.</td>
+</tr>
+<tr>
+<td>quality.columns</td>
+<td>Columns</td>
+<td>No</td>
+<td>List of columns to be used in the quality check.</td>
+</tr>
+<tr>
+<td>quality.column</td>
+<td>Column</td>
+<td>No</td>
+<td>To be used in lieu of quality.columns when only a single column is required for the quality check.</td>
+</tr>
+<tr>
+<td>quality.type</td>
+<td>Type</td>
+<td>No</td>
+<td>The type of quality check.</td>
+</tr>
+<tr>
+<td>quality.severity</td>
+<td>Severity</td>
+<td>No</td>
+<td>The severity of the quality rule.</td>
+</tr>
+<tr>
+<td>quality.businessImpact</td>
+<td>Business Impact</td>
+<td>No</td>
+<td>Consequences of the rule failure.</td>
+</tr>
+<tr>
+<td>quality.scheduleCronExpression</td>
+<td>Schedule Expression</td>
+<td>No</td>
+<td>Rule execution schedule details.</td>
+</tr>
+<tr>
+<td>quality.customProperties</td>
+<td>Custom Properties</td>
+<td>No</td>
+<td>Additional properties required for rule execution.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pricing">Pricing</h2>
+<p>This section covers pricing when you bill your customer for using this data product. Pricing is experimental in v2.1.1 of the data contract.</p>
+<h3 id="example_2">Example</h3>
+<pre><code class="language-YAML">price:
+  priceAmount: 9.95
+  priceCurrency: USD
+  priceUnit: megabyte
+</code></pre>
+<h3 id="definitions_3">Definitions</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>UX label</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>price</td>
+<td>Price</td>
+<td>No</td>
+<td>Object</td>
+</tr>
+<tr>
+<td>price.priceAmount</td>
+<td>Price Amount</td>
+<td>No</td>
+<td>Subscription price per unit of measure in <code>priceUnit</code>.</td>
+</tr>
+<tr>
+<td>price.priceCurrency</td>
+<td>Price Currency</td>
+<td>No</td>
+<td>Currency of the subscription price in <code>price.priceAmount</code>.</td>
+</tr>
+<tr>
+<td>price.priceUnit</td>
+<td>Price Unit</td>
+<td>No</td>
+<td>The unit of measure for calculating cost. Examples megabyte, gigabyte.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stakeholders">Stakeholders</h2>
+<p>This section lists stakeholders and the history of their relation with this data contract.</p>
+<h3 id="example_3">Example</h3>
+<pre><code class="language-YAML">stakeholders:
+  - username: ceastwood
+    role: Data Scientist
+    dateIn: 2022-08-02
+    dateOut: 2022-10-01
+    replacedByUsername: mhopper
+  - username: mhopper
+    role: Data Scientist
+    dateIn: 2022-10-01
+  - username: daustin
+    role: Owner
+    comment: Keeper of the grail
+    dateIn: 2022-10-01
+</code></pre>
+<h3 id="definitions_4">Definitions</h3>
+<p>The UX label is the label used in the UI and other user experiences. It is not limited to BlueRacket.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>UX label</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stakeholders</td>
+<td>Stakeholders</td>
+<td>No</td>
+<td>Array</td>
+</tr>
+<tr>
+<td>stakeholders.username</td>
+<td>Username</td>
+<td>No</td>
+<td>The stakeholder's username or email.</td>
+</tr>
+<tr>
+<td>stakeholders.role</td>
+<td>Role</td>
+<td>No</td>
+<td>The stakeholder's job role; Examples might be owner, data steward. There is no limit on the role.</td>
+</tr>
+<tr>
+<td>stakeholders.dateIn</td>
+<td>Date In</td>
+<td>No</td>
+<td>The date when the user became a stakeholder.</td>
+</tr>
+<tr>
+<td>stakeholders.dateOut</td>
+<td>Date Out</td>
+<td>No</td>
+<td>The date when the user ceased to be a stakeholder</td>
+</tr>
+<tr>
+<td>stakeholders.replacedByUsername</td>
+<td>Replaced By Username</td>
+<td>No</td>
+<td>The username of the user who replaced the stakeholder</td>
+</tr>
+</tbody>
+</table>
+<h2 id="roles">Roles</h2>
+<p>This section lists the roles that a consumer may need to access the dataset depending on the type of access they require.</p>
+<h3 id="example_4">Example</h3>
+<pre><code class="language-YAML">roles:
+  - role: microstrategy_user_opr
+    access: read
+    firstLevelApprovers: Reporting Manager
+    secondLevelApprovers: 'mandolorian'
+  - role: bq_queryman_user_opr
+    access: read
+    firstLevelApprovers: Reporting Manager
+    secondLevelApprovers: na
+  - role: risk_data_access_opr
+    access: read
+    firstLevelApprovers: Reporting Manager
+    secondLevelApprovers: 'dathvador'
+  - role: bq_unica_user_opr
+    access: write
+    firstLevelApprovers: Reporting Manager
+    secondLevelApprovers: 'mickey'
+</code></pre>
+<h3 id="definitions_5">Definitions</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>UX label</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>roles</td>
+<td>Roles</td>
+<td>Yes</td>
+<td>Array. A list of roles that will provide user access to the dataset.</td>
+</tr>
+<tr>
+<td>roles.role</td>
+<td>Role</td>
+<td>Yes</td>
+<td>Name of the IAM role that provides access to the dataset; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.</td>
+</tr>
+<tr>
+<td>roles.access</td>
+<td>Access</td>
+<td>Yes</td>
+<td>The type of access provided by the IAM role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.</td>
+</tr>
+<tr>
+<td>roles.firstLevelApprovers</td>
+<td>1st Level Approvers</td>
+<td>No</td>
+<td>The name(s) of the first-level approver(s) of the role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.</td>
+</tr>
+<tr>
+<td>roles.secondLevelApprovers</td>
+<td>2nd Level Approvers</td>
+<td>No</td>
+<td>The name(s) of the second-level approver(s) of the role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="service-level-agreement">Service-level agreement</h2>
+<p>This section describes the service-level agreements (SLA). SLA have been extended in version v2.1.0.</p>
+<ul>
+<li>Use the <code>Table.Column</code> to indicate the number to do the checks on, as in <code>SELECT txn_ref_dt FROM tab1</code>.</li>
+<li>Separate multiple table.columns by a comma, as in <code>table1.col1</code>, <code>table2.col1</code>, <code>table1.col2</code>.</li>
+<li>If there is only one table in the contract, the table name is not required.</li>
+</ul>
+<h3 id="example_5">Example</h3>
+<pre><code class="language-YAML">slaDefaultColumn: tab1.txn_ref_dt # Optional, default value is partitionColumn.
+slaProperties:
+  - property: latency # Property, see list of values in DP QoS
+    value: 4
+    unit: d # d, day, days for days; y, yr, years for years
+    column: tab1.txn_ref_dt # This would not be needed as it is the same table.column as the default one
+  - property: generalAvailability
+    value: 2022-05-12T09:30:10-08:00
+  - property: endOfSupport
+    value: 2032-05-12T09:30:10-08:00
+  - property: endOfLife
+    value: 2042-05-12T09:30:10-08:00
+  - property: retention
+    value: 3
+    unit: y
+    column: tab1.txn_ref_dt
+  - property: frequency
+    value: 1
+    valueExt: 1
+    unit: d
+    column: tab1.txn_ref_dt
+  - property: timeOfAvailability
+    value: 09:00-08:00
+    column: tab1.txn_ref_dt
+    driver: regulatory # Describes the importance of the SLA: [regulatory|analytics|operational|...]
+  - property: timeOfAvailability
+    value: 08:00-08:00
+    column: tab1.txn_ref_dt
+    driver: analytics
+</code></pre>
+<h3 id="definitions_6">Definitions</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>UX label</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slaDefaultColumn</td>
+<td>Default SLA column(s)</td>
+<td>No</td>
+<td>Columns (using the Table.Column notation) to do the checks on. By default, it is the partition column.</td>
+</tr>
+<tr>
+<td>slaProperties</td>
+<td>SLA</td>
+<td>No</td>
+<td>A list of key/value pairs for SLA specific properties. There is no limit on the type of properties (more details to come).</td>
+</tr>
+<tr>
+<td>slaProperties.property</td>
+<td>Property</td>
+<td>Yes</td>
+<td>Specific property in SLA, check the periodic table. May requires units (more details to come).</td>
+</tr>
+<tr>
+<td>slaProperties.value</td>
+<td>Value</td>
+<td>Yes</td>
+<td>Agreement value. The label will change based on the property itself.</td>
+</tr>
+<tr>
+<td>slaProperties.valueExt</td>
+<td>Extended value</td>
+<td>No - unless needed by property</td>
+<td>Extended agreement value. The label will change based on the property itself.</td>
+</tr>
+<tr>
+<td>slaProperties.unit</td>
+<td>Unit</td>
+<td>No - unless needed by property</td>
+<td><strong>d</strong>, day, days for days; <strong>y</strong>, yr, years for years, etc. Units use the ISO standard.</td>
+</tr>
+<tr>
+<td>slaProperties.column</td>
+<td>Column(s)</td>
+<td>No</td>
+<td>Column(s) to check on. Multiple columns should be extremely rare and, if so, separated by commas.</td>
+</tr>
+<tr>
+<td>slaProperties.driver</td>
+<td>Driver</td>
+<td>No</td>
+<td>Describes the importance of the SLA from the list of: <code>regulatory</code>, <code>analytics</code>, or <code>operational</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="other-properties">Other properties</h2>
+<p>This section covers other properties you may find in a data contract.</p>
+<h3 id="example_6">Example</h3>
+<pre><code class="language-YAML">customProperties:
+  - property: refRulesetName
+    value: gcsc.ruleset.name
+  - property: somePropertyName
+    value: property.value
+  - property: dataprocClusterName # Used for specific applications like Elevate
+    value: [cluster name]
+
+systemInstance: instance.ClimateQuantum.org
+contractCreatedTs: 2022-11-15 02:59:43
+</code></pre>
+<h3 id="definitions_7">Definitions</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>UX label</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>customProperties</td>
+<td>Custom Properties</td>
+<td>No</td>
+<td>A list of key/value pairs for custom properties. Initially created to support the REF ruleset property.</td>
+</tr>
+<tr>
+<td>customProperties.property</td>
+<td>Property</td>
+<td>No</td>
+<td>The name of the key. Names should be in camel case–the same as if they were permanent properties in the contract.</td>
+</tr>
+<tr>
+<td>customProperties.value</td>
+<td>Value</td>
+<td>No</td>
+<td>The value of the key.</td>
+</tr>
+<tr>
+<td>systemInstance</td>
+<td>System Instance</td>
+<td>No</td>
+<td>System Instance name where the dataset resides.</td>
+</tr>
+<tr>
+<td>contractCreatedTs</td>
+<td>Contract Created UTC</td>
+<td>No</td>
+<td>Timestamp in UTC of when the data contract was created.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="full-example">Full example</h2>
+<p><a href="../examples/all/full-example.yaml">Check full example here.</a></p>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../examples/" class="md-footer__link md-footer__link--next" aria-label="Next: Examples">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Examples
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://join.slack.com/t/aidaug/shared_invite/zt-2d6ypx776-YGqtXwlSlCANhn2EWDmNGQ" target="_blank" rel="noopener" title="join.slack.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/bitol-io" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/company/bitol-io/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.instant", "navigation.instant.prefetch", "navigation.tracking", "navigation.top", "navigation.footer", "navigation.path", "content.code.copy", "content.code.select", "content.tabs.link", "toc.integrate", "toc.follow"], "search": "../assets/javascripts/workers/search.f2da59ea.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ef51cdc3.min.js"></script>
+      
+        <script src="../js/open_in_new_tab.js"></script>
+      
+    
+  </body>
+</html>
