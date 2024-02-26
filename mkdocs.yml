@@ -43,8 +43,17 @@ extra:
       link: https://github.com/bitol-io
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/company/bitol-io/
+  version:
+    provider: mike
 
 markdown_extensions:
   - attr_list
   - def_list
   - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
