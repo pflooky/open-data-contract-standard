@@ -1,17 +1,17 @@
 # Open Data Contract Standard
 
 ## Executive summary
-This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [demographics](#Demographics), [dataset & schema](#Dataset-&-schema), [data quality](#Data-quality), [pricing](#Pricing), [stakeholders](#Stakeholders), [roles](#Roles), [service-level agreement](#Service-level-agreement), and [other properties](#Other-properties). Each section starts with at least an example followed by definition of each field/key.
+This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [demographics](#demographics), [dataset & schema](#dataset-and-schema), [data quality](#data-quality), [pricing](#pricing), [stakeholders](#stakeholders), [roles](#roles), [service-level agreement](#service-level-agreement), and [other properties](#other-properties). Each section starts with at least an example followed by definition of each field/key.
 
 ## Table of content
-* [Fundamentals & demographics](#Demographics)
-* [Datasets & schema](#dataset--schema)
-* [Data quality](#Data-quality)
-* [Pricing](#Pricing)
-* [Stakeholders](#Stakeholders)
-* [Roles](#Roles)
+* [Fundamentals & demographics](#demographics)
+* [Datasets & schema](#dataset-and-schema)
+* [Data quality](#data-quality)
+* [Pricing](#pricing)
+* [Stakeholders](#stakeholders)
+* [Roles](#roles)
 * [Service-level agreement](#service-level-agreement)
-* [Other properties](#Other-properties)
+* [Other properties](#other-properties)
 * [Full example](#full-example)
 
 ## Notes
@@ -104,7 +104,7 @@ tags: null
 | password                | Password                 | No       | User credentials for connecting to the dataset; how the credentials will be stored/passed is out of the scope of this contract.                                                                                                                                                                                                                  |                                                                                                                                                                                            
 | schedulerAppName        | Scheduler App Name       | No       | Required if you want to schedule stuff. The name of the application used to schedule jobs                                                                                                                                                                                                                                                        |  
 
-## Dataset & schema
+## Dataset and schema
 This section describes the dataset and the schema of the data contract. It is the support for data quality, which is detailed in the next section.
 
 ### Example

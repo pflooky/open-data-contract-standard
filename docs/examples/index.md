@@ -6,13 +6,13 @@ This folder contains mainly excerpt of data contracts to illustrate specific sec
 ## Table of content
 * [Full example](#full-example)
 * [Fundamentals & demographics](#fundamentals)
-* [Datasets & schema](#Dataset-&-schema)
-* [Data quality](#Data-quality)
-* [Pricing](#Pricing)
-* [Stakeholders](#Stakeholders)
-* [Roles](#Roles)
+* [Datasets & schema](#dataset-and-schema)
+* [Data quality](#data-quality)
+* [Pricing](#pricing)
+* [Stakeholders](#stakeholders)
+* [Roles](#roles)
 * [Service-level agreement](#service-level-agreement)
-* [Other properties](#Other-properties)
+* [Other properties](#other-properties)
 
 ## Full example
 
@@ -23,7 +23,7 @@ This folder contains mainly excerpt of data contracts to illustrate specific sec
 
 - [Table and column](fundamentals/table-column-description.yaml)
 
-## Dataset & schema
+## Dataset and schema
 
 - [Table with single column](schema/table-column.yaml)
 - [Table with columns and partitioning](schema/table-columns-with-partition.yaml)
