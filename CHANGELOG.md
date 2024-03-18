@@ -7,8 +7,9 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 * Change `price.priceAmount` data type from `string` to `number`
 * Change `slaProperties.value` data type from `string` to `oneOf[string, number]`
 * Change `slaProperties.valueExt` data type from `string` to `oneOf[string, number]`
-* Update [examples](examples) to adhere to JSON schema
-* Full example from README directs to [full-example.yaml](examples/all/full-example.yaml)
+* Update [examples](docs/examples) to adhere to JSON schema
+* Full example from README directs to [full-example.yaml](docs/examples/all/full-example.yaml)
+* Add in mkdocs for creating documentation website
 
 # v2.2.1 - 2023-12-18 - APPROVED
 
