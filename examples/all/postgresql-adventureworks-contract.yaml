@@ -11,7 +11,6 @@ driver: "org.postgresql.Driver"
 description: {}
 database: "adventureworks"
 dataset:
-  tables:
   - table: "department"
     physicalName: "department"
     description: "Lookup table containing the departments within the Adventure Works\
