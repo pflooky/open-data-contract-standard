@@ -53,6 +53,15 @@ Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
 If you spot an article about the Open Data Contract Standard, make a pull request! 
 
+## Vendors
+
+Vendors who natively support the Open Data Contract Standard.
+
+A non-exhaustive list of organizations offering solutions natively compatible with ODCS, such as data catalogs, and data quality platforms.
+
+* [DQC.ai | DQ PLATFORM](https://www.dqc.ai/dqc-platform) - [Enhancing Data Quality with ODCS: A Standard Ensured by the DQ Platform
+](https://www.dqc.ai/post/enhancing-data-quality-with-odcs-a-standard-ensured-by-the-dq-platform)
+
 ## More
 
 ### History
