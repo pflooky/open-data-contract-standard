@@ -39,6 +39,8 @@ validation of your YAML files. Links below show how you can import the schema:
 Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
 ## Articles 
+ * 2024-02-06 - [Getting started with ODCS](https://medium.com/abeadata/getting-started-with-odcs-3ba790707879)
+ * 2023-12-08 - [Why the Need for Standardizing Data Contracts?](https://medium.com/abeadata/why-the-need-for-standardizing-data-contracts-133bc3491148)
  * 2023-11-30 - [Linux Foundation AI & Data - Bitol Joins LF AI & Data as New Sandbox Project](https://lfaidata.foundation/blog/2023/11/30/bitol-joins-lf-ai-data-as-new-sandbox-project/)
  * 2023-11-30 - [AIDAUG - Bitol Joins LF AI & Data as New Sandbox Project](https://aidausergroup.org/2023/11/30/bitol-joins-lf-ai-data-as-new-sandbox-project/)
  * 2023-10-01 - [Data Contracts: A Bridge Connecting Two Worlds](https://medium.com/@atanas.iliev.ai/data-contracts-a-bridge-connecting-two-worlds-404eff1d970d)
@@ -55,7 +57,7 @@ If you spot an article about the Open Data Contract Standard, make a pull reques
 ## More
 
 ### History
-Formerly known as the data contract template, this standard is used to implement Data Mesh at [PayPal](https://about.pypl.com/). Today, starting with v2.2.0, it is maintained by a 501c6 non-profit organization called AIDA User Group (Artificial Intelligence, Data, and Analytics User Group). On November 30th, 2023, [AIDA User Group](https://aidaug.org) and the [Linux Foundation AI & Data](https://lfaidata.foundation/) joined forces to create [Bitol](https://bitol.io). Bitol englobes ODCS and future standards & tools.
+Formerly known as the data contract template, this standard is used to implement Data Mesh at [PayPal](https://about.pypl.com/). Starting with v2.2.0, it is maintained by a 501c6 non-profit organization called [AIDA User Group (Artificial Intelligence, Data, and Analytics User Group)](https://aidaug.org). On November 30th, 2023, [AIDA User Group](https://aidaug.org) and the [Linux Foundation AI & Data](https://lfaidata.foundation/) joined forces to create [Bitol](https://bitol.io). Bitol englobes ODCS and future standards & tools.
 
 ### How does PayPal use Data Contracts?
 PayPal uses data contracts in many ways, but this [article](https://medium.com/paypal-tech/the-next-generation-of-data-platforms-is-the-data-mesh-b7df4b825522) from the [PayPal Technology blog](https://medium.com/paypal-tech) gives a good introduction.
