@@ -42,11 +42,11 @@ You have to be a member of AIDA User Group (it's free) to have access to our Sla
 
 > If you want to ask a question, we assume that you have read the available [Documentation](https://github.com/AIDAUserGroup/open-data-contract-standard).
 
-Before you ask a question, it is best to search for existing [Issues](/issues) that might help you. In case you have found a suitable issue and still need clarification, you can write your question in this issue. It is also advisable to search the internet for answers first.
+Before you ask a question, it is best to search for existing [Issues](https://github.com/bitol-io/open-data-contract-standard/issues) that might help you. In case you have found a suitable issue and still need clarification, you can write your question in this issue. It is also advisable to search the internet for answers first.
 
 If you then still feel the need to ask a question and need clarification, we recommend the following:
 
-- Open an [Issue](/issues/new).
+- Open a [New Issue](https://github.com/bitol-io/open-data-contract-standard/issues/new).
 - Provide as much context as you can about what you're running into.
 
 We will then take care of the issue as soon as possible.
@@ -65,13 +65,13 @@ This section guides you through submitting an enhancement suggestion for Data Co
 
 - Make sure that you are using the latest version.
 - Read the [documentation](https://github.com/AIDAUserGroup/open-data-contract-standard) carefully and find out if the functionality is already covered.
-- Perform a [search](/issues) to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
+- Perform a [search](https://github.com/bitol-io/open-data-contract-standard/issues) to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
 - Find out whether your idea fits with the scope and aims of the project. It's up to you to make a strong case to convince the project's developers of the merits of this feature. Keep in mind that we want features that will be useful to the majority of our users and not just a small subset. 
 
 <!-- omit in toc -->
 #### How Do I Submit a Good Enhancement Suggestion?
 
-Enhancement suggestions are tracked as [GitHub issues](/issues).
+Enhancement suggestions are tracked as [GitHub issues](https://github.com/bitol-io/open-data-contract-standard/issues).
 
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
@@ -79,7 +79,7 @@ Enhancement suggestions are tracked as [GitHub issues](/issues).
 - **Explain why this enhancement would be useful** to most Open Data Contract Standard users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
 
 ### Improving The Documentation
-Please contact [@jgperrin](https://github.com/jgperrin). Examples are always welecome.
+Please contact [@jgperrin](https://github.com/jgperrin). Examples are always welcome.
 
 ## Join The Project Team
 Please contact [@jgperrin](https://github.com/jgperrin).
