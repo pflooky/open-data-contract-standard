@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://pflooky.github.io/open-data-contract-standard/v2.2.1/standard/">
+        <link rel="canonical" href="https://pflooky.github.io/open-data-contract-standard/standard/">
       
       
         <link rel="prev" href="..">
@@ -498,10 +498,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#authorative-definitions" class="md-nav__link">
+  <a href="#logical-type-options" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Authorative definitions
+        Logical Type Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authoritative-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authoritative definitions
       
     </span>
   </a>
@@ -1266,13 +1277,19 @@
 <td>dataset.table.columns.column.logicalType</td>
 <td>Logical Type</td>
 <td>Yes</td>
-<td>The logical column datatype.</td>
+<td>The logical column datatype. One of <code>string</code>, <code>number</code>, <code>integer</code>, <code>object</code>, <code>array</code> or <code>boolean</code>.</td>
+</tr>
+<tr>
+<td>dataset.table.columns.column.logicalTypeOptions</td>
+<td>Logical Type Options</td>
+<td>No</td>
+<td>Additional optional metadata to describe the logical type. See <a href="#logical-type-options">here</a> for more details about supported options for each <code>logicalType</code>.</td>
 </tr>
 <tr>
 <td>dataset.table.columns.column.physicalType</td>
 <td>Physical Type</td>
 <td>Yes</td>
-<td>The physical column datatype.</td>
+<td>The physical column data type in the data source. For example, VARCHAR(2), DOUBLE, INT.</td>
 </tr>
 <tr>
 <td>dataset.table.columns.column.description</td>
@@ -1370,15 +1387,129 @@
 <td>No</td>
 <td>A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.</td>
 </tr>
+</tbody>
+</table>
+<h3 id="logical-type-options">Logical Type Options</h3>
+<p>Additional metadata options to more accurately define the data type.</p>
+<table>
+<thead>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<th>Data Type</th>
+<th>Key</th>
+<th>UX Label</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>array</td>
+<td>maxItems</td>
+<td>Maximum Items</td>
+<td>No</td>
+<td>Maximum number of items.</td>
+</tr>
+<tr>
+<td>array</td>
+<td>minItems</td>
+<td>Minimum Items</td>
+<td>No</td>
+<td>Minimum number of items.</td>
+</tr>
+<tr>
+<td>array</td>
+<td>uniqueItems</td>
+<td>Unique Items</td>
+<td>No</td>
+<td>If set to true, all items in the array are unique.</td>
+</tr>
+<tr>
+<td>integer/number</td>
+<td>exclusiveMaximum</td>
+<td>Exclusive Maximum</td>
+<td>No</td>
+<td>If set to true, all values are strictly less than the maximum value (values &lt; maximum). Otherwise, less than or equal to the maximum value (values &lt;= maximum).</td>
+</tr>
+<tr>
+<td>integer/number</td>
+<td>exclusiveMinimum</td>
+<td>Exclusive Minimum</td>
+<td>No</td>
+<td>If set to true, all values are strictly greater than the minimum value (values &gt; minimum). Otherwise, greater than or equal to the minimum value (values &gt;= minimum).</td>
+</tr>
+<tr>
+<td>integer/number</td>
+<td>maximum</td>
+<td>Maximum</td>
+<td>No</td>
+<td>All values are less than or equal to this value (values &lt;= maximum).</td>
+</tr>
+<tr>
+<td>integer/number</td>
+<td>minimum</td>
+<td>Minimum</td>
+<td>No</td>
+<td>All values are greater than or equal to this value (values &gt;= minimum).</td>
+</tr>
+<tr>
+<td>integer/number</td>
+<td>multipleOf</td>
+<td>Multiple Of</td>
+<td>No</td>
+<td>Values must be multiples of this number. For example, multiple of 5 has valid values 0, 5, 10, -5.</td>
+</tr>
+<tr>
+<td>object</td>
+<td>maxProperties</td>
+<td>Maximum Properties</td>
+<td>No</td>
+<td>Maximum number of properties.</td>
+</tr>
+<tr>
+<td>object</td>
+<td>minProperties</td>
+<td>Minimum Properties</td>
+<td>No</td>
+<td>Minimum number of properties.</td>
+</tr>
+<tr>
+<td>object</td>
+<td>required</td>
+<td>Required</td>
+<td>No</td>
+<td>Property names that are required to exist in the object.</td>
+</tr>
+<tr>
+<td>string</td>
+<td>format</td>
+<td>Format</td>
+<td>No</td>
+<td>Provides extra context about what format the string follows. For example, date, date-time, password, byte, binary, email, uuid, uri, hostname, ipv4, ipv6.</td>
+</tr>
+<tr>
+<td>string</td>
+<td>maxLength</td>
+<td>Maximum Length</td>
+<td>No</td>
+<td>Maximum length of the string.</td>
+</tr>
+<tr>
+<td>string</td>
+<td>minLength</td>
+<td>Minimum Length</td>
+<td>No</td>
+<td>Minimum length of the string.</td>
+</tr>
+<tr>
+<td>string</td>
+<td>pattern</td>
+<td>Pattern</td>
+<td>No</td>
+<td>Regular expression pattern to define valid value. Follows regular expression syntax from ECMA-262 (https://262.ecma-international.org/5.1/#sec-15.10.1).</td>
 </tr>
 </tbody>
 </table>
-<h3 id="authorative-definitions">Authorative definitions</h3>
+<h3 id="authoritative-definitions">Authoritative definitions</h3>
 <p>Updated in ODCS (Open Data Contract Standard) v2.2.1.</p>
 <table>
 <thead>

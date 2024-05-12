@@ -1,5 +1,11 @@
 This document tracks the history and evolution of the **Open Data Contract Standard**.
 
+# v3.0.0 - 2024-05-12 - OPEN
+
+* Add in `dataset.column.logicalTypeOptions` (based on [OpenAPI data type options](https://swagger.io/docs/specification/data-models/data-types/))
+* Restrict `dataset.column.logicalType` to one of `string`, `number`, `integer`, `object`, `array` or `boolean`
+* Add in example of all data types (found [here](docs/examples/data-types/all-data-types.yaml))
+
 # v2.2.2 - 2024-01-05 - OPEN
 
 * Change `dataset.description` data type from `array` to `string`
