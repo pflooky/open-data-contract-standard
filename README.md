@@ -7,10 +7,10 @@ Welcome!
 Thanks for your interest and for taking the time to come here! ❤️
 
 ## Executive summary
-This standard describes a structure for a **data contract**. It's current version is 2.2.1. It is available for you as an Apache 2.0 license. Contributions are welcome!
+This standard describes a structure for a **data contract**. It's current version is v2.2.2. It is available for you as an Apache 2.0 license. Contributions are welcome!
 
 ## Discover the open standard
-Discover the [Open Data Contract Standard](docs/index.md). This file contains some explanations and several examples. More [examples](docs/examples/index.md) have been added to v2.2.1.
+Discover the [Open Data Contract Standard](docs/index.md). This file contains some explanations and several examples. More [examples](docs/examples/index.md) can be found here.
 
 ## What is a Data Contract?
 
