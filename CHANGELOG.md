@@ -16,7 +16,7 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 * Reformat quality examples to be valid YAML.
 * Type of definition for authority have standard values: `businessDefinition`, `transformationImplementation`, `videoTutorial`, `tutorial`, and `implementation`.
 * Add in `isUnique`, `primaryKeyPosition`, `partitionKeyPosition`, and `clusterKeyPosition` to `column` definition.
-* Add [JSON schema](schema/odcs-json-schema.json) to validate YAML files for v2.2.1.
+* Add [JSON schema](https://github.com/bitol-io/open-data-contract-standard/blob/main/schema/odcs-json-schema.json) to validate YAML files for v2.2.1.
 * Integrated as part of [Bitol](https://lfaidata.foundation/projects/bitol/).
 * Reformat Markdown tables.
 

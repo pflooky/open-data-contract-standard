@@ -10,7 +10,7 @@ Thanks for your interest and for taking the time to come here! ❤️
 This standard describes a structure for a **data contract**. It's current version is v2.2.2. It is available for you as an Apache 2.0 license. Contributions are welcome!
 
 ## Discover the open standard
-Discover the [Open Data Contract Standard](docs/index.md). This file contains some explanations and several examples. More [examples](docs/examples/index.md) can be found here.
+Discover the [Open Data Contract Standard](docs/standard.md). This file contains some explanations and several examples. More [examples](docs/examples/index.md) can be found here.
 
 ## What is a Data Contract?
 
@@ -23,13 +23,13 @@ A data contract defines the agreement between a data producer and consumers. A d
 * Security & stakeholders.
 * Custom properties.
 
-![Data contract schema](./docs/img/data-contract-v2.2.1-schema.svg "Data contract schema")
+![Data contract schema](docs/img/data-contract-v2.2.1-schema.svg "Data contract schema")
 
 *Figure 1: illustration of a data contract, its principal contributors, sections, and usage.*
 
 ### JSON Schema
 
-JSON Schema for ODCS can be found [here](schema/odcs-json-schema.json). You can import this schema into your IDE for 
+JSON Schema for ODCS can be found [here](https://github.com/bitol-io/open-data-contract-standard/blob/main/schema/odcs-json-schema.json). You can import this schema into your IDE for 
 validation of your YAML files. Links below show how you can import the schema:
 
 - [IntelliJ](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom)
@@ -82,7 +82,7 @@ mike set-default --push latest                    #by default, users will go to 
 ```
 
 #### Deploying a new version
-Given that the Github action [here](.github/workflows/docs-site-deploy.yaml) it set to trigger when a new tag version is
+Given that the Github action [here](https://github.com/bitol-io/open-data-contract-standard/blob/main/.github/workflows/docs-site-deploy.yaml) it set to trigger when a new tag version is
 created, all that is required is to:
 1. [Create a new release](https://github.com/bitol-io/open-data-contract-standard/releases)
 2. Put in new tag version for release (follows pattern v*)
