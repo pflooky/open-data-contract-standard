@@ -29,4 +29,7 @@ jobs:
             mkdocs-material-
       - run: pip install mkdocs-open-in-new-tab mike
       - run: pip install mkdocs-material
+      - run: cp README.md docs/index.md
+      - run: cp CONTRIBUTING.md docs/contributing.md
+      - run: cp CHANGELOG.md docs/changelog.md
       - run: mike deploy --push --update-aliases ${{ github.ref_name }} latest
