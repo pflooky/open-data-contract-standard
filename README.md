@@ -43,6 +43,7 @@ Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
  * 2023-12-08 - [Why the Need for Standardizing Data Contracts?](https://medium.com/abeadata/why-the-need-for-standardizing-data-contracts-133bc3491148)
  * 2023-11-30 - [Linux Foundation AI & Data - Bitol Joins LF AI & Data as New Sandbox Project](https://lfaidata.foundation/blog/2023/11/30/bitol-joins-lf-ai-data-as-new-sandbox-project/)
  * 2023-11-30 - [AIDAUG - Bitol Joins LF AI & Data as New Sandbox Project](https://aidausergroup.org/2023/11/30/bitol-joins-lf-ai-data-as-new-sandbox-project/)
+ * 2023-11-22 - [What is, and what isn’t, a data contract](https://datacreation.substack.com/p/what-is-and-what-isnt-a-data-contract)
  * 2023-10-01 - [Data Contracts: A Bridge Connecting Two Worlds](https://medium.com/@atanas.iliev.ai/data-contracts-a-bridge-connecting-two-worlds-404eff1d970d)
  * 2023-09-10 - [Data Contracts 101](https://medium.com/p/568a9adbf9a9)
  * 2023-08-10 - [Welcome to the Open Data Contract Standard](https://jgp.ai/2023/08/09/welcome-to-the-open-data-contract-standard/)
@@ -53,15 +54,6 @@ Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
  * 2023-05-01 - [PayPal open sources its data contract template](https://jgp.ai/2023/05/01/paypal-open-sources-its-data-contract-template/)
 
 If you spot an article about the Open Data Contract Standard, make a pull request! 
-
-## Vendors
-
-Vendors who natively support the Open Data Contract Standard.
-
-A non-exhaustive list of organizations offering solutions natively compatible with ODCS, such as data catalogs, and data quality platforms.
-
-* [DQC.ai | DQ PLATFORM](https://www.dqc.ai/dqc-platform) - [Enhancing Data Quality with ODCS: A Standard Ensured by the DQ Platform
-](https://www.dqc.ai/post/enhancing-data-quality-with-odcs-a-standard-ensured-by-the-dq-platform)
 
 ## More
 
