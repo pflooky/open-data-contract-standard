@@ -9,14 +9,14 @@ uuid: 53581432-6c55-4ba2-a65f-72344a91553a
 # Lots of information
 description:
   purpose: Views built on top of the seller tables.
-  limitations: null
-  usage: null
+  limitations: Data based on seller perspective, no buyer information
+  usage: Predict sales over time
 tenant: ClimateQuantumInc
 
 # Getting support
 productDl: product-dl@ClimateQuantum.org
 productSlackChannel: '#product-help'
-productFeedbackUrl: null
+productFeedbackUrl: https://product-feedback.com/sellers
 
 # Physical parts / GCP / BigQuery specific
 sourcePlatform: googleCloudPlatform
@@ -25,14 +25,14 @@ datasetProject: edw # BQ dataset
 datasetName: access_views # BQ dataset
 
 kind: DataContract
-apiVersion: 2.3.0 # Standard version (follows semantic versioning, previously known as templateVersion)
+apiVersion: v2.2.2 # Standard version (follows semantic versioning, previously known as templateVersion)
 
 type: tables
 
 # Physical access
-driver: null
-driverVersion: null
-server: null
+driver: jdbc:postgresql
+driverVersion: 1.0.0
+server: localhost:5432
 database: pypl-edw.pp_access_views
 username: '${env.username}'
 password: '${env.password}'
@@ -42,7 +42,7 @@ schedulerAppName: name_coming_from_scheduler # NEW 2.1.0 Required if you want to
 dataset:
   - table: tbl
     physicalName: tbl_1 # NEW in v2.1.0, Optional, default value is table name + version separated by underscores, as table_1_2_0
-    priorTableName: null # if needed
+    priorTableName: seller_table # if needed
     description: Provides core payment metrics
     authoritativeDefinitions: # NEW in v2.2.0, inspired by the column-level authoritative links
       - url: https://catalog.data.gov/dataset/air-quality
@@ -59,15 +59,14 @@ dataset:
         logicalType: date
         physicalType: date
         isNullable: false
-        description: null
+        description: Reference date for transaction
         partitionStatus: true
         partitionKeyPosition: 1
         clusterStatus: false
         clusterKeyPosition: -1
         criticalDataElementStatus: false
-        tags: null
-        classification: null
-        encryptedColumnName: null
+        tags: []
+        classification: public
         transformSourceTables:
           - table_name_1
           - table_name_2
@@ -90,9 +89,8 @@ dataset:
         clusterStatus: true
         clusterKeyPosition: 1
         criticalDataElementStatus: false
-        tags: null
-        classification: null
-        encryptedColumnName: null
+        tags: []
+        classification: restricted
       - column: rcvr_cntry_code
         isPrimary: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
         primaryKeyPosition: -1
@@ -100,14 +98,14 @@ dataset:
         logicalType: string
         physicalType: varchar(2)
         isNullable: false
-        description: null
+        description: Country code
         partitionStatus: false
         partitionKeyPosition: -1
         clusterStatus: false
         clusterKeyPosition: -1
         criticalDataElementStatus: false
-        tags: null
-        classification: null
+        tags: []
+        classification: public
         authoritativeDefinitions:
           - url: https://collibra.com/asset/742b358f-71a5-4ab1-bda4-dcdba9418c25
             type: businessDefinition
@@ -162,14 +160,10 @@ stakeholders:
   - username: mhopper
     role: Data Scientist
     dateIn: 2022-10-01
-    dateOut: null
-    replacedByUsername: null
   - username: daustin
     role: Owner
     comment: Keeper of the grail
     dateIn: 2022-10-01
-    dateOut: null
-    replacedByUsername: null
 
 # Roles
 roles:

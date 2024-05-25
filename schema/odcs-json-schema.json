@@ -16,8 +16,8 @@
     },
     "apiVersion": {
       "type": "string",
-      "default": "v2.3.0",
-      "description": "Version of the standard used to build data contract. Default value is v2.3.0.",
+      "default": "v2.2.2",
+      "description": "Version of the standard used to build data contract. Default value is v2.2.2.",
       "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+"
     },
     "uuid": {
@@ -189,11 +189,8 @@
           "description": "Name of the previous version of the dataset, if applicable."
         },
         "description": {
-          "type": "array",
-          "description": "List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.",
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "description": "Description of the dataset."
         },
         "authoritativeDefinitions": {
           "$ref": "#/$defs/AuthoritativeDefinitions"
@@ -228,7 +225,7 @@
           "description": "The name of the column."
         },
         "isPrimaryKey": {
-          "type": "string",
+          "type": "boolean",
           "description": "Boolean value specifying whether the column is primary or not. Default is false."
         },
         "primaryKeyPosition": {
@@ -415,7 +412,7 @@
       "type": "object",
       "properties": {
         "priceAmount": {
-          "type": "string",
+          "type": "number",
           "description": "Subscription price per unit of measure in `priceUnit`."
         },
         "priceCurrency": {
@@ -483,11 +480,25 @@
           "description": "Specific property in SLA, check the periodic table. May requires units (more details to come)."
         },
         "value": {
-          "type": "string",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ],
           "description": "Agreement value. The label will change based on the property itself."
         },
         "valueExt": {
-          "type": "string",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ],
           "description": "Extended agreement value. The label will change based on the property itself."
         },
         "unit": {

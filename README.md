@@ -7,10 +7,10 @@ Welcome!
 Thanks for your interest and for taking the time to come here! ❤️
 
 ## Executive summary
-This standard describes a structure for a **data contract**. Its current version is 3.0.0-dev. It is available for you as an Apache 2.0 license. Contributions are welcome!
+This standard describes a structure for a **data contract**. It's current version is v2.2.2. It is available for you as an Apache 2.0 license. Contributions are welcome!
 
 ## Discover the open standard
-Discover the [Open Data Contract Standard](./docs/README.md). This file contains some explanations and several examples. More [examples](./examples/README.md) have been added to vTBD.
+Discover the [Open Data Contract Standard](docs/standard.md). This file contains some explanations and several examples. More [examples](docs/examples/index.md) can be found here.
 
 ## What is a Data Contract?
 
@@ -23,13 +23,14 @@ A data contract defines the agreement between a data producer and consumers. A d
 * Security & stakeholders.
 * Custom properties.
 
-![Data contract schema](./docs/img/data-contract-v2.2.1-schema.svg "Data contract schema")
+![Data contract schema](docs/img/data-contract-v2.2.1-schema.svg "Data contract schema")
 
 *Figure 1: illustration of a data contract, its principal contributors, sections, and usage.*
 
 ### JSON Schema
 
-JSON Schema for ODCS can be found [here](schema/odcs-json-schema.json). You can import this schema into your IDE for validation of your YAML files. The links below show how you can import the schema:
+JSON Schema for ODCS can be found [here](https://github.com/bitol-io/open-data-contract-standard/blob/main/schema/odcs-json-schema.json). You can import this schema into your IDE for 
+validation of your YAML files. Links below show how you can import the schema:
 
 - [IntelliJ](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom)
 - [VS Code](https://code.visualstudio.com/docs/languages/json#_json-schemas-and-settings)
@@ -42,6 +43,7 @@ Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
  * 2023-12-08 - [Why the Need for Standardizing Data Contracts?](https://medium.com/abeadata/why-the-need-for-standardizing-data-contracts-133bc3491148)
  * 2023-11-30 - [Linux Foundation AI & Data - Bitol Joins LF AI & Data as New Sandbox Project](https://lfaidata.foundation/blog/2023/11/30/bitol-joins-lf-ai-data-as-new-sandbox-project/)
  * 2023-11-30 - [AIDAUG - Bitol Joins LF AI & Data as New Sandbox Project](https://aidausergroup.org/2023/11/30/bitol-joins-lf-ai-data-as-new-sandbox-project/)
+ * 2023-11-22 - [What is, and what isn’t, a data contract](https://datacreation.substack.com/p/what-is-and-what-isnt-a-data-contract)
  * 2023-10-01 - [Data Contracts: A Bridge Connecting Two Worlds](https://medium.com/@atanas.iliev.ai/data-contracts-a-bridge-connecting-two-worlds-404eff1d970d)
  * 2023-09-10 - [Data Contracts 101](https://medium.com/p/568a9adbf9a9)
  * 2023-08-10 - [Welcome to the Open Data Contract Standard](https://jgp.ai/2023/08/09/welcome-to-the-open-data-contract-standard/)
@@ -60,3 +62,5 @@ Formerly known as the data contract template, this standard is used to implement
 
 ### How does PayPal use Data Contracts?
 PayPal uses data contracts in many ways, but this [article](https://medium.com/paypal-tech/the-next-generation-of-data-platforms-is-the-data-mesh-b7df4b825522) from the [PayPal Technology blog](https://medium.com/paypal-tech) gives a good introduction.
+
+
