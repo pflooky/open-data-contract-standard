@@ -1,9 +1,8 @@
 name: docs-site-deploy
 on:
   push:
-    tags:
-      - "v*"
-  workflow_dispatch:
+    branches:
+      - main
 permissions:
   contents: write
 jobs:
@@ -29,7 +28,7 @@ jobs:
             mkdocs-material-
       - run: pip install mkdocs-open-in-new-tab mike
       - run: pip install mkdocs-material
-      - run: cat README.md | sed 's/docs\///g' | sed 's/CONTRIBUTING.md/contributing.md/g' > docs/index.md
-      - run: cat CHANGELOG.md | sed 's/docs\///g' > docs/changelog.md
-      - run: cp CONTRIBUTING.md docs/contributing.md
-      - run: mike deploy --push --update-aliases ${{ github.ref_name }} latest
+      - run: bash script/build_docs.sh
+      - run: |
+          latest_tag=$(git describe --tags --abbrev=0)
+          mike deploy --push --update-aliases "$latest_tag" latest
