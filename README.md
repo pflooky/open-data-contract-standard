@@ -7,9 +7,11 @@ Welcome!
 Thanks for your interest and for taking the time to come here! ❤️
 
 ## Executive summary
-This standard describes a structure for a **data contract**. It's current version is v2.2.2. It is available for you as an Apache 2.0 license. Contributions are welcome!
+This standard describes a structure for a **data contract**. Its current version is v2.2.2. It is available for you as an Apache 2.0 license. Contributions are welcome!
 
 ## Discover the open standard
+A reader-friendly version of the standard can be found on its [dedicated site](https://bitol-io.github.io/open-data-contract-standard/).
+
 Discover the [Open Data Contract Standard](docs/standard.md). This file contains some explanations and several examples. More [examples](docs/examples/index.md) can be found here.
 
 ## What is a Data Contract?
@@ -41,6 +43,7 @@ Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
 ## Articles
 
+* 2024-05-25 - [Conceptual model of Data Quality of Service as Code by Jarkko Moilanen](https://aidausergroup.org/2024/05/25/aida-user-group-forecaster-pi-day-highlights-data-quality-whats-new/)
 * 2024-02-06 - [Getting started with ODCS](https://medium.com/abeadata/getting-started-with-odcs-3ba790707879)
 * 2023-12-08 - [Why the Need for Standardizing Data Contracts?](https://medium.com/abeadata/why-the-need-for-standardizing-data-contracts-133bc3491148)
 * 2023-11-30 - [Linux Foundation AI & Data - Bitol Joins LF AI & Data as New Sandbox Project](https://lfaidata.foundation/blog/2023/11/30/bitol-joins-lf-ai-data-as-new-sandbox-project/)
