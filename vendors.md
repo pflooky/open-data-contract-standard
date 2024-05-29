@@ -1,4 +1,4 @@
-# Vendors
+# Available third-party solutions & support
 
 ## Software vendors & package
 
