@@ -1,3 +1,9 @@
+---
+title: "Open Data Contract Standard (ODCS)"
+description: "Home of Open Data Contract Standard (ODCS) documentation."
+image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color/Bitol_Logo_color.svg"
+---
+
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8149/badge)](https://www.bestpractices.dev/projects/8149)
 
 # Open Data Contract Standard (ODCS)
