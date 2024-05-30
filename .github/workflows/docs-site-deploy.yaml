@@ -28,6 +28,7 @@ jobs:
             mkdocs-material-
       - run: pip install mkdocs-open-in-new-tab mike
       - run: pip install mkdocs-material
+      - run: pip install "mkdocs-material[imaging]"
       - run: bash script/build_docs.sh
       - run: |
           latest_tag=$(git describe --tags --abbrev=0)
