@@ -6,6 +6,7 @@ repo_name: open-data-contract-standard
 plugins:
   - open-in-new-tab
   - search
+  - social
 
 theme:
   name: material
