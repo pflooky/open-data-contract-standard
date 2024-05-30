@@ -4,6 +4,7 @@
 This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [demographics](#demographics), [dataset & schema](#dataset-and-schema), [data quality](#data-quality), [pricing](#pricing), [stakeholders](#stakeholders), [roles](#roles), [service-level agreement](#service-level-agreement), and [other properties](#other-properties). Each section starts with at least an example followed by definition of each field/key.
 
 ## Table of content
+
 * [Fundamentals & demographics](#demographics)
 * [Datasets & schema](#dataset-and-schema)
 * [Data quality](#data-quality)
@@ -15,6 +16,7 @@ This document describes the keys and values expected in a YAML data contract, pe
 * [Full example](#full-example)
 
 ## Notes
+
 * This contract is containing example values, we reviewed very carefully the consistency of those values, but we cannot guarantee that there are no errors. If you spot one, please raise an [issue](https://github.com/AIDAUserGroup/open-data-contract-standard/issues).
 * Some fields have `null` value: even if it is equivalent to not having the field in the contract, we wanted to have the field for illustration purpose.
 * This contract leverages BigQuery but should be **platform agnostic**. If you think it is not the case, please raise an [issue](https://github.com/AIDAUserGroup/open-data-contract-standard/issues).
@@ -96,7 +98,7 @@ tags: null
 | datasetName             | Dataset name             | No       | May be required in cloud instance like GCP BigQuery dataset name.                                                                                                                                                                                                                                                                                |
 | server                  | Server                   | No       | The server where the dataset resides.                                                                                                                                                                                                                                                                                                            |
 | kind                    | Kind                     | Yes      | The kind of file this is. Valid value is `DataContract`.                                                                                                                                                                                                                                                                                         |
-| apiVersion              | Standard version         | No       | Version of the standard used to build data contract. Default value is v2.3.0.                                                                                                                                                                                                                                                                    |
+| apiVersion              | Standard version         | No       | Version of the standard used to build data contract. Default value is v2.2.2.                                                                                                                                                                                                                                                                    |
 | type                    | Type                     | Yes      | Identifies the types of objects in the dataset. For BigQuery or any other database, the expected value would be Tables.                                                                                                                                                                                                                          |
 | driver                  | Driver                   | No       | The connection driver required to connect to the dataset.                                                                                                                                                                                                                                                                                        |
 | driverVersion           | Driver version           | No       | The version of the connection driver to be used to connect to the dataset.                                                                                                                                                                                                                                                                       |
@@ -204,9 +206,8 @@ dataset:
 | dataset.table.columns.column.isPrimaryKey              | Primary Key                  | No       | Boolean value specifying whether the column is primary or not. Default is false.                                                                                                                                                                      |
 | dataset.table.columns.column.primaryKeyPosition        | Primary Key Position         | No       | If column is a primary key, the position of the primary key column. Starts from 1. Example of `account_id, name` being primary key columns, `account_id` has primaryKeyPosition 1 and `name` primaryKeyPosition 2. Default to -1.                     |
 | dataset.table.columns.column.businessName              | Business Name                | No       | The business name of the column.                                                                                                                                                                                                                      |
-| dataset.table.columns.column.logicalType               | Logical Type                 | Yes      | The logical column datatype. One of `string`, `number`, `integer`, `object`, `array` or `boolean`.                                                                                                                                                    |
-| dataset.table.columns.column.logicalTypeOptions        | Logical Type Options         | No       | Additional optional metadata to describe the logical type. See [here](#logical-type-options) for more details about supported options for each `logicalType`.                                                                                         |
-| dataset.table.columns.column.physicalType              | Physical Type                | Yes      | The physical column data type in the data source. For example, VARCHAR(2), DOUBLE, INT.                                                                                                                                                               |
+| dataset.table.columns.column.logicalType               | Logical Type                 | Yes      | The logical column datatype.                                                                                                                                                                                                                          |
+| dataset.table.columns.column.physicalType              | Physical Type                | Yes      | The physical column datatype.                                                                                                                                                                                                                         |
 | dataset.table.columns.column.description               | Description                  | No       | Description of the column.                                                                                                                                                                                                                            |
 | dataset.table.columns.column.isNullable                | Nullable                     | No       | Indicates if the column may contain Null values; possible values are true and false. Default is false.                                                                                                                                                |
 | dataset.table.columns.column.isUnique                  | Unique                       | No       | Indicates if the column contains unique values; possible values are true and false. Default is false.                                                                                                                                                 |
@@ -223,31 +224,9 @@ dataset:
 | dataset.table.columns.column.sampleValues              | Sample Values                | No       | List of sample column values.                                                                                                                                                                                                                         |
 | dataset.table.columns.column.criticalDataElementStatus | Critical Data Element Status | No       | True or false indicator; If element is considered a critical data element (CDE) then true else false.                                                                                                                                                 |
 | dataset.table.columns.column.tags                      | Tags                         | No       | A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.                                                                                                                                        |
+                                                                                                                  |
 
-
-### Logical Type Options
-
-Additional metadata options to more accurately define the data type.
-
-| Data Type      | Key              | UX Label           | Required | Description                                                                                                                                                           |
-|----------------|------------------|--------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| array          | maxItems         | Maximum Items      | No       | Maximum number of items.                                                                                                                                              |
-| array          | minItems         | Minimum Items      | No       | Minimum number of items.                                                                                                                                              |
-| array          | uniqueItems      | Unique Items       | No       | If set to true, all items in the array are unique.                                                                                                                    |
-| integer/number | exclusiveMaximum | Exclusive Maximum  | No       | If set to true, all values are strictly less than the maximum value (values < maximum). Otherwise, less than or equal to the maximum value (values <= maximum).       |
-| integer/number | exclusiveMinimum | Exclusive Minimum  | No       | If set to true, all values are strictly greater than the minimum value (values > minimum). Otherwise, greater than or equal to the minimum value (values >= minimum). |
-| integer/number | maximum          | Maximum            | No       | All values are less than or equal to this value (values <= maximum).                                                                                                  |
-| integer/number | minimum          | Minimum            | No       | All values are greater than or equal to this value (values >= minimum).                                                                                               |
-| integer/number | multipleOf       | Multiple Of        | No       | Values must be multiples of this number. For example, multiple of 5 has valid values 0, 5, 10, -5.                                                                    |
-| object         | maxProperties    | Maximum Properties | No       | Maximum number of properties.                                                                                                                                         |
-| object         | minProperties    | Minimum Properties | No       | Minimum number of properties.                                                                                                                                         |
-| object         | required         | Required           | No       | Property names that are required to exist in the object.                                                                                                              |
-| string         | format           | Format             | No       | Provides extra context about what format the string follows. For example, date, date-time, password, byte, binary, email, uuid, uri, hostname, ipv4, ipv6.            |
-| string         | maxLength        | Maximum Length     | No       | Maximum length of the string.                                                                                                                                         |
-| string         | minLength        | Minimum Length     | No       | Minimum length of the string.                                                                                                                                         |
-| string         | pattern          | Pattern            | No       | Regular expression pattern to define valid value. Follows regular expression syntax from ECMA-262 (https://262.ecma-international.org/5.1/#sec-15.10.1).              |
-
-### Authoritative definitions
+### Authorative definitions
 
 Updated in ODCS (Open Data Contract Standard) v2.2.1.
 

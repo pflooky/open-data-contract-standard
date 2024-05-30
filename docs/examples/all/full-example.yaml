@@ -25,7 +25,7 @@ datasetProject: edw # BQ dataset
 datasetName: access_views # BQ dataset
 
 kind: DataContract
-apiVersion: v2.3.0 # Standard version (follows semantic versioning, previously known as templateVersion)
+apiVersion: v2.2.2 # Standard version (follows semantic versioning, previously known as templateVersion)
 
 type: tables
 
