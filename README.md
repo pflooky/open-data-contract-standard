@@ -47,8 +47,9 @@ validation of your YAML files. Links below show how you can import the schema:
 ## Contributing to the project
 Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
-## Articles
+## Articles and Other Resources
 
+* 2024-05-30 - [ODCS Roadmap](https://medium.com/abeadata/odcs-roadmap-9b9a17367af4)
 * 2024-05-25 - [Conceptual model of Data Quality of Service as Code by Jarkko Moilanen](https://aidausergroup.org/2024/05/25/aida-user-group-forecaster-pi-day-highlights-data-quality-whats-new/)
 * 2024-02-06 - [Getting started with ODCS](https://medium.com/abeadata/getting-started-with-odcs-3ba790707879)
 * 2023-12-08 - [Why the Need for Standardizing Data Contracts?](https://medium.com/abeadata/why-the-need-for-standardizing-data-contracts-133bc3491148)
