@@ -1,9 +1,16 @@
+---
+title: "Definition: Open Data Contract Standard (ODCS)"
+description: "Details of the Open Data Contract Standard (ODCS). Includes fundamentals, datasets, schemas, data quality, pricing, stakeholders, roles, service-level agreements and other properties."
+image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color/Bitol_Logo_color.svg"
+---
+
 # Open Data Contract Standard
 
 ## Executive summary
 This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [demographics](#demographics), [dataset & schema](#dataset-and-schema), [data quality](#data-quality), [pricing](#pricing), [stakeholders](#stakeholders), [roles](#roles), [service-level agreement](#service-level-agreement), and [other properties](#other-properties). Each section starts with at least an example followed by definition of each field/key.
 
 ## Table of content
+
 * [Fundamentals & demographics](#demographics)
 * [Datasets & schema](#dataset-and-schema)
 * [Data quality](#data-quality)
@@ -15,6 +22,7 @@ This document describes the keys and values expected in a YAML data contract, pe
 * [Full example](#full-example)
 
 ## Notes
+
 * This contract is containing example values, we reviewed very carefully the consistency of those values, but we cannot guarantee that there are no errors. If you spot one, please raise an [issue](https://github.com/AIDAUserGroup/open-data-contract-standard/issues).
 * Some fields have `null` value: even if it is equivalent to not having the field in the contract, we wanted to have the field for illustration purpose.
 * This contract leverages BigQuery but should be **platform agnostic**. If you think it is not the case, please raise an [issue](https://github.com/AIDAUserGroup/open-data-contract-standard/issues).

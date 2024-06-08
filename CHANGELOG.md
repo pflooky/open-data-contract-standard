@@ -1,22 +1,30 @@
+---
+title: "Changelog: Open Data Contract Standard (ODCS)"
+description: "Home of Open Data Contract Standard (ODCS) documentation."
+image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color/Bitol_Logo_color.svg"
+---
+
 This document tracks the history and evolution of the **Open Data Contract Standard**.
 
-# v2.2.2 - 2024-01-05 - OPEN
+# v2.2.2 - 2024-05-23 - APPROVED
 
-* Change `dataset.description` data type from `array` to `string`
-* Change `dataset.column.isPrimaryKey` data type from `string` to `boolean`
-* Change `price.priceAmount` data type from `string` to `number`
-* Change `slaProperties.value` data type from `string` to `oneOf[string, number]`
-* Change `slaProperties.valueExt` data type from `string` to `oneOf[string, number]`
-* Update [examples](docs/examples) to adhere to JSON schema
-* Full example from README directs to [full-example.yaml](docs/examples/all/full-example.yaml)
-* Add in mkdocs for creating documentation website
+* In JSON schema validation:
+  * Change `dataset.description` data type from `array` to `string`.
+  * Change `dataset.column.isPrimaryKey` data type from `string` to `boolean`.
+  * Change `price.priceAmount` data type from `string` to `number`.
+  * Change `slaProperties.value` data type from `string` to `oneOf[string, number]`.
+  * Change `slaProperties.valueExt` data type from `string` to `oneOf[string, number]`.
+* Update [examples](docs/examples) to adhere to JSON schema.
+* Full example from README directs to [full-example.yaml](docs/examples/all/full-example.yaml).
+* Add in mkdocs for creating a [documentation website](https://bitol-io.github.io/open-data-contract-standard/). Check [building-doc.md](building-doc.md).
+* Add vendors page [vendors.md](vendors.md). Feel free to add anyone there.
 
 # v2.2.1 - 2023-12-18 - APPROVED
 
 * Reformat quality examples to be valid YAML.
 * Type of definition for authority have standard values: `businessDefinition`, `transformationImplementation`, `videoTutorial`, `tutorial`, and `implementation`.
 * Add in `isUnique`, `primaryKeyPosition`, `partitionKeyPosition`, and `clusterKeyPosition` to `column` definition.
-* Add [JSON schema](schema/odcs-json-schema.json) to validate YAML files for v2.2.1.
+* Add [JSON schema](https://github.com/bitol-io/open-data-contract-standard/blob/main/schema/odcs-json-schema.json) to validate YAML files for v2.2.1.
 * Integrated as part of [Bitol](https://lfaidata.foundation/projects/bitol/).
 * Reformat Markdown tables.
 
