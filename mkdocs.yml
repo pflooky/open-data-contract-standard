@@ -37,6 +37,7 @@ nav:
   - Examples: 'examples/index.md'
   - Changelog: 'changelog.md'
   - Contributing: 'contributing.md'
+  - Vendors: 'vendors.md'
 
 extra:
   social:
