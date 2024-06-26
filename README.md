@@ -38,7 +38,7 @@ A data contract defines the agreement between a data producer and consumers. A d
 
 ### JSON Schema
 
-JSON Schema for ODCS can be found [here](https://github.com/bitol-io/open-data-contract-standard/blob/main/schema/odcs-json-schema.json). You can import this schema into your IDE for 
+JSON Schema for ODCS can be found [here](https://github.com/bitol-io/open-data-contract-standard/blob/main/schema/odcs-json-schema-latest.json). You can import this schema into your IDE for 
 validation of your YAML files. Links below show how you can import the schema:
 
 - [IntelliJ](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom)
