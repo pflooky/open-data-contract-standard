@@ -16,38 +16,38 @@ This folder contains mainly excerpt of data contracts to illustrate specific sec
 
 ## Full example
 
-- [Full example](all/full-example.yaml)
-- [Postgres AdventureWorks](all/postgresql-adventureworks-contract.yaml)
+- [Full example](all/full-example.odcs.yaml)
+- [Postgres AdventureWorks](all/postgresql-adventureworks-contract.odcs.yaml)
 
 ## Fundamentals
 
-- [Table and column](fundamentals/table-column-description.yaml)
+- [Table and column](fundamentals/table-column-description.odcs.yaml)
 
 ## Dataset and schema
 
-- [Table with single column](schema/table-column.yaml)
-- [Table with columns and partitioning](schema/table-columns-with-partition.yaml)
+- [Table with single column](schema/table-column.odcs.yaml)
+- [Table with columns and partitioning](schema/table-columns-with-partition.odcs.yaml)
 
 ## Data quality 
 
-- [Column accuracy](quality/column-accuracy.yaml)
-- [Column completeness](quality/column-completeness.yaml)
-- [Column validity](quality/column-validity.yaml)
+- [Column accuracy](quality/column-accuracy.odcs.yaml)
+- [Column completeness](quality/column-completeness.odcs.yaml)
+- [Column validity](quality/column-validity.odcs.yaml)
 
 ## Pricing
 This section covers pricing when you bill your customer for using this data product. Pricing is experimental in v2.2.0 of the data contract.
 
 ## Stakeholders
 
-- [Stakeholders example](stakeholders/basic-four-dpo.yaml)
+- [Stakeholders example](stakeholders/basic-four-dpo.odcs.yaml)
 
 ## Roles
 
-- [Service and operational roles](roles/service-and-operational-roles.yaml)
+- [Service and operational roles](roles/service-and-operational-roles.odcs.yaml)
 
 ## Service-level agreement
 
-- [Database SLA](sla/database-table-sla.yaml)
+- [Database SLA](sla/database-table-sla.odcs.yaml)
 
 ## Other properties
 Coming soon.

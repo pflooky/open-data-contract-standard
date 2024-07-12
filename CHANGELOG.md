@@ -1,3 +1,9 @@
+---
+title: "Changelog: Open Data Contract Standard (ODCS)"
+description: "Home of Open Data Contract Standard (ODCS) documentation."
+image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color/Bitol_Logo_color.svg"
+---
+
 This document tracks the history and evolution of the **Open Data Contract Standard**.
 
 # v2.2.2 - 2024-05-23 - APPROVED
