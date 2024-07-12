@@ -1,3 +1,9 @@
+---
+title: "Definition: Open Data Contract Standard (ODCS)"
+description: "Details of the Open Data Contract Standard (ODCS). Includes fundamentals, datasets, schemas, data quality, pricing, stakeholders, roles, service-level agreements and other properties."
+image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color/Bitol_Logo_color.svg"
+---
+
 # Open Data Contract Standard
 
 ## Executive summary
@@ -126,7 +132,7 @@ dataset:
     dataGranularity: Aggregation on columns txn_ref_dt, pmt_txn_id
     columns:
       - column: txn_ref_dt
-        isPrimary: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        isPrimaryKey: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
         primaryKeyPosition: -1
         businessName: transaction reference date
         logicalType: date
@@ -150,7 +156,7 @@ dataset:
           - 2022-10-03
           - 2020-01-28
       - column: rcvr_id
-        isPrimary: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        isPrimaryKey: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
         primaryKeyPosition: 1
         businessName: receiver id
         logicalType: string
@@ -166,7 +172,7 @@ dataset:
         classification: restricted
         encryptedColumnName: enc_rcvr_id
       - column: rcvr_cntry_code
-        isPrimary: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        isPrimaryKey: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
         primaryKeyPosition: -1
         businessName: receiver country code
         logicalType: string
@@ -328,7 +334,7 @@ dataset:
 dataset:
   - table: tab1
       - column: rcvr_id
-        isPrimary: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        isPrimaryKey: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
         businessName: receiver id
 # ...
         quality:

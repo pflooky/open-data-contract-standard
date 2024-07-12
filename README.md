@@ -1,3 +1,9 @@
+---
+title: "Open Data Contract Standard (ODCS)"
+description: "Home of Open Data Contract Standard (ODCS) documentation."
+image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color/Bitol_Logo_color.svg"
+---
+
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8149/badge)](https://www.bestpractices.dev/projects/8149)
 
 # Open Data Contract Standard (ODCS)
@@ -32,7 +38,7 @@ A data contract defines the agreement between a data producer and consumers. A d
 
 ### JSON Schema
 
-JSON Schema for ODCS can be found [here](https://github.com/bitol-io/open-data-contract-standard/blob/main/schema/odcs-json-schema.json). You can import this schema into your IDE for 
+JSON Schema for ODCS can be found [here](https://github.com/bitol-io/open-data-contract-standard/blob/main/schema/odcs-json-schema-latest.json). You can import this schema into your IDE for 
 validation of your YAML files. Links below show how you can import the schema:
 
 - [IntelliJ](https://www.jetbrains.com/help/idea/json.html#ws_json_schema_add_custom)
@@ -41,8 +47,10 @@ validation of your YAML files. Links below show how you can import the schema:
 ## Contributing to the project
 Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
-## Articles
+## Articles and Other Resources
 
+* 2024-06-12 - [The Future of Data Management: An Enabler of AI Development? A Basic Illustration with RAG, Open Standards, and Data Contracts](https://blog.owulveryck.info/2024/06/12/the-future-of-data-management-an-enabler-of-ai-development-a-basic-illustration-with-rag-open-standards-and-data-contracts.html)
+* 2024-05-30 - [ODCS Roadmap](https://medium.com/abeadata/odcs-roadmap-9b9a17367af4)
 * 2024-05-25 - [Conceptual model of Data Quality of Service as Code by Jarkko Moilanen](https://aidausergroup.org/2024/05/25/aida-user-group-forecaster-pi-day-highlights-data-quality-whats-new/)
 * 2024-02-06 - [Getting started with ODCS](https://medium.com/abeadata/getting-started-with-odcs-3ba790707879)
 * 2023-12-08 - [Why the Need for Standardizing Data Contracts?](https://medium.com/abeadata/why-the-need-for-standardizing-data-contracts-133bc3491148)
