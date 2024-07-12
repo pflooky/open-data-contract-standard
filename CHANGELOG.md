@@ -6,6 +6,14 @@ image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color
 
 This document tracks the history and evolution of the **Open Data Contract Standard**.
 
+# v3.0.0 - 2024-07-12 - PROPOSED
+
+* In JSON schema:
+  * Restrict `dataset.table.columns.column.logicalType` to be one of `string, date, number, integer, object, array, boolean`
+  * Add `dataset.table.columns.column.logicalTypeOptions`
+* Add [all data types example](docs/examples/data-types/all-data-types.odcs.yaml)
+* Add [logical type options to standard](docs/standard.md#logical-type-options)
+
 # v2.2.2 - 2024-05-23 - APPROVED
 
 * In JSON schema validation:

@@ -21,15 +21,15 @@ dataset:
         physicalType: date
         logicalType: date
         logicalTypeOptions:
-          minLength: 10
-          maxLength: 10
+          minimum: 2020-01-01
+          maximum: 2021-01-01
           format: yyyy-MM-dd
       - column: txn_timestamp
         physicalType: timestamp
         logicalType: date
         logicalTypeOptions:
-          minLength: 19
-          maxLength: 19
+          minimum: 2020-01-01 00:00:00
+          maximum: 2021-01-01 00:00:00
           format: "yyyy-MM-dd HH:mm:ss"
       - column: amount
         physicalType: double
@@ -43,6 +43,7 @@ dataset:
           minimum: 18
           maximum: 100
           exclusiveMaximum: true
+          format: i64
       - column: is_open
         physicalType: bool
         logicalType: boolean

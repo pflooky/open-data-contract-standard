@@ -27,6 +27,7 @@ This folder contains mainly excerpt of data contracts to illustrate specific sec
 
 - [Table with single column](schema/table-column.odcs.yaml)
 - [Table with columns and partitioning](schema/table-columns-with-partition.odcs.yaml)
+- [Data types](data-types/all-data-types.odcs.yaml)
 
 ## Data quality 
 
