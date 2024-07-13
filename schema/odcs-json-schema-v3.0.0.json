@@ -416,13 +416,6 @@
               {
                 "properties": {
                   "logicalType": {
-                    "const": "number"
-                  }
-                }
-              },
-              {
-                "properties": {
-                  "logicalType": {
                     "const": "integer"
                   }
                 }
@@ -461,6 +454,57 @@
                     "default": "i32",
                     "description": "Format of the value in terms of how many bits of space it can use and whether it is signed or unsigned (follows the Rust integer types).",
                     "enum": ["i8", "i16", "i32", "i64", "i128", "u8", "u16", "u32", "u64", "u128"]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "anyOf": [
+              {
+                "properties": {
+                  "logicalType": {
+                    "const": "number"
+                  }
+                }
+              }
+            ]
+          },
+          "then": {
+            "properties": {
+              "logicalTypeOptions": {
+                "properties": {
+                  "multipleOf": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "description": "Values must be multiples of this number. For example, multiple of 5 has valid values 0, 5, 10, -5."
+                  },
+                  "maximum": {
+                    "type": "number",
+                    "description": "All values are less than or equal to this value (values <= maximum)."
+                  },
+                  "exclusiveMaximum": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If set to true, all values are strictly less than the maximum value (values < maximum). Otherwise, less than or equal to the maximum value (values <= maximum)."
+                  },
+                  "minimum": {
+                    "type": "number",
+                    "description": "All values are greater than or equal to this value (values >= minimum)."
+                  },
+                  "exclusiveMinimum": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If set to true, all values are strictly greater than the minimum value (values > minimum). Otherwise, greater than or equal to the minimum value (values >= minimum)."
+                  },
+                  "format": {
+                    "type": "string",
+                    "default": "i32",
+                    "description": "Format of the value in terms of how many bits of space it can use (follows the Rust float types).",
+                    "enum": ["f32", "f64"]
                   }
                 },
                 "additionalProperties": false

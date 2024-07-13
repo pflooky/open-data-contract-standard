@@ -36,6 +36,7 @@ dataset:
         logicalType: number
         logicalTypeOptions:
           minimum: 0
+          format: f32
       - column: age
         physicalType: int
         logicalType: integer
