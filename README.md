@@ -49,6 +49,7 @@ Check out the [CONTRIBUTING](./CONTRIBUTING.md) file.
 
 ## Articles and Other Resources
 
+* 2024-07-17 - [Data Contracts in Action: Testing](https://medium.com/@pflooky/data-contracts-in-action-testing-111631338657)
 * 2024-06-12 - [The Future of Data Management: An Enabler of AI Development? A Basic Illustration with RAG, Open Standards, and Data Contracts](https://blog.owulveryck.info/2024/06/12/the-future-of-data-management-an-enabler-of-ai-development-a-basic-illustration-with-rag-open-standards-and-data-contracts.html)
 * 2024-05-30 - [ODCS Roadmap](https://medium.com/abeadata/odcs-roadmap-9b9a17367af4)
 * 2024-05-25 - [Conceptual model of Data Quality of Service as Code by Jarkko Moilanen](https://aidausergroup.org/2024/05/25/aida-user-group-forecaster-pi-day-highlights-data-quality-whats-new/)
