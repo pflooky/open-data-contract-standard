@@ -11,15 +11,15 @@ This document describes the keys and values expected in a YAML data contract, pe
 
 ## Table of content
 
-* [Fundamentals & demographics](#demographics)
-* [Datasets & schema](#dataset-and-schema)
+* [Fundamentals (fka demographics)](#demographics)
+* [Schema](#dataset-and-schema)
 * [Data quality](#data-quality)
 * [Pricing](#pricing)
-* [Stakeholders](#stakeholders)
+* [Team](#stakeholders)
 * [Roles](#roles)
 * [Service-level agreement](#service-level-agreement)
-* [Other properties](#other-properties)
-* [Full example](#full-example)
+* [Custom & other properties](#other-properties)
+* [Examples](#full-example)
 
 ## Notes
 
@@ -27,7 +27,7 @@ This document describes the keys and values expected in a YAML data contract, pe
 * Some fields have `null` value: even if it is equivalent to not having the field in the contract, we wanted to have the field for illustration purpose.
 * This contract leverages BigQuery but should be **platform agnostic**. If you think it is not the case, please raise an [issue](https://github.com/AIDAUserGroup/open-data-contract-standard/issues).
 
-## Demographics
+## Fundamentals
 This section contains general information about the contract.
 
 ### Example
@@ -112,38 +112,37 @@ tags: null
 | password                | Password                 | No       | User credentials for connecting to the dataset; how the credentials will be stored/passed is out of the scope of this contract.                                                                                                                                                                                                                  |                                                                                                                                                                                            
 | schedulerAppName        | Scheduler App Name       | No       | Required if you want to schedule stuff. The name of the application used to schedule jobs                                                                                                                                                                                                                                                        |  
 
-## Dataset and schema
+## Schema
 This section describes the dataset and the schema of the data contract. It is the support for data quality, which is detailed in the next section.
 
 ### Example
 
 ```YAML
-dataset:
-  - table: tbl
-    physicalName: tbl_1 # NEW in v2.1.0, Optional, default value is table name + version separated by underscores, as table_1_2_0
-    priorTableName: null # if needed
+schema:
+  - name: tbl
+    logicalType: object
+    physicalType: table
+    physicalName: tbl_1 
     description: Provides core payment metrics 
-    authoritativeDefinitions: # NEW in v2.2.0, inspired by the column-level authoritative links
+    authoritativeDefinitions: 
       - url: https://catalog.data.gov/dataset/air-quality 
         type: businessDefinition
       - url: https://youtu.be/jbY1BKFj9ec
         type: videoTutorial
     tags: null
-    dataGranularity: Aggregation on columns txn_ref_dt, pmt_txn_id
-    columns:
-      - column: txn_ref_dt
-        isPrimaryKey: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+    dataGranularityDescription: Aggregation on columns txn_ref_dt, pmt_txn_id
+    properties:
+      - name: txn_ref_dt
+        primaryKey: false 
         primaryKeyPosition: -1
         businessName: transaction reference date
         logicalType: date
         physicalType: date
-        isNullable: false
+        required: false
         description: null
-        partitionStatus: true
+        partitioned: true
         partitionKeyPosition: 1
-        clusterStatus: false
-        clusterKeyPosition: -1
-        criticalDataElementStatus: false
+        criticalDataElement: false
         tags: []
         classification: public
         transformSourceTables:
@@ -152,38 +151,34 @@ dataset:
           - table_name_3
         transformLogic: sel t1.txn_dt as txn_ref_dt from table_name_1 as t1, table_name_2 as t2, table_name_3 as t3 where t1.txn_dt=date-3
         transformDescription: Defines the logic in business terms. 
-        sampleValues:
+        examples:
           - 2022-10-03
           - 2020-01-28
-      - column: rcvr_id
-        isPrimaryKey: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+      - name: rcvr_id
+        primaryKey: true 
         primaryKeyPosition: 1
         businessName: receiver id
         logicalType: string
         physicalType: varchar(18)
-        isNullable: false
+        required: false
         description: A description for column rcvr_id.
-        partitionStatus: false
+        partitioned: false
         partitionKeyPosition: -1
-        clusterStatus: true
-        clusterKeyPosition: 1
-        criticalDataElementStatus: false
+        criticalDataElement: false
         tags: []
         classification: restricted
-        encryptedColumnName: enc_rcvr_id
-      - column: rcvr_cntry_code
-        isPrimaryKey: false # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+        encryptedName: enc_rcvr_id
+      - name: rcvr_cntry_code
+        primaryKey: false 
         primaryKeyPosition: -1
         businessName: receiver country code
         logicalType: string
         physicalType: varchar(2)
-        isNullable: false
+        required: false
         description: null
-        partitionStatus: false
+        partitioned: false
         partitionKeyPosition: -1
-        clusterStatus: false
-        clusterKeyPosition: -1
-        criticalDataElementStatus: false
+        criticalDataElement: false
         tags: []
         classification: public
         authoritativeDefinitions:
@@ -193,43 +188,44 @@ dataset:
             type: transformationImplementation
           - url: jdbc:postgresql://localhost:5432/adventureworks/tbl_1/rcvr_cntry_code
             type: implementation
-        encryptedColumnName: rcvr_cntry_code_encrypted
+        encryptedName: rcvr_cntry_code_encrypted
 ```
 
 ### Definitions
 
+Note: the description needs to be updated.
+
 | Key                                                    | UX label                     | Required | Description                                                                                                                                                                                                                                           |
 |--------------------------------------------------------|------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| dataset                                                | Dataset                      | Yes      | Array. A list of tables within the dataset to be cataloged.                                                                                                                                                                                           |
-| dataset.table                                          | Table                        | Yes      | Name of the table being cataloged; the value should only contain the table name. Do not include the project or dataset name in the value.                                                                                                             |
-| dataset.table.physicalName                             | Physical Name                | No       | Physical name of the table, default value is table name + version separated by underscores, as `table_1_2_0`.                                                                                                                                         |
-| dataset.table.priorTableName                           | Prior Table Name             | No       | Name of the previous version of the dataset, if applicable.                                                                                                                                                                                           |
-| dataset.table.description                              | Description                  | No       | Description of the dataset.                                                                                                                                                                                                                           |
-| dataset.table.authoritativeDefinitions                 | Authoritative Definitions    | No       | List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. Authoritative definitions follow the same structure in the standard. |
-| dataset.table.dataGranularity                          | Data Granularity             | No       | Granular level of the data in the table. Example would be `pmt_txn_id`.                                                                                                                                                                               |
-| dataset.table.columns                                  | Columns                      | Yes      | Array. A list of columns in the table.                                                                                                                                                                                                                |
-| dataset.table.columns.column                           | Column                       | Yes      | The name of the column.                                                                                                                                                                                                                               |
-| dataset.table.columns.column.isPrimaryKey              | Primary Key                  | No       | Boolean value specifying whether the column is primary or not. Default is false.                                                                                                                                                                      |
-| dataset.table.columns.column.primaryKeyPosition        | Primary Key Position         | No       | If column is a primary key, the position of the primary key column. Starts from 1. Example of `account_id, name` being primary key columns, `account_id` has primaryKeyPosition 1 and `name` primaryKeyPosition 2. Default to -1.                     |
-| dataset.table.columns.column.businessName              | Business Name                | No       | The business name of the column.                                                                                                                                                                                                                      |
-| dataset.table.columns.column.logicalType               | Logical Type                 | Yes      | The logical column datatype.                                                                                                                                                                                                                          |
-| dataset.table.columns.column.physicalType              | Physical Type                | Yes      | The physical column datatype.                                                                                                                                                                                                                         |
-| dataset.table.columns.column.description               | Description                  | No       | Description of the column.                                                                                                                                                                                                                            |
-| dataset.table.columns.column.isNullable                | Nullable                     | No       | Indicates if the column may contain Null values; possible values are true and false. Default is false.                                                                                                                                                |
-| dataset.table.columns.column.isUnique                  | Unique                       | No       | Indicates if the column contains unique values; possible values are true and false. Default is false.                                                                                                                                                 |
-| dataset.table.columns.column.partitionStatus           | Partition Status             | No       | Indicates if the column is partitioned; possible values are true and false.                                                                                                                                                                           |
-| dataset.table.columns.column.partitionKeyPosition      | Partition Key Position       | No       | If column is used for partitioning, the position of the partition column. Starts from 1. Example of `country, year` being partition columns, `country` has partitionKeyPosition 1 and `year` partitionKeyPosition 2. Default to -1.                   |
-| dataset.table.columns.column.clusterStatus             | Cluster Status               | No       | Indicates of the column is clustered; possible values are true and false.                                                                                                                                                                             |
-| dataset.table.columns.column.clusterKeyPosition        | Cluster Key Position         | No       | If column is used for clustering, the position of the cluster column. Starts from 1. Example of `year, date` being cluster columns, `year` has clusterKeyPosition 1 and `date` clusterKeyPosition 2. Default to -1.                                   |
-| dataset.table.columns.column.classification            | Classification               | No       | Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.                     |
-| dataset.table.columns.column.authoritativeDefinitions  | Authoritative Definitions    | No       | List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.                                                                                                       |
-| dataset.table.columns.column.encryptedColumnName       | Encrypted Column Name        | No       | The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`.                                                              |
-| dataset.table.columns.column.transformSourceTables     | Transform Source Tables      | No       | List of sources used in column transformation.                                                                                                                                                                                                        |
-| dataset.table.columns.column.transformLogic            | Transform Logic              | No       | Logic used in the column transformation.                                                                                                                                                                                                              |
-| dataset.table.columns.column.transformDescription      | Transform Description        | No       | Describes the transform logic in very simple terms.                                                                                                                                                                                                   |
-| dataset.table.columns.column.sampleValues              | Sample Values                | No       | List of sample column values.                                                                                                                                                                                                                         |
-| dataset.table.columns.column.criticalDataElementStatus | Critical Data Element Status | No       | True or false indicator; If element is considered a critical data element (CDE) then true else false.                                                                                                                                                 |
-| dataset.table.columns.column.tags                      | Tags                         | No       | A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.                                                                                                                                        |
+| schema                                                | schema                      | Yes      | Array. A list of tables within the schema to be cataloged.                                                                                                                                                                                           |
+| schema.table                                          | Table                        | Yes      | Name of the table being cataloged; the value should only contain the table name. Do not include the project or schema name in the value.                                                                                                             |
+| schema.table.physicalName                             | Physical Name                | No       | Physical name of the table, default value is table name + version separated by underscores, as `table_1_2_0`.                                                                                                                                         |
+| schema.table.description                              | Description                  | No       | Description of the schema.                                                                                                                                                                                                                           |
+| schema.table.authoritativeDefinitions                 | Authoritative Definitions    | No       | List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. Authoritative definitions follow the same structure in the standard. |
+| schema.table.dataGranularity                          | Data Granularity             | No       | Granular level of the data in the table. Example would be `pmt_txn_id`.                                                                                                                                                                               |
+| schema.table.columns                                  | Columns                      | Yes      | Array. A list of columns in the table.                                                                                                                                                                                                                |
+| schema.table.columns.column                           | Column                       | Yes      | The name of the column.                                                                                                                                                                                                                               |
+| schema.table.columns.column.isPrimaryKey              | Primary Key                  | No       | Boolean value specifying whether the column is primary or not. Default is false.                                                                                                                                                                      |
+| schema.table.columns.column.primaryKeyPosition        | Primary Key Position         | No       | If column is a primary key, the position of the primary key column. Starts from 1. Example of `account_id, name` being primary key columns, `account_id` has primaryKeyPosition 1 and `name` primaryKeyPosition 2. Default to -1.                     |
+| schema.table.columns.column.businessName              | Business Name                | No       | The business name of the column.                                                                                                                                                                                                                      |
+| schema.table.columns.column.logicalType               | Logical Type                 | Yes      | The logical column datatype.                                                                                                                                                                                                                          |
+| schema.table.columns.column.physicalType              | Physical Type                | Yes      | The physical column datatype.                                                                                                                                                                                                                         |
+| schema.table.columns.column.description               | Description                  | No       | Description of the column.                                                                                                                                                                                                                            |
+| schema.table.columns.column.isNullable                | Nullable                     | No       | Indicates if the column may contain Null values; possible values are true and false. Default is false.                                                                                                                                                |
+| schema.table.columns.column.isUnique                  | Unique                       | No       | Indicates if the column contains unique values; possible values are true and false. Default is false.                                                                                                                                                 |
+| schema.table.columns.column.partitionStatus           | Partition Status             | No       | Indicates if the column is partitioned; possible values are true and false.                                                                                                                                                                           |
+| schema.table.columns.column.partitionKeyPosition      | Partition Key Position       | No       | If column is used for partitioning, the position of the partition column. Starts from 1. Example of `country, year` being partition columns, `country` has partitionKeyPosition 1 and `year` partitionKeyPosition 2. Default to -1.                   |
+| schema.table.columns.column.clusterStatus             | Cluster Status               | No       | Indicates of the column is clustered; possible values are true and false.                                                                                                                                                                             |
+| schema.table.columns.column.clusterKeyPosition        | Cluster Key Position         | No       | If column is used for clustering, the position of the cluster column. Starts from 1. Example of `year, date` being cluster columns, `year` has clusterKeyPosition 1 and `date` clusterKeyPosition 2. Default to -1.                                   |
+| schema.table.columns.column.classification            | Classification               | No       | Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.                     |
+| schema.table.columns.column.authoritativeDefinitions  | Authoritative Definitions    | No       | List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.                                                                                                       |
+| schema.table.columns.column.encryptedColumnName       | Encrypted Column Name        | No       | The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`.                                                              |
+| schema.table.columns.column.transformSourceTables     | Transform Source Tables      | No       | List of sources used in column transformation.                                                                                                                                                                                                        |
+| schema.table.columns.column.transformLogic            | Transform Logic              | No       | Logic used in the column transformation.                                                                                                                                                                                                              |
+| schema.table.columns.column.transformDescription      | Transform Description        | No       | Describes the transform logic in very simple terms.                                                                                                                                                                                                   |
+| schema.table.columns.column.sampleValues              | Sample Values                | No       | List of sample column values.                                                                                                                                                                                                                         |
+| schema.table.columns.column.criticalDataElementStatus | Critical Data Element Status | No       | True or false indicator; If element is considered a critical data element (CDE) then true else false.                                                                                                                                                 |
+| schema.table.columns.column.tags                      | Tags                         | No       | A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.                                                                                                                                        |
                                                                                                                   |
 
 ### Authorative definitions
@@ -244,15 +240,16 @@ Updated in ODCS (Open Data Contract Standard) v2.2.1.
 ## Data quality 
 This section describes data quality rules & parameters. They are tightly linked to the schema described in the previous section.
 
-### Example of data quality at the dataset level
+### Example of data quality at the object level
 
 Note:
 * This example relies on a data quality tool called Elevate. It should be easily transformed to any other tool. If you have questions, please raise an [issue](https://github.com/AIDAUserGroup/open-data-contract-standard/issues).
 * The Open Data Contract Standard has a provision for supporting multiple data quality tools.
 
 ```YAML
-dataset:
-  - table: tab1
+schema:
+  - name: tab1
+    logicalType: object
 # ...
     quality:
       - code: countCheck # Required, name of the rule
@@ -300,13 +297,14 @@ dataset:
             value:
 ```
 
-### Example of data quality at the column level
+### Example of data quality at the element level
 
 ```YAML
-dataset:
-  - table: tab1
-      - column: rcvr_id
-        isPrimaryKey: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
+schema:
+  - name: tab1
+    logicalType: object
+      - name: rcvr_id
+        primaryKey: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
         businessName: receiver id
 # ...
         quality:
@@ -370,12 +368,12 @@ price:
 | price.priceUnit     | Price Unit         | No       | The unit of measure for calculating cost. Examples megabyte, gigabyte. |
 
 
-## Stakeholders
-This section lists stakeholders and the history of their relation with this data contract.
+## Team
+This section lists team members and the history of their relation with this data contract. In v2.x, this section was called stakeholders.
 
 ### Example
 ```YAML
-stakeholders:
+team:
   - username: ceastwood
     role: Data Scientist
     dateIn: 2022-08-02
@@ -393,14 +391,14 @@ stakeholders:
 ### Definitions
 The UX label is the label used in the UI and other user experiences. It is not limited to BlueRacket.
 
-| Key                             | UX label                   | Required | Description                                                                                       |
-|---------------------------------|----------------------------|----------|---------------------------------------------------------------------------------------------------|
-| stakeholders                    | Stakeholders               | No       | Array                                                                                             |
-| stakeholders.username           | Username                   | No       | The stakeholder's username or email.                                                              |
-| stakeholders.role               | Role                       | No       | The stakeholder's job role; Examples might be owner, data steward. There is no limit on the role. |
-| stakeholders.dateIn             | Date In                    | No       | The date when the user became a stakeholder.                                                      |
-| stakeholders.dateOut            | Date Out                   | No       | The date when the user ceased to be a stakeholder                                                 |
-| stakeholders.replacedByUsername | Replaced By Username       | No       | The username of the user who replaced the stakeholder                                             |
+| Key                     | UX label           | Required | Description                                                                                       |
+|-------------------------|--------------------|----------|---------------------------------------------------------------------------------------------------|
+| team                    | Stakeholders       | No       | Array                                                                                             |
+| team.username           | Username           | No       | The stakeholder's username or email.                                                              |
+| team.role               | Role               | No       | The stakeholder's job role; Examples might be owner, data steward. There is no limit on the role. |
+| team.dateIn             | Date In            | No       | The date when the user became a stakeholder.                                                      |
+| team.dateOut            | Date Out           | No       | The date when the user ceased to be a stakeholder                                                 |
+| team.replacedByUsername | Replaced By        | No       | The username of the user who replaced the stakeholder                                             |
 
 
 ## Roles
@@ -438,8 +436,8 @@ roles:
 | roles.firstLevelApprovers  | 1st Level Approvers | No       | The name(s) of the first-level approver(s) of the role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.   |
 | roles.secondLevelApprovers | 2nd Level Approvers | No       | The name(s) of the second-level approver(s) of the role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.  |
 
-## Service-level agreement
-This section describes the service-level agreements (SLA). SLA have been extended in version v2.1.0.
+## Service-level agreement (SLA)
+This section describes the service-level agreements (SLA). SLA have been extended in version v2.1.0. 
 
 * Use the `Table.Column` to indicate the number to do the checks on, as in `SELECT txn_ref_dt FROM tab1`.
 * Separate multiple table.columns by a comma, as in `table1.col1`, `table2.col1`, `table1.col2`.
@@ -448,12 +446,12 @@ This section describes the service-level agreements (SLA). SLA have been extende
 ### Example
 
 ```YAML
-slaDefaultColumn: tab1.txn_ref_dt # Optional, default value is partitionColumn.
+slaDefaultElement: tab1.txn_ref_dt # Optional, default value is partitionColumn.
 slaProperties:
   - property: latency # Property, see list of values in DP QoS
     value: 4
     unit: d # d, day, days for days; y, yr, years for years
-    column: tab1.txn_ref_dt # This would not be needed as it is the same table.column as the default one
+    element: tab1.txn_ref_dt # This would not be needed as it is the same table.column as the default one
   - property: generalAvailability
     value: 2022-05-12T09:30:10-08:00
   - property: endOfSupport
@@ -463,34 +461,35 @@ slaProperties:
   - property: retention
     value: 3
     unit: y
-    column: tab1.txn_ref_dt
+    element: tab1.txn_ref_dt
   - property: frequency
     value: 1
     valueExt: 1
     unit: d
-    column: tab1.txn_ref_dt
+    element: tab1.txn_ref_dt
   - property: timeOfAvailability
     value: 09:00-08:00
-    column: tab1.txn_ref_dt
+    element: tab1.txn_ref_dt
     driver: regulatory # Describes the importance of the SLA: [regulatory|analytics|operational|...]
   - property: timeOfAvailability
     value: 08:00-08:00
-    column: tab1.txn_ref_dt
+    element: tab1.txn_ref_dt
     driver: analytics
 ```
 
 ### Definitions
 
-| Key                    | UX label              | Required                       | Description                                                                                                                |
-|------------------------|-----------------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| slaDefaultColumn       | Default SLA column(s) | No                             | Columns (using the Table.Column notation) to do the checks on. By default, it is the partition column.                     |
-| slaProperties          | SLA                   | No                             | A list of key/value pairs for SLA specific properties. There is no limit on the type of properties (more details to come). |
-| slaProperties.property | Property              | Yes                            | Specific property in SLA, check the periodic table. May requires units (more details to come).                             |
-| slaProperties.value    | Value                 | Yes                            | Agreement value. The label will change based on the property itself.                                                       |
-| slaProperties.valueExt | Extended value        | No - unless needed by property | Extended agreement value. The label will change based on the property itself.                                              |
-| slaProperties.unit     | Unit                  | No - unless needed by property | **d**, day, days for days; **y**, yr, years for years, etc. Units use the ISO standard.                                    |
-| slaProperties.column   | Column(s)             | No                             | Column(s) to check on. Multiple columns should be extremely rare and, if so, separated by commas.                          |
-| slaProperties.driver   | Driver                | No                             | Describes the importance of the SLA from the list of: `regulatory`, `analytics`, or `operational`.                         |
+| Key                    | UX label               | Required                       | Description                                                                                                                |
+|------------------------|------------------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| slaDefaultElement      | Default SLA element(s) | No                             | Element (using the element path notation) to do the checks on.                                                             |
+| slaProperties          | SLA                    | No                             | A list of key/value pairs for SLA specific properties. There is no limit on the type of properties.                        |
+| slaProperties.property | Property               | Yes                            | Specific property in SLA, check the Data QoS periodic table. May requires units.                                           |
+| slaProperties.value    | Value                  | Yes                            | Agreement value. The label will change based on the property itself.                                                       |
+| slaProperties.valueExt | Extended value         | No - unless needed by property | Extended agreement value. The label will change based on the property itself.                                              |
+| slaProperties.unit     | Unit                   | No - unless needed by property | **d**, day, days for days; **y**, yr, years for years, etc. Units use the ISO standard.                                    |
+| slaProperties.element  | Element(s)             | No                             | Element(s) to check on. Multiple elements should be extremely rare and, if so, separated by commas.                        |
+| slaProperties.driver   | Driver                 | No                             | Describes the importance of the SLA from the list of: `regulatory`, `analytics`, or `operational`.                         |
+
 
 ## Other properties
 This section covers other properties you may find in a data contract.
@@ -506,10 +505,8 @@ customProperties:
   - property: dataprocClusterName # Used for specific applications like Elevate
     value: [cluster name]
 
-systemInstance: instance.ClimateQuantum.org
 contractCreatedTs: 2022-11-15 02:59:43
 ```
-
 
 ### Definitions
 
@@ -518,7 +515,6 @@ contractCreatedTs: 2022-11-15 02:59:43
 | customProperties          | Custom Properties    | No       | A list of key/value pairs for custom properties. Initially created to support the REF ruleset property.           |
 | customProperties.property | Property             | No       | The name of the key. Names should be in camel case–the same as if they were permanent properties in the contract. |
 | customProperties.value    | Value                | No       | The value of the key.                                                                                             |
-| systemInstance            | System Instance      | No       | System Instance name where the dataset resides.                                                                   |
 | contractCreatedTs         | Contract Created UTC | No       | Timestamp in UTC of when the data contract was created.                                                           |
 
 

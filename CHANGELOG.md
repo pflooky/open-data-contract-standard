@@ -6,6 +6,41 @@ image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color
 
 This document tracks the history and evolution of the **Open Data Contract Standard**.
 
+# v3.0.0 - 2024-xx-xx - IN PROGRESS
+
+* Fundamentals:
+* Schema:
+  * Major changes, check spec. 
+  * Adds support for non table formats, hierarchies, and arrays.
+  * `priorTableName` is not supported anymore, if needed, consider a custom property.
+  * `dataGranularity` is now `dataGranularityDescription`.
+  * `encryptedColumnName`is now `encryptedName`.
+  * `partitionStatus` is now `partitioned`.
+  * 'clusterStatus' is not supported anymore, if needed, consider a custom property.
+  * 'clusterKeyPosition' is not supported anymore, if needed, consider a custom property.
+  * 'sampleValues' is now 'examples'.
+  * 'isNullable' is now 'required'.
+  * 'isUnique' is now 'unique'.
+  * 'isPrimaryKey' is now 'primaryKey'.
+  * 'criticalDataElementStatus' is now 'criticalDataElement'.
+  * 'clusterKeyPosition' is not supported anymore, if needed, consider a custom property.
+* Data Quality:
+  *
+* Pricing:
+  * No changes.
+* Team:
+  * Replaces `stakeholders`. Content stays the same.
+* Security:
+  * No changes.
+* SLA:
+  * Starting with v3, the schema is not purely tables and columns, hence minor modifications: columns are now elements.
+  * 'slaDefaultColumn' is now 'slaDefaultElement'.
+  * 'column' is now 'element'.
+  * Explicit reference to Data QoS.
+* Custom and other properties:
+  * 'systemInstance' is not supported anymore, if needed, consider a custom property.
+
+
 # v2.2.2 - 2024-05-23 - APPROVED
 
 * In JSON schema validation:
