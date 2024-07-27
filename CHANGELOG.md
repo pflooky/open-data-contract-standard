@@ -9,6 +9,26 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 # v3.0.0 - 2024-xx-xx - IN PROGRESS
 
 * Fundamentals:
+  * Rename uuid to id
+  * Add name
+  * Rename quantumName to dataProduct and make it optional
+  * Rename datasetDomain to domain (we avoid the dataset prefix)
+  * Drop datasetKind (example: virtualDataset, was optional, have not seen any   * usage)
+  * Drop userConsumptionMode (examples: analytical, was optional, already   * deprecated in v2.)
+  * Drop sourceSystem (example: bigQuery, information will be encoded in servers)
+  * Drop sourcePlatform (example: googleCloudPlatform, information will be encoded   * in servers)
+  * Drop productSlackChannel (will move to support channels)
+  * Drop productFeedbackUrl (will move to support channels)
+  * Drop productDl (will move to support channels)
+  * Drop username (credentials should not be stored in the data contract)
+  * Drop password (credentials should not be stored in the data contract)
+  * Drop driverVersion (will move to servers if needed)
+  * Drop driver (will move to servers if needed)
+  * Drop server (will move to servers if needed)
+  * Drop project (BigQuery-specific, will move to servers)
+  * Drop datasetName (BigQuery-specific, will move to servers)
+  * Drop database (BigQuery-specific, will move to servers)
+  * Drop schedulerAppName (not part of the contract)
 * Schema:
   * Major changes, check spec. 
   * Adds support for non table formats, hierarchies, and arrays.
