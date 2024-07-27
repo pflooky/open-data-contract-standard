@@ -33,45 +33,21 @@ This section contains general information about the contract.
 ### Example
 
 ```YAML
-# What's this data contract about?
-datasetDomain: seller # Domain
-quantumName: my quantum # Data product name
-userConsumptionMode: Analytical
-version: 1.1.0 # Version (follows semantic versioning)
-status: current
-uuid: 53581432-6c55-4ba2-a65f-72344a91553a
+apiVersion: 3.0.0 # Standard version
+kind: DataContract
 
-# Lots of information
+id: 53581432-6c55-4ba2-a65f-72344a91553a
+name: seller_payments_v1
+version: 1.1.0 # Data Contract Version 
+status: production
+domain: seller
+dataProduct: payments
+tenant: ClimateQuantumInc
+
 description:
   purpose: Views built on top of the seller tables.
   limitations: null
   usage: null
-tenant: ClimateQuantumInc
-
-# Getting support
-productDl: product-dl@ClimateQuantum.org
-productSlackChannel: '#product-help'
-productFeedbackUrl: null
-
-# Physical parts / GCP / BigQuery specific
-sourcePlatform: googleCloudPlatform
-sourceSystem: bigQuery
-project: edw # BQ dataset
-datasetName: access_views # BQ dataset
-
-kind: DataContract
-apiVersion: 2.3.0 # Standard version (follows semantic versioning, previously known as templateVersion)
-
-type: tables
-
-# Physical access
-driver: null
-driverVersion: null
-server: null
-database: pypl-edw.pp_access_views
-username: '${env.username}'
-password: '${env.password}'
-schedulerAppName: name_coming_from_scheduler # NEW 2.1.0 Required if you want to schedule stuff, comes from DataALM.
 
 # Data Quality
 quality: null # See more information below
@@ -82,35 +58,21 @@ tags: null
 
 ### Definitions
 
-| Key                     | UX label                 | Required | Description                                                                                                                                                                                                                                                                                                                                      |
-|-------------------------|--------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| datasetDomain           | Dataset domain           | No       | Name of the logical domain dataset the contract describes. This field is only required for output data contracts. Examples: `imdb_ds_aggregate`, `receiver_profile_out`,  `transaction_profile_out`.                                                                                                                                             |
-| quantumName             | Quantum name             | Yes      | The name of the data quantum or data product.                                                                                                                                                                                                                                                                                                    |
-| userConsumptionMode     | Consumption mode         | No       | List of data modes for which the dataset may be used.  Expected sample values might be `analytical` or `operational`. <br/>Note: in the future, this will probably be replaced by ports.                                                                                                                                                         |
-| version                 | Version                  | Yes      | Current version of the data contract.                                                                                                                                                                                                                                                                                                            |
-| status                  | Status                   | Yes      | Current status of the dataset. Valid values are `production`, `test`, or `development`.                                                                                                                                                                                                                                                          |
-| uuid                    | Identifier               | Yes      | A unique identifier used to reduce the risk of dataset name collisions; initially the UUID will be created using a UUID generator tool ([example](https://www.uuidgenerator.net/)). However, we may want to develop a method that accepts a seed value using a combination of fields–such as name, kind and source–to create a repeatable value. |
-| description             | Description              | No       | Object.                                                                                                                                                                                                                                                                                                                                          |
-| description.purpose     | Purpose                  | No       | Purpose of the dataset, table, or column (depending on the level); the key may appear at the dataset, table, or column level.                                                                                                                                                                                                                    |
-| description.limitations | Limitations              | No       | Limitations of the dataset, table, or column (depending on the level); the key may appear at the dataset, table, or column level.                                                                                                                                                                                                                |
-| description.usage       | Usage                    | No       | Intended usage of the dataset, table, or column (depending on the level); the key may appear at the dataset, table, or column level.                                                                                                                                                                                                             |
-| tenant                  | Tenant                   | No       | Indicates the property the data is primarily associated with. Value is case insensitive.                                                                                                                                                                                                                                                         |
-| productDl               | E-mail distribution list | No       | The email distribution list (DL) of the persons or team responsible for maintaining the dataset.                                                                                                                                                                                                                                                 |
-| productSlackChannel     | Support Slack channel    | No       | Slack channel of the team responsible for maintaining the dataset.                                                                                                                                                                                                                                                                               |
-| productFeedbackUrl      | Feedback URL             | No       | The URL for submitting feedback to the team responsible for maintaining the dataset.                                                                                                                                                                                                                                                             |
-| sourcePlatform          | Source platform          | No       | The platform where the dataset resides. Expected value is GoogleCloudPlatform, IBMCloud, Azure...                                                                                                                                                                                                                                                |
-| sourceSystem            | Source system            | No       | The system where the dataset resides. Expected value can be BigQuery.                                                                                                                                                                                                                                                                            |
-| project                 | Project                  | No       | Associated cloud project name, can be used for billing or administrative purpose. Used to be datasetProject.                                                                                                                                                                                                                                     |
-| datasetName             | Dataset name             | No       | May be required in cloud instance like GCP BigQuery dataset name.                                                                                                                                                                                                                                                                                |
-| server                  | Server                   | No       | The server where the dataset resides.                                                                                                                                                                                                                                                                                                            |
-| kind                    | Kind                     | Yes      | The kind of file this is. Valid value is `DataContract`.                                                                                                                                                                                                                                                                                         |
-| apiVersion              | Standard version         | No       | Version of the standard used to build data contract. Default value is v2.2.2.                                                                                                                                                                                                                                                                    |
-| type                    | Type                     | Yes      | Identifies the types of objects in the dataset. For BigQuery or any other database, the expected value would be Tables.                                                                                                                                                                                                                          |
-| driver                  | Driver                   | No       | The connection driver required to connect to the dataset.                                                                                                                                                                                                                                                                                        |
-| driverVersion           | Driver version           | No       | The version of the connection driver to be used to connect to the dataset.                                                                                                                                                                                                                                                                       |
-| username                | Username                 | No       | User credentials for connecting to the dataset; how the credentials will be stored/passed is outside of the scope of the contract.                                                                                                                                                                                                               |
-| password                | Password                 | No       | User credentials for connecting to the dataset; how the credentials will be stored/passed is out of the scope of this contract.                                                                                                                                                                                                                  |                                                                                                                                                                                            
-| schedulerAppName        | Scheduler App Name       | No       | Required if you want to schedule stuff. The name of the application used to schedule jobs                                                                                                                                                                                                                                                        |  
+| Key                     | UX label         | Required | Description                                                                              |
+|-------------------------|------------------|----------|------------------------------------------------------------------------------------------|
+| apiVersion              | Standard version | Yes      | Version of the standard used to build data contract. Default value is `v3.0.0`.          |
+| kind                    | Kind             | Yes      | The kind of file this is. Valid value is `DataContract`.                                 |
+| id                      | ID               | Yes      | A unique identifier used to reduce the risk of dataset name collisions, such as a UUID.  |
+| name                    | Name             | No       | Name of the data contract.                                                               |
+| version                 | Version          | Yes      | Current version of the data contract.                                                    |
+| status                  | Status           | Yes      | Current status of the data contract.  |
+| tenant                  | Tenant           | No       | Indicates the property the data is primarily associated with. Value is case insensitive. |
+| domain                  | Domain           | No       | Name of the logical data domain.                                                         |
+| dataProduct             | Data Product     | No       | The name of the data product.                                                            |
+| description             | Description      | No       | Object.                                                                                  |
+| description.purpose     | Purpose          | No       | What is the intendet purpose for the provided data.                                      |
+| description.limitations | Limitations      | No       | Technical, compliance, and legal limitations for using the data.                         |
+| description.usage       | Usage            | No       | How to use the data.                                                                     |
 
 ## Schema
 This section describes the dataset and the schema of the data contract. It is the support for data quality, which is detailed in the next section.
