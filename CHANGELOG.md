@@ -50,6 +50,9 @@ This document tracks the history and evolution of the **Open Data Contract Stand
   * No changes.
 * Team:
   * Replaces `stakeholders`. Content stays the same.
+* Role:
+  * Added `description`
+  * Changed `access` is not required anymore  
 * Security:
   * No changes.
 * SLA:

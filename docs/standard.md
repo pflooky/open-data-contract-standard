@@ -393,10 +393,11 @@ roles:
 | Key                        | UX label            | Required | Description                                                                                                                                           |
 |----------------------------|---------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | roles                      | Roles               | Yes      | Array. A list of roles that will provide user access to the dataset.                                                                                  |
-| roles.role                 | Role                | Yes      | Name of the IAM role that provides access to the dataset; the value will generally come directly from the "BQ dataset to IAM roles mapping" document. |
-| roles.access               | Access              | Yes      | The type of access provided by the IAM role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.              |
-| roles.firstLevelApprovers  | 1st Level Approvers | No       | The name(s) of the first-level approver(s) of the role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.   |
-| roles.secondLevelApprovers | 2nd Level Approvers | No       | The name(s) of the second-level approver(s) of the role; the value will generally come directly from the "BQ dataset to IAM roles mapping" document.  |
+| roles.role                 | Role                | Yes      | Name of the IAM role that provides access to the datase. |
+| roles.description                 | Description                | No      | Description of the IAM role and its permissions. |
+| roles.access               | Access              | No      | The type of access provided by the IAM role.              |
+| roles.firstLevelApprovers  | 1st Level Approvers | No       | The name(s) of the first-level approver(s) of the role.   |
+| roles.secondLevelApprovers | 2nd Level Approvers | No       | The name(s) of the second-level approver(s) of the role.  |
 
 ## Service-level agreement (SLA)
 This section describes the service-level agreements (SLA). SLA have been extended in version v2.1.0. 
