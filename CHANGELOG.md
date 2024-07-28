@@ -24,6 +24,8 @@ This document tracks the history and evolution of the **Open Data Contract Stand
   * 'isPrimaryKey' is now 'primaryKey'.
   * 'criticalDataElementStatus' is now 'criticalDataElement'.
   * 'clusterKeyPosition' is not supported anymore, if needed, consider a custom property.
+  * Restrict `dataset.table.columns.column.logicalType` to be one of `string, date, number, integer, object, array, boolean`
+  * Add `dataset.table.columns.column.logicalTypeOptions`
 * Data Quality:
   *
 * Pricing:
