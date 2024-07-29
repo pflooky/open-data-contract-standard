@@ -24,8 +24,8 @@ If you spot an article about the Open Data Contract Standard, make a pull reques
 
 ## Books
 
-* 2024-09-01 - **Implementing Data Mesh** [O'Reilly](https://www.oreilly.com/library/view/implementing-data-mesh/9781098156213/), [Amazon](https://amzn.to/3ysN3Jf): in Chapter 5, ODCS is extensively used & described.
-* 2024-01-20 - **Data Contracts for all ages** [Amazon](https://amzn.to/3Wl1My1).
+* 2024-09-01 - **Implementing Data Mesh**, [O'Reilly](https://www.oreilly.com/library/view/implementing-data-mesh/9781098156213/), [Amazon](https://amzn.to/3ysN3Jf): in Chapter 5, ODCS is extensively used & described.
+* 2024-01-20 - **Data Contracts for all ages**, [Amazon](https://amzn.to/3Wl1My1).
 
 If you spot a book about the Open Data Contract Standard, make a pull request! 
 
