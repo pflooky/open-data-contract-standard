@@ -7,20 +7,21 @@ image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color
 # Open Data Contract Standard
 
 ## Executive Summary
-This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [demographics](#demographics), [dataset & schema](#dataset-and-schema), [data quality](#data-quality), [pricing](#pricing), [stakeholders](#stakeholders), [roles](#roles), [service-level agreement](#service-level-agreement), and [other properties](#other-properties). Each section starts with at least an example followed by definition of each field/key.
+This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [fundamentals (fka demographics)](#fundamentals), [schema](#schema), [data quality](#data-quality), [pricing](#pricing), [team](#team), [roles](#roles), [service-level agreement](#service-level-agreement), and [other/custom properties](#custom-properties). Each section starts with at least an example followed by definition of each field/key.
 
 
 ## Table of content
 
-* [Fundamentals (fka demographics)](#demographics)
-* [Schema](#dataset-and-schema)
-* [Data quality](#data-quality)
-* [Pricing](#pricing)
-* [Team](#stakeholders)
-* [Roles](#roles)
-* [Service-level agreement](#service-level-agreement)
-* [Custom & other properties](#other-properties)
-* [Examples](#full-example)
+1. [Fundamentals (fka demographics)](#fundamentals)
+1. [Schema](#schema)
+1. [Data quality](#data-quality)
+1. [Pricing](#pricing)
+1. [Team](#team)
+1. [Roles](#roles)
+1. [Service-level agreement](#service-level-agreement)
+1. [Infrastructures & servers]()
+1. [Custom & other properties](#custom-properties)
+1. [Examples](#full-example)
 
 
 ## Notes
@@ -539,6 +540,8 @@ slaProperties:
 | slaProperties.element  | Element(s)             | No                             | Element(s) to check on. Multiple elements should be extremely rare and, if so, separated by commas.                        |
 | slaProperties.driver   | Driver                 | No                             | Describes the importance of the SLA from the list of: `regulatory`, `analytics`, or `operational`.                         |
 
+## Infrastructure & servers
+TBD
 
 ## Custom Properties
 This section covers custom properties you may find in a data contract.
