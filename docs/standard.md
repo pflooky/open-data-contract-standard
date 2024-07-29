@@ -6,8 +6,9 @@ image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color
 
 # Open Data Contract Standard
 
-## Executive summary
+## Executive Summary
 This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [demographics](#demographics), [dataset & schema](#dataset-and-schema), [data quality](#data-quality), [pricing](#pricing), [stakeholders](#stakeholders), [roles](#roles), [service-level agreement](#service-level-agreement), and [other properties](#other-properties). Each section starts with at least an example followed by definition of each field/key.
+
 
 ## Table of content
 
@@ -21,11 +22,13 @@ This document describes the keys and values expected in a YAML data contract, pe
 * [Custom & other properties](#other-properties)
 * [Examples](#full-example)
 
+
 ## Notes
 
 * This contract is containing example values, we reviewed very carefully the consistency of those values, but we cannot guarantee that there are no errors. If you spot one, please raise an [issue](https://github.com/AIDAUserGroup/open-data-contract-standard/issues).
 * Some fields have `null` value: even if it is equivalent to not having the field in the contract, we wanted to have the field for illustration purpose.
-* This contract leverages BigQuery but should be **platform agnostic**. If you think it is not the case, please raise an [issue](https://github.com/AIDAUserGroup/open-data-contract-standard/issues).
+* This contract should be **platform agnostic**. If you think it is not the case, please raise an [issue](https://github.com/AIDAUserGroup/open-data-contract-standard/issues).
+
 
 ## Fundamentals
 This section contains general information about the contract.
@@ -65,7 +68,7 @@ tags: null
 | id                      | ID               | Yes      | A unique identifier used to reduce the risk of dataset name collisions, such as a UUID.  |
 | name                    | Name             | No       | Name of the data contract.                                                               |
 | version                 | Version          | Yes      | Current version of the data contract.                                                    |
-| status                  | Status           | Yes      | Current status of the data contract.  |
+| status                  | Status           | Yes      | Current status of the data contract.                                                     |
 | tenant                  | Tenant           | No       | Indicates the property the data is primarily associated with. Value is case insensitive. |
 | domain                  | Domain           | No       | Name of the logical data domain.                                                         |
 | dataProduct             | Data Product     | No       | The name of the data product.                                                            |
@@ -74,10 +77,13 @@ tags: null
 | description.limitations | Limitations      | No       | Technical, compliance, and legal limitations for using the data.                         |
 | description.usage       | Usage            | No       | How to use the data.                                                                     |
 
-## Schema
-This section describes the dataset and the schema of the data contract. It is the support for data quality, which is detailed in the next section.
 
-### Example
+## Schema
+This section describes the schema of the data contract. It is the support for data quality, which is detailed in the next section. Schema supports both a business representation of 
+
+### Examples
+
+#### Complete schema
 
 ```YAML
 schema:
@@ -107,7 +113,7 @@ schema:
         criticalDataElement: false
         tags: []
         classification: public
-        transformSourceTables:
+        transformSourceObjects:
           - table_name_1
           - table_name_2
           - table_name_3
@@ -153,47 +159,96 @@ schema:
         encryptedName: rcvr_cntry_code_encrypted
 ```
 
+#### Simple Array
+
+```yaml
+schema:
+  - name: AnObject
+    logicalType: object 
+    properties:
+      - name: street_lines
+        logicalType: array 
+        items: 
+          logicalType: string
+```
+
+#### Array of Objects
+
+```yaml
+schema:
+  - name: AnotherObject
+    logicalType: object 
+    properties:
+      - name: x
+        logicalType: array 
+        items:
+          logicalType: object
+          properties:
+            - name: id
+              logicalType: uuid 
+              physicalType: VARCHAR(40)
+            - name: zip
+              logicalType: string 
+              physicalType: VARCHAR(15)
+```
+
 ### Definitions
 
 Note: the description needs to be updated.
 
+#### Schema
+
 | Key                                                    | UX label                     | Required | Description                                                                                                                                                                                                                                           |
 |--------------------------------------------------------|------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| schema                                                | schema                      | Yes      | Array. A list of tables within the schema to be cataloged.                                                                                                                                                                                           |
-| schema.table                                          | Table                        | Yes      | Name of the table being cataloged; the value should only contain the table name. Do not include the project or schema name in the value.                                                                                                             |
-| schema.table.physicalName                             | Physical Name                | No       | Physical name of the table, default value is table name + version separated by underscores, as `table_1_2_0`.                                                                                                                                         |
-| schema.table.description                              | Description                  | No       | Description of the schema.                                                                                                                                                                                                                           |
-| schema.table.authoritativeDefinitions                 | Authoritative Definitions    | No       | List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. Authoritative definitions follow the same structure in the standard. |
-| schema.table.dataGranularity                          | Data Granularity             | No       | Granular level of the data in the table. Example would be `pmt_txn_id`.                                                                                                                                                                               |
-| schema.table.columns                                  | Columns                      | Yes      | Array. A list of columns in the table.                                                                                                                                                                                                                |
-| schema.table.columns.column                           | Column                       | Yes      | The name of the column.                                                                                                                                                                                                                               |
-| schema.table.columns.column.isPrimaryKey              | Primary Key                  | No       | Boolean value specifying whether the column is primary or not. Default is false.                                                                                                                                                                      |
-| schema.table.columns.column.primaryKeyPosition        | Primary Key Position         | No       | If column is a primary key, the position of the primary key column. Starts from 1. Example of `account_id, name` being primary key columns, `account_id` has primaryKeyPosition 1 and `name` primaryKeyPosition 2. Default to -1.                     |
-| schema.table.columns.column.businessName              | Business Name                | No       | The business name of the column.                                                                                                                                                                                                                      |
-| dataset.table.columns.column.logicalType               | Logical Type                 | Yes      | The logical column datatype. One of `string`, `date`, `number`, `integer`, `object`, `array` or `boolean`.                                                                                                                                            |
-| dataset.table.columns.column.logicalTypeOptions        | Logical Type Options         | No       | Additional optional metadata to describe the logical type. See [here](#logical-type-options) for more details about supported options for each `logicalType`.                                                                                         |
-| dataset.table.columns.column.physicalType              | Physical Type                | Yes      | The physical column data type in the data source. For example, VARCHAR(2), DOUBLE, INT.                                                                                                                                                               |
-| schema.table.columns.column.description               | Description                  | No       | Description of the column.                                                                                                                                                                                                                            |
-| schema.table.columns.column.isNullable                | Nullable                     | No       | Indicates if the column may contain Null values; possible values are true and false. Default is false.                                                                                                                                                |
-| schema.table.columns.column.isUnique                  | Unique                       | No       | Indicates if the column contains unique values; possible values are true and false. Default is false.                                                                                                                                                 |
-| schema.table.columns.column.partitionStatus           | Partition Status             | No       | Indicates if the column is partitioned; possible values are true and false.                                                                                                                                                                           |
-| schema.table.columns.column.partitionKeyPosition      | Partition Key Position       | No       | If column is used for partitioning, the position of the partition column. Starts from 1. Example of `country, year` being partition columns, `country` has partitionKeyPosition 1 and `year` partitionKeyPosition 2. Default to -1.                   |
-| schema.table.columns.column.clusterStatus             | Cluster Status               | No       | Indicates of the column is clustered; possible values are true and false.                                                                                                                                                                             |
-| schema.table.columns.column.clusterKeyPosition        | Cluster Key Position         | No       | If column is used for clustering, the position of the cluster column. Starts from 1. Example of `year, date` being cluster columns, `year` has clusterKeyPosition 1 and `date` clusterKeyPosition 2. Default to -1.                                   |
-| schema.table.columns.column.classification            | Classification               | No       | Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.                     |
-| schema.table.columns.column.authoritativeDefinitions  | Authoritative Definitions    | No       | List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.                                                                                                       |
-| schema.table.columns.column.encryptedColumnName       | Encrypted Column Name        | No       | The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`.                                                              |
-| schema.table.columns.column.transformSourceTables     | Transform Source Tables      | No       | List of sources used in column transformation.                                                                                                                                                                                                        |
-| schema.table.columns.column.transformLogic            | Transform Logic              | No       | Logic used in the column transformation.                                                                                                                                                                                                              |
-| schema.table.columns.column.transformDescription      | Transform Description        | No       | Describes the transform logic in very simple terms.                                                                                                                                                                                                   |
-| schema.table.columns.column.sampleValues              | Sample Values                | No       | List of sample column values.                                                                                                                                                                                                                         |
-| schema.table.columns.column.criticalDataElementStatus | Critical Data Element Status | No       | True or false indicator; If element is considered a critical data element (CDE) then true else false.                                                                                                                                                 |
-| schema.table.columns.column.tags                      | Tags                         | No       | A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.                                                                                                                                        |
+| schema                                                 | schema                       | Yes      | Array. A list of elements within the schema to be cataloged.                                                                                                                                                                                          |
+
+#### Applicable to Elements (either Objects or Properties)
+
+| Key                                                    | UX label                     | Required | Description                                                                                                                                                                                                                                           |
+|--------------------------------------------------------|------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| physicalName                                           | Physical Name                | No       | Physical name.                                                                                                                                                                                                                                        |
+| description                                            | Description                  | No       | Description of the element.                                                                                                                                                                                                                           |
+| businessName                                           | Business Name                | No       | The business name of the element.                                                                                                                                                                                                                     |
+| authoritativeDefinitions                               | Authoritative Definitions    | No       | List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. See `authoritativeDefinitions` below.                                |
+| tags                                                   | Tags                         | No       | A list of tags that may be assigned to the elements (object or property); the tags keyword may appear at any level.                                                                                                                                   |
+
+#### Applicable to Objects
+
+| Key                                                    | UX label                     | Required | Description                                                                                                                                                                                                                                           |
+|--------------------------------------------------------|------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| dataGranularityDescription                             | Data Granularity             | No       | Granular level of the data in the table. Example would be "Aggregation by country."                                                                                                                                                                   |
+
+#### Applicable to Properties
+
+Some keys are more applicable when the described property is a column. 
+
+| Key                                                    | UX label                     | Required | Description                                                                                                                                                                                                                                           |
+|--------------------------------------------------------|------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| primaryKey                                             | Primary Key                  | No       | Boolean value specifying whether the field is primary or not. Default is false.                                                                                                                                                                       |
+| primaryKeyPosition                                     | Primary Key Position         | No       | If field is a primary key, the position of the primary key column. Starts from 1. Example of `account_id, name` being primary key columns, `account_id` has primaryKeyPosition 1 and `name` primaryKeyPosition 2. Default to -1.                      |
+| logicalType                                            | Logical Type                 | Yes      | The logical field datatype. One of `string`, `date`, `number`, `integer`, `object`, `array` or `boolean`.                                                                                                                                             |
+| logicalTypeOptions                                     | Logical Type Options         | No       | Additional optional metadata to describe the logical type. See [here](#logical-type-options) for more details about supported options for each `logicalType`.                                                                                         |
+| physicalType                                           | Physical Type                | Yes      | The physical column data type in the data source. For example, VARCHAR(2), DOUBLE, INT.                                                                                                                                                               |
+| description                                            | Description                  | No       | Description of the column.                                                                                                                                                                                                                            |
+| required                                               | Required                     | No       | Indicates if the column may contain Null values; possible values are true and false. Default is false.                                                                                                                                                |
+| unique                                                 | Unique                       | No       | Indicates if the column contains unique values; possible values are true and false. Default is false.                                                                                                                                                 |
+| partitionStatus                                        | Partition Status             | No       | Indicates if the column is partitioned; possible values are true and false.                                                                                                                                                                           |
+| partitionKeyPosition                                   | Partition Key Position       | No       | If column is used for partitioning, the position of the partition column. Starts from 1. Example of `country, year` being partition columns, `country` has partitionKeyPosition 1 and `year` partitionKeyPosition 2. Default to -1.                   |
+| clusterStatus                                          | Cluster Status               | No       | Indicates of the column is clustered; possible values are true and false.                                                                                                                                                                             |
+| clusterKeyPosition                                     | Cluster Key Position         | No       | If column is used for clustering, the position of the cluster column. Starts from 1. Example of `year, date` being cluster columns, `year` has clusterKeyPosition 1 and `date` clusterKeyPosition 2. Default to -1.                                   |
+| classification                                         | Classification               | No       | Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.                     |
+| authoritativeDefinitions                               | Authoritative Definitions    | No       | List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.                                                                                                       |
+| encryptedColumnName                                    | Encrypted Column Name        | No       | The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`.                                                              |
+| transformSourceObjects                                 | Transform Sources            | No       | List of objects in the data source used in the transformation.                                                                                                                                                                                        |
+| transformLogic                                         | Transform Logic              | No       | Logic used in the column transformation.                                                                                                                                                                                                              |
+| transformDescription                                   | Transform Description        | No       | Describes the transform logic in very simple terms.                                                                                                                                                                                                   |
+| examples                                               | Example Values               | No       | List of sample column values.                                                                                                                                                                                                                         |
+| criticalDataElement                                    | Critical Data Element Status | No       | True or false indicator; If element is considered a critical data element (CDE) then true else false.                                                                                                                                                 |
+| items                                                  | Items                        | No       | List of items in an array (only applicable when `logicalType: array`)                                                                                                                                                                                 |
 
 ### Logical Type Options
 
 Additional metadata options to more accurately define the data type.
-
 
 | Data Type      | Key              | UX Label           | Required | Description                                                                                                                                                                                           |
 |----------------|------------------|--------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -227,6 +282,7 @@ Updated in ODCS (Open Data Contract Standard) v2.2.1.
 |------|-------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | type | Definition type   | Yes      | Type of definition for authority: v2.2.1 adds standard values: `businessDefinition`, `transformationImplementation`, `videoTutorial`, `tutorial`, and `implementation`. |
 | url  | URL to definition | Yes      | URL to the authority.                                                                                                                                                   |
+
 
 ## Data quality 
 This section describes data quality rules & parameters. They are tightly linked to the schema described in the previous section.
@@ -384,7 +440,7 @@ The UX label is the label used in the UI and other user experiences. It is not l
 
 | Key                     | UX label           | Required | Description                                                                                       |
 |-------------------------|--------------------|----------|---------------------------------------------------------------------------------------------------|
-| team                    | Stakeholders       | No       | Array                                                                                             |
+| team                    | Stakeholders       | No       | Array.                                                                                            |
 | team.username           | Username           | No       | The stakeholder's username or email.                                                              |
 | team.role               | Role               | No       | The stakeholder's job role; Examples might be owner, data steward. There is no limit on the role. |
 | team.dateIn             | Date In            | No       | The date when the user became a stakeholder.                                                      |
@@ -421,15 +477,16 @@ roles:
 
 | Key                        | UX label            | Required | Description                                                                                                                                           |
 |----------------------------|---------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| roles                      | Roles               | Yes      | Array. A list of roles that will provide user access to the dataset.                                                                                  |
-| roles.role                 | Role                | Yes      | Name of the IAM role that provides access to the datase. |
-| roles.description                 | Description                | No      | Description of the IAM role and its permissions. |
-| roles.access               | Access              | No      | The type of access provided by the IAM role.              |
-| roles.firstLevelApprovers  | 1st Level Approvers | No       | The name(s) of the first-level approver(s) of the role.   |
-| roles.secondLevelApprovers | 2nd Level Approvers | No       | The name(s) of the second-level approver(s) of the role.  |
+| roles                      | Roles               | No       | Array. A list of roles that will provide user access to the dataset.                                                                                  |
+| roles.role                 | Role                | Yes      | Name of the IAM role that provides access to the datase.                                                                                              |
+| roles.description          | Description         | No       | Description of the IAM role and its permissions.                                                                                                      |
+| roles.access               | Access              | No       | The type of access provided by the IAM role.                                                                                                          |
+| roles.firstLevelApprovers  | 1st Level Approvers | No       | The name(s) of the first-level approver(s) of the role.                                                                                               |
+| roles.secondLevelApprovers | 2nd Level Approvers | No       | The name(s) of the second-level approver(s) of the role.                                                                                              |
 
-## Service-level agreement (SLA)
-This section describes the service-level agreements (SLA). SLA have been extended in version v2.1.0. 
+
+## Service-Level Agreement (SLA)
+This section describes the service-level agreements (SLA). 
 
 * Use the `Table.Column` to indicate the number to do the checks on, as in `SELECT txn_ref_dt FROM tab1`.
 * Separate multiple table.columns by a comma, as in `table1.col1`, `table2.col1`, `table1.col2`.
@@ -483,8 +540,8 @@ slaProperties:
 | slaProperties.driver   | Driver                 | No                             | Describes the importance of the SLA from the list of: `regulatory`, `analytics`, or `operational`.                         |
 
 
-## Other properties
-This section covers other properties you may find in a data contract.
+## Custom Properties
+This section covers custom properties you may find in a data contract.
 
 ### Example
 
@@ -496,8 +553,6 @@ customProperties:
     value: property.value
   - property: dataprocClusterName # Used for specific applications like Elevate
     value: [cluster name]
-
-contractCreatedTs: 2022-11-15 02:59:43
 ```
 
 ### Definitions
@@ -507,8 +562,23 @@ contractCreatedTs: 2022-11-15 02:59:43
 | customProperties          | Custom Properties    | No       | A list of key/value pairs for custom properties. Initially created to support the REF ruleset property.           |
 | customProperties.property | Property             | No       | The name of the key. Names should be in camel case–the same as if they were permanent properties in the contract. |
 | customProperties.value    | Value                | No       | The value of the key.                                                                                             |
-| contractCreatedTs         | Contract Created UTC | No       | Timestamp in UTC of when the data contract was created.                                                           |
 
+
+## Other Properties
+This section covers other properties you may find in a data contract.
+
+### Example
+
+```YAML
+contractCreatedTs: 2022-11-15 02:59:43
+```
+
+
+### Other properties definition
+
+| Key                       | UX label             | Required | Description                                                                                                       |
+|---------------------------|----------------------|----------|-------------------------------------------------------------------------------------------------------------------|
+| contractCreatedTs         | Contract Created UTC | No       | Timestamp in UTC of when the data contract was created.                                                           |
 
 ## Full example
 
