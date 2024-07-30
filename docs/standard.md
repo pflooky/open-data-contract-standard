@@ -80,7 +80,7 @@ tags: null
 | description.usage       | Usage            | No       | How to use the data.                                                                     |
 
 
-## Schema {#schema}
+## <a id="schema"/> Schema 
 This section describes the schema of the data contract. It is the support for data quality, which is detailed in the next section. Schema supports both a business representation of your data and a physical implementation. It allows to tie them together.
 
 In ODCS v3, the schema has evolved from the table and column representation, therefore the schema introduces a new terminology:
