@@ -7,7 +7,7 @@ image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color
 # Open Data Contract Standard
 
 ## Executive Summary
-This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [fundamentals (fka demographics)](#fundamentals), [schema](#schema), [data quality](#data-quality), [pricing](#pricing), [team](#team), [roles](#roles), [service-level agreement](#service-level-agreement), and [other/custom properties](#custom-properties). Each section starts with at least an example followed by definition of each field/key.
+This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [fundamentals (fka demographics)](#fundamentals), [schema](#schema), [data quality](#data-quality), [pricing](#pricing), [team](#team), [roles](#roles), [service-level agreement](#sla), and [other/custom properties](#custom-properties). Each section starts with at least an example followed by definition of each field/key.
 
 
 ## Table of content
@@ -408,7 +408,7 @@ schema:
 | quality.customProperties       | Custom Properties   | No       | Additional properties required for rule execution.                                                                                                                                                                                                                                                                                                                                                                                       |
 
 
-## Support & communication channels
+## <a id="support"/> Support & communication channels
 Support and communication channels help consumers find help regarding their use of the data contract. In version 3, ODCS opens the 
 
 ### Examples
@@ -551,7 +551,7 @@ roles:
 | roles.secondLevelApprovers | 2nd Level Approvers | No       | The name(s) of the second-level approver(s) of the role.                                                                                              |
 
 
-## Service-Level Agreement (SLA)
+## <a id="sla"/> Service-Level Agreement (SLA)
 This section describes the service-level agreements (SLA). 
 
 * Use the `Table.Column` to indicate the number to do the checks on, as in `SELECT txn_ref_dt FROM tab1`.
@@ -608,7 +608,7 @@ slaProperties:
 ## Infrastructure & servers
 TBD
 
-## Custom Properties
+## <a id="custom-properties"/> Custom Properties
 This section covers custom properties you may find in a data contract.
 
 ### Example
