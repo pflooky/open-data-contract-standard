@@ -15,12 +15,12 @@ This document describes the keys and values expected in a YAML data contract, pe
 1. [Fundamentals (fka demographics)](#fundamentals)
 1. [Schema](#schema)
 1. [Data quality](#data-quality)
-1. [Communication channels]()
+1. [Support & communication channels](#support)
 1. [Pricing](#pricing)
 1. [Team](#team)
 1. [Roles](#roles)
-1. [Service-level agreement](#service-level-agreement)
-1. [Infrastructures & servers]()
+1. [Service-level agreement](#sla)
+1. [Infrastructures & servers](#servers)
 1. [Custom & other properties](#custom-properties)
 1. [Examples](#full-example)
 
@@ -80,7 +80,7 @@ tags: null
 | description.usage       | Usage            | No       | How to use the data.                                                                     |
 
 
-## Schema
+## Schema {#schema}
 This section describes the schema of the data contract. It is the support for data quality, which is detailed in the next section. Schema supports both a business representation of your data and a physical implementation. It allows to tie them together.
 
 In ODCS v3, the schema has evolved from the table and column representation, therefore the schema introduces a new terminology:

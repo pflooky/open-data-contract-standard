@@ -8,7 +8,7 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 
 # v3.0.0 - 2024-xx-xx - IN PROGRESS
 
-* **New section**: Communication channels.  
+* **New section**: Support & communication channels.  
 * **Changes** to fundamentals :
   * Rename `uuid` to `id`.
   * Add `name`.
