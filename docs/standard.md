@@ -81,7 +81,19 @@ tags: null
 
 
 ## Schema
-This section describes the schema of the data contract. It is the support for data quality, which is detailed in the next section. Schema supports both a business representation of 
+This section describes the schema of the data contract. It is the support for data quality, which is detailed in the next section. Schema supports both a business representation of your data and a physical implementation. It allows to tie them together.
+
+In ODCS v3, the schema has evolved from the table and column representation, therefore the schema introduces a new terminology:
+
+* **Objects** are a structure of data: a table in a RDBMS system, a document in a NoSQL database, and so on.
+* **Properties** are attributes of an object: a column in a table, a field in a payload, and so on.
+* **Elements** are either an object or a property.
+
+Figure 1 illustrates those terms with a basic relational database.
+
+<img src=img/elements-of-schema-odcs-v3.svg width=800/>
+
+*Figure 1: elements of the schema in ODCS v3.*
 
 ### Examples
 
@@ -397,7 +409,7 @@ schema:
 
 
 ## Support & communication channels
-
+Support and communication channels help consumers find help regarding their use of the data contract. In version 3, ODCS opens the 
 
 ### Examples
 
