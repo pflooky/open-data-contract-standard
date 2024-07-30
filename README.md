@@ -18,19 +18,19 @@ This standard describes a structure for a **data contract**. Its current version
 ## Discover the open standard
 A reader-friendly version of the standard can be found on its [dedicated site](https://bitol-io.github.io/open-data-contract-standard/).
 
-Discover the [Open Data Contract Standard](docs/standard.md). This file contains some explanations and several examples. More [examples](docs/examples/index.md) can be found here.
+Discover the [Open Data Contract Standard](docs/README.md). This file contains some explanations and several examples. More [examples](docs/examples/README.md) can be found here.
 
 ## What is a Data Contract?
 
 ### The basics of a data contract
 A data contract defines the agreement between a data producer and consumers. A data contract contains several sections:
 
-* [Fundamentals](docs/standard.md#demographics).
-* [Schema](docs/standard.md#dataset-and-schema).
-* [Data quality](docs/standard.md#data-quality).
-* [Service-level agreement (SLA)](docs/standard.md#service-level-agreement).
-* [Security & stakeholders](docs/standard.md#stakeholders).
-* [Custom properties](docs/standard.md#other-properties).
+* [Fundamentals](docs/README.md#demographics).
+* [Schema](docs/README.md#dataset-and-schema).
+* [Data quality](docs/README.md#data-quality-).
+* [Service-level agreement (SLA)](docs/README.md#service-level-agreement).
+* [Security & stakeholders](docs/README.md#stakeholders).
+* [Custom properties](docs/README.md#other-properties).
 
 ![Data contract schema](docs/img/data-contract-v2.2.1-schema.svg "Data contract schema")
 
