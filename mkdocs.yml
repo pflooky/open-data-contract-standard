@@ -33,8 +33,8 @@ theme:
 
 nav:
   - Home: 'index.md'
-  - Standard: 'standard.md'
-  - Examples: 'examples/index.md'
+  - Standard: 'README.md'
+  - Examples: 'examples/README.md'
   - Changelog: 'changelog.md'
   - Contributing: 'contributing.md'
   - Vendors: 'vendors.md'
