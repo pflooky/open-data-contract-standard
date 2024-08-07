@@ -524,4 +524,4 @@ contractCreatedTs: 2022-11-15 02:59:43
 
 ## Full example
 
-[Check full example here.](examples/all/full-example.yaml)
+[Check full example here.](examples/all/full-example.odcs.yaml)

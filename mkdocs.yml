@@ -32,7 +32,7 @@ theme:
     repo: fontawesome/brands/git-alt
 
 nav:
-  - Home: 'index.md'
+  - Home: 'home.md'
   - Standard: 'README.md'
   - Examples: 'examples/README.md'
   - Changelog: 'changelog.md'
