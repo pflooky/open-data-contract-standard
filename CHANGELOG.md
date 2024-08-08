@@ -8,7 +8,7 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 
 # v3.0.0 - 2024-xx-xx - IN PROGRESS
 
-* **New section**: Communication channels.  
+* **New section**: Support & communication channels.  
 * **Changes** to fundamentals :
   * Rename `uuid` to `id`.
   * Add `name`.
@@ -37,16 +37,16 @@ This document tracks the history and evolution of the **Open Data Contract Stand
   * `dataGranularity` is now `dataGranularityDescription`.
   * `encryptedColumnName`is now `encryptedName`.
   * `partitionStatus` is now `partitioned`.
-  * 'clusterStatus' is not supported anymore, if needed, consider a custom property.
-  * 'clusterKeyPosition' is not supported anymore, if needed, consider a custom property.
-  * 'sampleValues' is now 'examples'.
-  * 'isNullable' is now 'required'.
-  * 'isUnique' is now 'unique'.
-  * 'isPrimaryKey' is now 'primaryKey'.
-  * 'criticalDataElementStatus' is now 'criticalDataElement'.
-  * 'clusterKeyPosition' is not supported anymore, if needed, consider a custom property.
-  * Restrict `dataset.table.columns.column.logicalType` to be one of `string, date, number, integer, object, array, boolean`
-  * Add `dataset.table.columns.column.logicalTypeOptions`
+  * `clusterStatus` is not supported anymore, if needed, consider a custom property.
+  * `clusterKeyPosition` is not supported anymore, if needed, consider a custom property.
+  * `sampleValues` is now `examples`.
+  * `isNullable` is now `required`.
+  * `isUnique` is now `unique`.
+  * `isPrimaryKey` is now `primaryKey`.
+  * `criticalDataElementStatus` is now `criticalDataElement`.
+  * `clusterKeyPosition` is not supported anymore, if needed, consider a custom property.
+  * Restrict `dataset.table.columns.column.logicalType` to be one of `string`, `date`, `number`, `integer`, `object`, `array`, `boolean`.
+  * Add `dataset.table.columns.column.logicalTypeOptions`.
 * **Changes** to Data Quality:
   * TBD.
 * Pricing:
@@ -60,11 +60,11 @@ This document tracks the history and evolution of the **Open Data Contract Stand
   * No changes.
 * **Changes** to SLA:
   * Starting with v3, the schema is not purely tables and columns, hence minor modifications: columns are now elements.
-  * 'slaDefaultColumn' is now 'slaDefaultElement'.
-  * 'column' is now 'element'.
+  * `slaDefaultColumn` is now `slaDefaultElement`.
+  * `column` is now `element`.
   * Explicit reference to Data QoS.
 * **Changes** to custom and other properties:
-  * 'systemInstance' is not supported anymore, if needed, consider a custom property.
+  * `systemInstance` is not supported anymore, if needed, consider a custom property.
 
 
 # v2.2.2 - 2024-05-23 - APPROVED

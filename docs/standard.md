@@ -7,7 +7,7 @@ image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color
 # Open Data Contract Standard
 
 ## Executive Summary
-This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [fundamentals (fka demographics)](#fundamentals), [schema](#schema), [data quality](#data-quality), [pricing](#pricing), [team](#team), [roles](#roles), [service-level agreement](#service-level-agreement), and [other/custom properties](#custom-properties). Each section starts with at least an example followed by definition of each field/key.
+This document describes the keys and values expected in a YAML data contract, per the **Open Data Contract Standard**. It is divided in multiple sections: [fundamentals (fka demographics)](#fundamentals), [schema](#schema), [data quality](#data-quality), [pricing](#pricing), [team](#team), [roles](#roles), [service-level agreement](#sla), and [other/custom properties](#custom-properties). Each section starts with at least an example followed by definition of each field/key.
 
 
 ## Table of content
@@ -15,12 +15,12 @@ This document describes the keys and values expected in a YAML data contract, pe
 1. [Fundamentals (fka demographics)](#fundamentals)
 1. [Schema](#schema)
 1. [Data quality](#data-quality)
-1. [Communication channels]()
+1. [Support & communication channels](#support)
 1. [Pricing](#pricing)
 1. [Team](#team)
 1. [Roles](#roles)
-1. [Service-level agreement](#service-level-agreement)
-1. [Infrastructures & servers]()
+1. [Service-level agreement](#sla)
+1. [Infrastructures & servers](#servers)
 1. [Custom & other properties](#custom-properties)
 1. [Examples](#full-example)
 
@@ -80,8 +80,20 @@ tags: null
 | description.usage       | Usage            | No       | How to use the data.                                                                     |
 
 
-## Schema
-This section describes the schema of the data contract. It is the support for data quality, which is detailed in the next section. Schema supports both a business representation of 
+## <a id="schema"/> Schema 
+This section describes the schema of the data contract. It is the support for data quality, which is detailed in the next section. Schema supports both a business representation of your data and a physical implementation. It allows to tie them together.
+
+In ODCS v3, the schema has evolved from the table and column representation, therefore the schema introduces a new terminology:
+
+* **Objects** are a structure of data: a table in a RDBMS system, a document in a NoSQL database, and so on.
+* **Properties** are attributes of an object: a column in a table, a field in a payload, and so on.
+* **Elements** are either an object or a property.
+
+Figure 1 illustrates those terms with a basic relational database.
+
+<img src=img/elements-of-schema-odcs-v3.svg width=800/>
+
+*Figure 1: elements of the schema in ODCS v3.*
 
 ### Examples
 
@@ -396,8 +408,8 @@ schema:
 | quality.customProperties       | Custom Properties   | No       | Additional properties required for rule execution.                                                                                                                                                                                                                                                                                                                                                                                       |
 
 
-## Support & communication channels
-
+## <a id="support"/> Support & communication channels
+Support and communication channels help consumers find help regarding their use of the data contract. In version 3, ODCS opens the 
 
 ### Examples
 
@@ -539,7 +551,7 @@ roles:
 | roles.secondLevelApprovers | 2nd Level Approvers | No       | The name(s) of the second-level approver(s) of the role.                                                                                              |
 
 
-## Service-Level Agreement (SLA)
+## <a id="sla"/> Service-Level Agreement (SLA)
 This section describes the service-level agreements (SLA). 
 
 * Use the `Table.Column` to indicate the number to do the checks on, as in `SELECT txn_ref_dt FROM tab1`.
@@ -596,7 +608,7 @@ slaProperties:
 ## Infrastructure & servers
 TBD
 
-## Custom Properties
+## <a id="custom-properties"/> Custom Properties
 This section covers custom properties you may find in a data contract.
 
 ### Example
