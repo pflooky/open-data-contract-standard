@@ -75,7 +75,7 @@ tags: null
 | domain                  | Domain           | No       | Name of the logical data domain.                                                         |
 | dataProduct             | Data Product     | No       | The name of the data product.                                                            |
 | description             | Description      | No       | Object.                                                                                  |
-| description.purpose     | Purpose          | No       | What is the intendet purpose for the provided data.                                      |
+| description.purpose     | Purpose          | No       | What is the intended purpose for the provided data.                                      |
 | description.limitations | Limitations      | No       | Technical, compliance, and legal limitations for using the data.                         |
 | description.usage       | Usage            | No       | How to use the data.                                                                     |
 
@@ -178,11 +178,11 @@ schema:
 ```yaml
 schema:
   - name: AnObject
-    logicalType: object 
+    logicalType: object
     properties:
       - name: street_lines
         logicalType: array 
-        items: 
+        items:
           logicalType: string
 ```
 
@@ -191,18 +191,18 @@ schema:
 ```yaml
 schema:
   - name: AnotherObject
-    logicalType: object 
+    logicalType: object
     properties:
       - name: x
-        logicalType: array 
+        logicalType: array
         items:
           logicalType: object
           properties:
             - name: id
-              logicalType: uuid 
+              logicalType: string 
               physicalType: VARCHAR(40)
             - name: zip
-              logicalType: string 
+              logicalType: string
               physicalType: VARCHAR(15)
 ```
 
@@ -218,47 +218,46 @@ Note: the description needs to be updated.
 
 #### Applicable to Elements (either Objects or Properties)
 
-| Key                                                    | UX label                     | Required | Description                                                                                                                                                                                                                                           |
-|--------------------------------------------------------|------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| physicalName                                           | Physical Name                | No       | Physical name.                                                                                                                                                                                                                                        |
-| description                                            | Description                  | No       | Description of the element.                                                                                                                                                                                                                           |
-| businessName                                           | Business Name                | No       | The business name of the element.                                                                                                                                                                                                                     |
-| authoritativeDefinitions                               | Authoritative Definitions    | No       | List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. See `authoritativeDefinitions` below.                                |
-| tags                                                   | Tags                         | No       | A list of tags that may be assigned to the elements (object or property); the tags keyword may appear at any level.                                                                                                                                   |
+| Key                      | UX label                     | Required | Description                                                                                                                                                                                                            |
+|--------------------------|------------------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| name                     | Name                         | Yes      | Name of the element.                                                                                                                                                                                                   |
+| physicalName             | Physical Name                | No       | Physical name.                                                                                                                                                                                                         |
+| description              | Description                  | No       | Description of the element.                                                                                                                                                                                            |
+| businessName             | Business Name                | No       | The business name of the element.                                                                                                                                                                                      |
+| authoritativeDefinitions | Authoritative Definitions    | No       | List of links to sources that provide more details on the table; examples would be a link to an external definition, a training video, a GitHub repo, Collibra, or another tool. See `authoritativeDefinitions` below. |
+| tags                     | Tags                         | No       | A list of tags that may be assigned to the elements (object or property); the tags keyword may appear at any level.                                                                                                    |
 
 #### Applicable to Objects
 
-| Key                                                    | UX label                     | Required | Description                                                                                                                                                                                                                                           |
-|--------------------------------------------------------|------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| dataGranularityDescription                             | Data Granularity             | No       | Granular level of the data in the table. Example would be "Aggregation by country."                                                                                                                                                                   |
+| Key                                                    | UX label                     | Required | Description                                                                          |
+|--------------------------------------------------------|------------------------------|----------|--------------------------------------------------------------------------------------|
+| dataGranularityDescription                             | Data Granularity             | No       | Granular level of the data in the object. Example would be "Aggregation by country." |
 
 #### Applicable to Properties
 
 Some keys are more applicable when the described property is a column. 
 
-| Key                                                    | UX label                     | Required | Description                                                                                                                                                                                                                                           |
-|--------------------------------------------------------|------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| primaryKey                                             | Primary Key                  | No       | Boolean value specifying whether the field is primary or not. Default is false.                                                                                                                                                                       |
-| primaryKeyPosition                                     | Primary Key Position         | No       | If field is a primary key, the position of the primary key column. Starts from 1. Example of `account_id, name` being primary key columns, `account_id` has primaryKeyPosition 1 and `name` primaryKeyPosition 2. Default to -1.                      |
-| logicalType                                            | Logical Type                 | Yes      | The logical field datatype. One of `string`, `date`, `number`, `integer`, `object`, `array` or `boolean`.                                                                                                                                             |
-| logicalTypeOptions                                     | Logical Type Options         | No       | Additional optional metadata to describe the logical type. See [here](#logical-type-options) for more details about supported options for each `logicalType`.                                                                                         |
-| physicalType                                           | Physical Type                | Yes      | The physical column data type in the data source. For example, VARCHAR(2), DOUBLE, INT.                                                                                                                                                               |
-| description                                            | Description                  | No       | Description of the column.                                                                                                                                                                                                                            |
-| required                                               | Required                     | No       | Indicates if the column may contain Null values; possible values are true and false. Default is false.                                                                                                                                                |
-| unique                                                 | Unique                       | No       | Indicates if the column contains unique values; possible values are true and false. Default is false.                                                                                                                                                 |
-| partitionStatus                                        | Partition Status             | No       | Indicates if the column is partitioned; possible values are true and false.                                                                                                                                                                           |
-| partitionKeyPosition                                   | Partition Key Position       | No       | If column is used for partitioning, the position of the partition column. Starts from 1. Example of `country, year` being partition columns, `country` has partitionKeyPosition 1 and `year` partitionKeyPosition 2. Default to -1.                   |
-| clusterStatus                                          | Cluster Status               | No       | Indicates of the column is clustered; possible values are true and false.                                                                                                                                                                             |
-| clusterKeyPosition                                     | Cluster Key Position         | No       | If column is used for clustering, the position of the cluster column. Starts from 1. Example of `year, date` being cluster columns, `year` has clusterKeyPosition 1 and `date` clusterKeyPosition 2. Default to -1.                                   |
-| classification                                         | Classification               | No       | Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.                     |
-| authoritativeDefinitions                               | Authoritative Definitions    | No       | List of links to sources that provide more detail on column logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.                                                                                                       |
-| encryptedColumnName                                    | Encrypted Column Name        | No       | The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`.                                                              |
-| transformSourceObjects                                 | Transform Sources            | No       | List of objects in the data source used in the transformation.                                                                                                                                                                                        |
-| transformLogic                                         | Transform Logic              | No       | Logic used in the column transformation.                                                                                                                                                                                                              |
-| transformDescription                                   | Transform Description        | No       | Describes the transform logic in very simple terms.                                                                                                                                                                                                   |
-| examples                                               | Example Values               | No       | List of sample column values.                                                                                                                                                                                                                         |
-| criticalDataElement                                    | Critical Data Element Status | No       | True or false indicator; If element is considered a critical data element (CDE) then true else false.                                                                                                                                                 |
-| items                                                  | Items                        | No       | List of items in an array (only applicable when `logicalType: array`)                                                                                                                                                                                 |
+| Key                      | UX label                     | Required | Description                                                                                                                                                                                                                           |
+|--------------------------|------------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| primaryKey               | Primary Key                  | No       | Boolean value specifying whether the field is primary or not. Default is false.                                                                                                                                                       |
+| primaryKeyPosition       | Primary Key Position         | No       | If field is a primary key, the position of the primary key element. Starts from 1. Example of `account_id, name` being primary key columns, `account_id` has primaryKeyPosition 1 and `name` primaryKeyPosition 2. Default to -1.     |
+| logicalType              | Logical Type                 | Yes      | The logical field datatype. One of `string`, `date`, `number`, `integer`, `object`, `array` or `boolean`.                                                                                                                             |
+| logicalTypeOptions       | Logical Type Options         | No       | Additional optional metadata to describe the logical type. See [here](#logical-type-options) for more details about supported options for each `logicalType`.                                                                         |
+| physicalType             | Physical Type                | Yes      | The physical element data type in the data source. For example, VARCHAR(2), DOUBLE, INT.                                                                                                                                              |
+| description              | Description                  | No       | Description of the element.                                                                                                                                                                                                           |
+| required                 | Required                     | No       | Indicates if the element may contain Null values; possible values are true and false. Default is false.                                                                                                                               |
+| unique                   | Unique                       | No       | Indicates if the element contains unique values; possible values are true and false. Default is false.                                                                                                                                |
+| partitioned              | Partitioned                  | No       | Indicates if the element is partitioned; possible values are true and false.                                                                                                                                                          |
+| partitionKeyPosition     | Partition Key Position       | No       | If element is used for partitioning, the position of the partition element. Starts from 1. Example of `country, year` being partition columns, `country` has partitionKeyPosition 1 and `year` partitionKeyPosition 2. Default to -1. |
+| classification           | Classification               | No       | Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.     |
+| authoritativeDefinitions | Authoritative Definitions    | No       | List of links to sources that provide more detail on element logic or values; examples would be URL to a GitHub repo, Collibra, on another tool.                                                                                      |
+| encryptedName            | Encrypted Name               | No       | The element name within the dataset that contains the encrypted element value. For example, unencrypted element `email_address` might have an encryptedName of `email_address_encrypt`.                                               |
+| transformSourceObjects   | Transform Sources            | No       | List of objects in the data source used in the transformation.                                                                                                                                                                        |
+| transformLogic           | Transform Logic              | No       | Logic used in the column transformation.                                                                                                                                                                                              |
+| transformDescription     | Transform Description        | No       | Describes the transform logic in very simple terms.                                                                                                                                                                                   |
+| examples                 | Example Values               | No       | List of sample element values.                                                                                                                                                                                                        |
+| criticalDataElement      | Critical Data Element Status | No       | True or false indicator; If element is considered a critical data element (CDE) then true else false.                                                                                                                                 |
+| items                    | Items                        | No       | List of items in an array (only applicable when `logicalType: array`)                                                                                                                                                                 |
 
 ### Logical Type Options
 
@@ -448,15 +447,15 @@ support:
 
 ### Definitions
 
-| Key                    | UX label           | Required | Description                                                                                                                       |
-|------------------------|--------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------|
-| support                | Support            | No       | Top level for support channels                                                                                                    |
-| support.channel        | Channel            | Yes      | Channel name or identifier.                                                                                                       |
-| support.url            | Channel URL        | Yes      | Access URL using normal [URL scheme](https://en.wikipedia.org/wiki/URL#Syntax) (https, mailto, etc.).                             |
-| support.description    | Descripton         | No       | Description of the channel, free text.                                                                                            |
-| support.tool           | Tool               | No       | Name of the tool, value can be `email`, `slack`, `teams`, `discord`, `ticket`, or `other`.                                        |
-| support.scope          | Scope              | No       | Scope can be: `interactive`, `announcements`, `issues`.                                                                           |
-| support.invitationUrl  | Invitation URL     | No       | Some tools uses invitation URL for requesting or subscribing. Follows the [URL scheme](https://en.wikipedia.org/wiki/URL#Syntax). |
+| Key                   | UX label       | Required | Description                                                                                                                       |
+|-----------------------|----------------|----------|-----------------------------------------------------------------------------------------------------------------------------------|
+| support               | Support        | No       | Top level for support channels.                                                                                                   |
+| support.channel       | Channel        | Yes      | Channel name or identifier.                                                                                                       |
+| support.url           | Channel URL    | Yes      | Access URL using normal [URL scheme](https://en.wikipedia.org/wiki/URL#Syntax) (https, mailto, etc.).                             |
+| support.description   | Description    | No       | Description of the channel, free text.                                                                                            |
+| support.tool          | Tool           | No       | Name of the tool, value can be `email`, `slack`, `teams`, `discord`, `ticket`, or `other`.                                        |
+| support.scope         | Scope          | No       | Scope can be: `interactive`, `announcements`, `issues`.                                                                           |
+| support.invitationUrl | Invitation URL | No       | Some tools uses invitation URL for requesting or subscribing. Follows the [URL scheme](https://en.wikipedia.org/wiki/URL#Syntax). |
 
 
 ## Pricing
@@ -541,14 +540,14 @@ roles:
 
 ### Definitions
 
-| Key                        | UX label            | Required | Description                                                                                                                                           |
-|----------------------------|---------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| roles                      | Roles               | No       | Array. A list of roles that will provide user access to the dataset.                                                                                  |
-| roles.role                 | Role                | Yes      | Name of the IAM role that provides access to the datase.                                                                                              |
-| roles.description          | Description         | No       | Description of the IAM role and its permissions.                                                                                                      |
-| roles.access               | Access              | No       | The type of access provided by the IAM role.                                                                                                          |
-| roles.firstLevelApprovers  | 1st Level Approvers | No       | The name(s) of the first-level approver(s) of the role.                                                                                               |
-| roles.secondLevelApprovers | 2nd Level Approvers | No       | The name(s) of the second-level approver(s) of the role.                                                                                              |
+| Key                        | UX label            | Required | Description                                                          |
+|----------------------------|---------------------|----------|----------------------------------------------------------------------|
+| roles                      | Roles               | No       | Array. A list of roles that will provide user access to the dataset. |
+| roles.role                 | Role                | Yes      | Name of the IAM role that provides access to the dataset.            |
+| roles.description          | Description         | No       | Description of the IAM role and its permissions.                     |
+| roles.access               | Access              | No       | The type of access provided by the IAM role.                         |
+| roles.firstLevelApprovers  | 1st Level Approvers | No       | The name(s) of the first-level approver(s) of the role.              |
+| roles.secondLevelApprovers | 2nd Level Approvers | No       | The name(s) of the second-level approver(s) of the role.             |
 
 
 ## <a id="sla"/> Service-Level Agreement (SLA)
@@ -594,16 +593,16 @@ slaProperties:
 
 ### Definitions
 
-| Key                    | UX label               | Required                       | Description                                                                                                                |
-|------------------------|------------------------|--------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| slaDefaultElement      | Default SLA element(s) | No                             | Element (using the element path notation) to do the checks on.                                                             |
-| slaProperties          | SLA                    | No                             | A list of key/value pairs for SLA specific properties. There is no limit on the type of properties.                        |
-| slaProperties.property | Property               | Yes                            | Specific property in SLA, check the Data QoS periodic table. May requires units.                                           |
-| slaProperties.value    | Value                  | Yes                            | Agreement value. The label will change based on the property itself.                                                       |
-| slaProperties.valueExt | Extended value         | No - unless needed by property | Extended agreement value. The label will change based on the property itself.                                              |
-| slaProperties.unit     | Unit                   | No - unless needed by property | **d**, day, days for days; **y**, yr, years for years, etc. Units use the ISO standard.                                    |
-| slaProperties.element  | Element(s)             | No                             | Element(s) to check on. Multiple elements should be extremely rare and, if so, separated by commas.                        |
-| slaProperties.driver   | Driver                 | No                             | Describes the importance of the SLA from the list of: `regulatory`, `analytics`, or `operational`.                         |
+| Key                    | UX label               | Required                       | Description                                                                                         |
+|------------------------|------------------------|--------------------------------|-----------------------------------------------------------------------------------------------------|
+| slaDefaultElement      | Default SLA element(s) | No                             | Element (using the element path notation) to do the checks on.                                      |
+| slaProperties          | SLA                    | No                             | A list of key/value pairs for SLA specific properties. There is no limit on the type of properties. |
+| slaProperties.property | Property               | Yes                            | Specific property in SLA, check the Data QoS periodic table. May requires units.                    |
+| slaProperties.value    | Value                  | Yes                            | Agreement value. The label will change based on the property itself.                                |
+| slaProperties.valueExt | Extended value         | No - unless needed by property | Extended agreement value. The label will change based on the property itself.                       |
+| slaProperties.unit     | Unit                   | No - unless needed by property | **d**, day, days for days; **y**, yr, years for years, etc. Units use the ISO standard.             |
+| slaProperties.element  | Element(s)             | No                             | Element(s) to check on. Multiple elements should be extremely rare and, if so, separated by commas. |
+| slaProperties.driver   | Driver                 | No                             | Describes the importance of the SLA from the list of: `regulatory`, `analytics`, or `operational`.  |
 
 ## Infrastructure & servers
 TBD
@@ -644,9 +643,9 @@ contractCreatedTs: 2022-11-15 02:59:43
 
 ### Other properties definition
 
-| Key                       | UX label             | Required | Description                                                                                                       |
-|---------------------------|----------------------|----------|-------------------------------------------------------------------------------------------------------------------|
-| contractCreatedTs         | Contract Created UTC | No       | Timestamp in UTC of when the data contract was created.                                                           |
+| Key                       | UX label             | Required | Description                                                  |
+|---------------------------|----------------------|----------|--------------------------------------------------------------|
+| contractCreatedTs         | Contract Created UTC | No       | Timestamp in UTC of when the data contract was created.      |
 
 ## Full example
 

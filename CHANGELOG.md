@@ -33,7 +33,11 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 * **Changes** to Schema:
   * Major changes, check spec. 
   * Adds support for non table formats, hierarchies, and arrays.
+  * `name` is a new field
+  * `items` is a new field
   * `priorTableName` is not supported anymore, if needed, consider a custom property.
+  * `table` is not supported anymore, if needed, consider using `name`.
+  * `columns` is now `properties`
   * `dataGranularity` is now `dataGranularityDescription`.
   * `encryptedColumnName`is now `encryptedName`.
   * `partitionStatus` is now `partitioned`.
@@ -45,6 +49,7 @@ This document tracks the history and evolution of the **Open Data Contract Stand
   * `isPrimaryKey` is now `primaryKey`.
   * `criticalDataElementStatus` is now `criticalDataElement`.
   * `clusterKeyPosition` is not supported anymore, if needed, consider a custom property.
+  * `transformSourceTables` is now `transformSourceObjects`
   * Restrict `dataset.table.columns.column.logicalType` to be one of `string`, `date`, `number`, `integer`, `object`, `array`, `boolean`.
   * Add `dataset.table.columns.column.logicalTypeOptions`.
 * **Changes** to Data Quality:
