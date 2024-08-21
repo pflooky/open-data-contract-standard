@@ -1,43 +1,44 @@
 version: 1.0.0
 kind: DataContract
-uuid: 53581432-6c55-4ba2-a65f-72344a91553a
+id: 53581432-6c55-4ba2-a65f-72344a91553a
 type: tables
 status: current
-datasetName: my_table
-quantumName: my_quantum
-dataset:
-  - table: transactions_tbl
+name: my_table
+dataProduct: my_quantum
+apiVersion: v3.0.0
+schema:
+  - name: transactions_tbl
     description: Provides core payment metrics
-    dataGranularity: Aggregation on columns txn_ref_dt, pmt_txn_id
-    columns:
-      - column: account_id
+    dataGranularityDescription: Aggregation on names txn_ref_dt, pmt_txn_id
+    properties:
+      - name: account_id
         physicalType: string
         logicalType: string
         logicalTypeOptions:
           minLength: 11
           maxLength: 11
           pattern: ACC[0-9]{8}
-      - column: txn_ref_date
+      - name: txn_ref_date
         physicalType: date
         logicalType: date
         logicalTypeOptions:
-          minimum: 2020-01-01
-          maximum: 2021-01-01
+          minimum: "2020-01-01"
+          maximum: "2021-01-01"
           format: yyyy-MM-dd
-      - column: txn_timestamp
+      - name: txn_timestamp
         physicalType: timestamp
         logicalType: date
         logicalTypeOptions:
-          minimum: 2020-01-01 00:00:00
-          maximum: 2021-01-01 00:00:00
+          minimum: "2020-01-01 00:00:00"
+          maximum: "2021-01-01 00:00:00"
           format: "yyyy-MM-dd HH:mm:ss"
-      - column: amount
+      - name: amount
         physicalType: double
         logicalType: number
         logicalTypeOptions:
           minimum: 0
           format: f32
-      - column: age
+      - name: age
         physicalType: int
         logicalType: integer
         logicalTypeOptions:
@@ -45,17 +46,17 @@ dataset:
           maximum: 100
           exclusiveMaximum: true
           format: i64
-      - column: is_open
+      - name: is_open
         physicalType: bool
         logicalType: boolean
-      - column: latest_txns
+      - name: latest_txns
         physicalType: list
         logicalType: array
         logicalTypeOptions:
           minItems: 0
           maxItems: 3
           uniqueItems: true
-      - column: customer_details
+      - name: customer_details
         physicalType: json
         logicalType: object
         logicalTypeOptions:

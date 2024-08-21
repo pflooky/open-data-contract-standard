@@ -18,21 +18,15 @@
       "type": "string",
       "default": "v3.0.0",
       "description": "Version of the standard used to build data contract. Default value is v3.0.0.",
-      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+"
+      "enum": ["v3.0.0", "v2.2.2", "v2.2.1", "v2.2.0"]
     },
-    "uuid": {
+    "id": {
       "type": "string",
-      "description": "A unique identifier used to reduce the risk of dataset name collisions; initially the UUID will be created using a UUID generator tool ([example](https://www.uuidgenerator.net/)). However, we may want to develop a method that accepts a seed value using a combination of fields–such as name, kind and source–to create a repeatable value."
+      "description": "A unique identifier used to reduce the risk of dataset name collisions, such as a UUID."
     },
-    "datasetKind": {
+    "name": {
       "type": "string",
-      "description": "The kind of dataset being cataloged; Expected values are `virtualDataset` or `managedDataset`.",
-      "examples": ["virtualDataset", "managedDataset"]
-    },
-    "userConsumptionMode": {
-      "type": "string",
-      "description": "List of data modes for which the dataset may be used.  Expected sample values might be `analytical` or `operational`. <br/>Note: in the future, this will probably be replaced by ports.",
-      "examples": ["analytical", "operational"]
+      "description": "Name of the data contract."
     },
     "type": {
       "type": "string",
@@ -44,62 +38,23 @@
       "description": "Indicates the property the data is primarily associated with. Value is case insensitive."
     },
     "tags": {
-      "type": "array",
-      "description": "A list of tags that may be assigned to the dataset, table or column; the `tags` keyword may appear at any level.",
-      "items": {
-        "type": "string"
-      }
+      "$ref": "#/$defs/Tags"
     },
     "status": {
       "type": "string",
       "description": "Current status of the dataset. Valid values are `production`, `test`, or `development`.",
       "examples": ["production", "test", "development"]
     },
-    "sourceSystem": {
-      "type": "string",
-      "description": "The system where the dataset resides. Expected value can be BigQuery.",
-      "examples": ["BigQuery"]
+    "servers": {
+      "type": "array",
+      "description": "List of servers where the datasets reside.",
+      "items": {
+        "$ref": "#/$defs/Server"
+      }
     },
-    "sourcePlatform": {
+    "dataProduct": {
       "type": "string",
-      "description": "The platform where the dataset resides. Expected value is GoogleCloudPlatform, IBMCloud, Azure...",
-      "examples": ["GoogleCloudPlatform", "IBMCloud", "Azure", "AWS"]
-    },
-    "server": {
-      "type": "string",
-      "description": "The server where the dataset resides."
-    },
-    "quantumName": {
-      "type": "string",
-      "description": "The name of the data quantum or data product."
-    },
-    "productSlackChannel": {
-      "type": "string",
-      "description": "Slack channel of the team responsible for maintaining the dataset."
-    },
-    "productFeedbackUrl": {
-      "type": "string",
-      "description": "The URL for submitting feedback to the team responsible for maintaining the dataset."
-    },
-    "productDl": {
-      "type": "string",
-      "description": "The email distribution list (DL) of the persons or team responsible for maintaining the dataset."
-    },
-    "username": {
-      "type": "string",
-      "description": "User credentials for connecting to the dataset; how the credentials will be stored/passed is outside of the scope of the contract."
-    },
-    "password": {
-      "type": "string",
-      "description": "User credentials for connecting to the dataset; how the credentials will be stored/passed is out of the scope of this contract."
-    },
-    "driverVersion": {
-      "type": "string",
-      "description": "The version of the connection driver to be used to connect to the dataset."
-    },
-    "driver": {
-      "type": "string",
-      "description": "The connection driver required to connect to the dataset."
+      "description": "The name of the data product."
     },
     "description": {
       "type": "object",
@@ -119,36 +74,28 @@
         }
       }
     },
-    "project": {
+    "domain": {
       "type": "string",
-      "description": "Associated project name, can be used for billing or administrative purpose. Used to be datasetProject."
-    },
-    "datasetName": {
-      "type": "string",
-      "description": "May be required in cloud instance like GCP BigQuery dataset name."
-    },
-    "datasetDomain": {
-      "type": "string",
-      "description": "Name of the logical domain dataset the contract describes. This field is only required for output data contracts.",
+      "description": "Name of the logical data domain.",
       "examples": ["imdb_ds_aggregate", "receiver_profile_out", "transaction_profile_out"]
     },
-    "database": {
-      "type": "string",
-      "description": "The database where the dataset resides."
-    },
-    "dataset": {
+    "schema": {
       "type": "array",
+      "description": "A list of elements within the schema to be cataloged.",
       "items": {
-        "$ref": "#/$defs/Dataset"
+        "$ref": "#/$defs/SchemaObject"
       }
+    },
+    "support": {
+      "$ref": "#/$defs/Support"
     },
     "price": {
       "$ref": "#/$defs/Pricing"
     },
-    "stakeholders": {
+    "team": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/Stakeholder"
+        "$ref": "#/$defs/Team"
       }
     },
     "roles": {
@@ -158,9 +105,9 @@
         "$ref": "#/$defs/Role"
       }
     },
-    "slaDefaultColumn": {
+    "slaDefaultElement": {
       "type": "string",
-      "description": "Columns (using the Table.Column notation) to do the checks on. By default, it is the partition column."
+      "description": "Element (using the element path notation) to do the checks on."
     },
     "slaProperties": {
       "type": "array",
@@ -168,78 +115,1321 @@
       "items": {
         "$ref": "#/$defs/ServiceLevelAgreementProperty"
       }
+    },
+    "customProperties": {
+      "$ref": "#/$defs/CustomProperties"
+    },
+    "contractCreatedTs": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp in UTC of when the data contract was created."
     }
   },
-  "required": ["version", "kind", "uuid", "type", "status", "dataset", "datasetName", "quantumName"],
+  "required": ["version", "apiVersion", "kind", "id", "status"],
+  "additionalProperties": false,
   "$defs": {
-    "Dataset": {
+    "Server": {
       "type": "object",
+      "description": "Data source details of where data is physically stored.",
       "properties": {
-        "table": {
+        "server": {
           "type": "string",
-          "description": "Name of the table being cataloged; the value should only contain the table name. Do not include the project or dataset name in the value."
+          "description": "Identifier of the server."
         },
-        "physicalName": {
+        "type": {
           "type": "string",
-          "description": "Physical name of the table, default value is table name + version separated by underscores, as `table_1_2_0`.",
-          "examples": ["table_1_2_0"]
-        },
-        "priorTableName": {
-          "type": "string",
-          "description": "Name of the previous version of the dataset, if applicable."
+          "description": "Type of the server.",
+          "enum": [
+            "athena", "azure", "bigquery", "clickhouse", "databricks", "denodo", "dremio",
+            "duckdb", "glue", "googlecloudsql", "ibmdb2", "kafka", "kinesis", "local", "mssql",
+            "mysql", "oracle", "postgres", "presto", "pubsub",
+            "redshift", "s3", "sftp", "snowflake", "sqlserver", "synapse", "trino", "vertica"
+          ]
         },
         "description": {
           "type": "string",
-          "description": "Description of the dataset."
+          "description": "Description of the server."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Environment of the server.",
+          "examples": ["prod", "preprod", "dev", "uat"]
+        },
+        "roles": {
+          "type": "array",
+          "description": "List of roles that have access to the server.",
+          "items": {
+            "$ref": "#/$defs/Role"
+          }
+        },
+        "customProperties": {
+          "$ref": "#/$defs/CustomProperties"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "athena"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/AthenaServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "azure"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/AzureServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "bigquery"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/BigQueryServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "clickhouse"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/ClickHouseServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "databricks"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/DatabricksServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "denodo"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/DenodoServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "dremio"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/DremioServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "duckdb"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/DuckdbServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "glue"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/GlueServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "googlecloudsql"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/GoogleCloudSqlServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "ibmdb2"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/IBMDB2Server"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "kafka"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/KafkaServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "kinesis"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/KinesisServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "local"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/LocalServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "mssql"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/MSSqlServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "mysql"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/MySqlServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "oracle"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/OracleServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "postgres"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/PostgresServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "presto"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/PrestoServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "pubsub"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/PubSubServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "redshift"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/RedshiftServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "s3"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/S3Server"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "sftp"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/SftpServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "snowflake"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/SnowflakeServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "sqlserver"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/SqlserverServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "synapse"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/SynapseServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "trino"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/TrinoServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "vertica"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/VerticaServer"
+          }
+        }
+      ],
+      "required": ["server", "type"]
+    },
+    "ServerSource": {
+      "AthenaServer": {
+        "type": "object",
+        "title": "AthenaServer",
+        "properties": {
+          "stagingDir": {
+            "type": "string",
+            "format": "uri",
+            "description": "Amazon Athena automatically stores query results and metadata information for each query that runs in a query result location that you can specify in Amazon S3.",
+            "examples": [
+              "s3://my_storage_account_name/my_container/path"
+            ]
+          },
+          "schema": {
+            "type": "string",
+            "description": "Identify the schema in the data source in which your tables exist."
+          },
+          "catalog": {
+            "type": "string",
+            "description": "Identify the name of the Data Source, also referred to as a Catalog.",
+            "default": "awsdatacatalog"
+          },
+          "regionName": {
+            "type": "string",
+            "description": "The region your AWS account uses.",
+            "examples": ["eu-west-1"]
+          }
+        },
+        "required": [
+          "staging_dir",
+          "schema"
+        ]
+      },
+      "AzureServer": {
+        "type": "object",
+        "title": "AzureServer",
+        "properties": {
+          "location": {
+            "type": "string",
+            "format": "uri",
+            "description": "Fully qualified path to Azure Blob Storage or Azure Data Lake Storage (ADLS), supports globs.",
+            "examples": [
+              "az://my_storage_account_name.blob.core.windows.net/my_container/path/*.parquet",
+              "abfss://my_storage_account_name.dfs.core.windows.net/my_container_name/path/*.parquet"
+            ]
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "parquet",
+              "delta",
+              "json",
+              "csv"
+            ],
+            "description": "File format."
+          },
+          "delimiter": {
+            "type": "string",
+            "enum": [
+              "new_line",
+              "array"
+            ],
+            "description": "Only for format = json. How multiple json documents are delimited within one file"
+          }
+        },
+        "required": [
+          "location",
+          "format"
+        ]
+      },
+      "BigQueryServer": {
+        "type": "object",
+        "title": "BigQueryServer",
+        "properties": {
+          "project": {
+            "type": "string",
+            "description": "The GCP project name."
+          },
+          "dataset": {
+            "type": "string",
+            "description": "The GCP dataset name."
+          }
+        },
+        "required": [
+          "project",
+          "dataset"
+        ]
+      },
+      "ClickHouseServer": {
+        "type": "object",
+        "title": "ClickHouseServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host of the ClickHouse server."
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port to the ClickHouse server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "database"
+        ]
+      },
+      "DatabricksServer": {
+        "type": "object",
+        "title": "DatabricksServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The Databricks host",
+            "examples": [
+              "dbc-abcdefgh-1234.cloud.databricks.com"
+            ]
+          },
+          "catalog": {
+            "type": "string",
+            "description": "The name of the Hive or Unity catalog"
+          },
+          "schema": {
+            "type": "string",
+            "description": "The schema name in the catalog"
+          }
+        },
+        "required": [
+          "catalog",
+          "schema"
+        ]
+      },
+      "DenodoServer": {
+        "type": "object",
+        "title": "DenodoServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host of the Denodo server."
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port of the Denodo server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          }
+        },
+        "required": [
+          "host",
+          "port"
+        ]
+      },
+      "DremioServer": {
+        "type": "object",
+        "title": "DremioServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host of the Dremio server."
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port of the Dremio server."
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema."
+          }
+        },
+        "required": [
+          "host",
+          "port"
+        ]
+      },
+      "DuckdbServer": {
+        "type": "object",
+        "title": "DuckdbServer",
+        "properties": {
+          "database": {
+            "type": "string",
+            "description": "Path to duckdb database file."
+          },
+          "schema": {
+            "type": "integer",
+            "description": "The name of the schema."
+          }
+        },
+        "required": [
+          "database"
+        ]
+      },
+      "GlueServer": {
+        "type": "object",
+        "title": "GlueServer",
+        "properties": {
+          "account": {
+            "type": "string",
+            "description": "The AWS Glue account",
+            "examples": [
+              "1234-5678-9012"
+            ]
+          },
+          "database": {
+            "type": "string",
+            "description": "The AWS Glue database name",
+            "examples": [
+              "my_database"
+            ]
+          },
+          "location": {
+            "type": "string",
+            "format": "uri",
+            "description": "The AWS S3 path. Must be in the form of a URL.",
+            "examples": [
+              "s3://datacontract-example-orders-latest/data/{model}"
+            ]
+          },
+          "format": {
+            "type": "string",
+            "description": "The format of the files",
+            "examples": [
+              "parquet",
+              "csv",
+              "json",
+              "delta"
+            ]
+          }
+        },
+        "required": [
+          "account",
+          "database"
+        ]
+      },
+      "GoogleCloudSqlServer": {
+        "type": "object",
+        "title": "GoogleCloudSqlServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host of the Google Cloud Sql server."
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port of the Google Cloud Sql server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema."
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "database",
+          "schema"
+        ]
+      },
+      "IBMDB2Server": {
+        "type": "object",
+        "title": "IBMDB2Server",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host of the IBM DB2 server."
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port of the IBM DB2 server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema."
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "database"
+        ]
+      },
+      "KafkaServer": {
+        "type": "object",
+        "title": "KafkaServer",
+        "description": "Kafka Server",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The bootstrap server of the kafka cluster."
+          },
+          "topic": {
+            "type": "string",
+            "description": "The topic name."
+          },
+          "format": {
+            "type": "string",
+            "description": "The format of the messages.",
+            "examples": ["json", "avro", "protobuf", "xml"],
+            "default": "json"
+          }
+        },
+        "required": [
+          "host",
+          "topic"
+        ]
+      },
+      "KinesisServer": {
+        "type": "object",
+        "title": "KinesisDataStreamsServer",
+        "description": "Kinesis Data Streams Server",
+        "properties": {
+          "stream": {
+            "type": "string",
+            "description": "The name of the Kinesis data stream."
+          },
+          "region": {
+            "type": "string",
+            "description": "AWS region.",
+            "examples": [
+              "eu-west-1"
+            ]
+          },
+          "format": {
+            "type": "string",
+            "description": "The format of the record",
+            "examples": [
+              "json",
+              "avro",
+              "protobuf"
+            ]
+          }
+        },
+        "required": [
+          "stream"
+        ]
+      },
+      "LocalServer": {
+        "type": "object",
+        "title": "LocalServer",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The relative or absolute path to the data file(s).",
+            "examples": [
+              "./folder/data.parquet",
+              "./folder/*.parquet"
+            ]
+          },
+          "format": {
+            "type": "string",
+            "description": "The format of the file(s)",
+            "examples": [
+              "json",
+              "parquet",
+              "delta",
+              "csv"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "format"
+        ]
+      },
+      "MSSqlServer": {
+        "type": "object",
+        "title": "MSSqlServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host of the MS Sql server."
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port of the MS Sql server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema."
+          },
+          "driver": {
+            "type": "string",
+            "description": "Version of ODBC driver to use."
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "database",
+          "schema"
+        ]
+      },
+      "MySqlServer": {
+        "type": "object",
+        "title": "MySqlServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host of the MySql server."
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port of the MySql server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "database"
+        ]
+      },
+      "OracleServer": {
+        "type": "object",
+        "title": "OracleServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host to the oracle server",
+            "examples": [
+              "localhost"
+            ]
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port to the oracle server.",
+            "examples": [
+              1523
+            ]
+          },
+          "serviceName": {
+            "type": "string",
+            "description": "The name of the service.",
+            "examples": [
+              "service"
+            ]
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "serviceName"
+        ]
+      },
+      "PostgresServer": {
+        "type": "object",
+        "title": "PostgresServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host to the Postgres server"
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port to the Postgres server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema in the database."
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "database",
+          "schema"
+        ]
+      },
+      "PrestoServer": {
+        "type": "object",
+        "title": "PrestoServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host to the Presto server",
+            "examples": [
+              "localhost:8080"
+            ]
+          },
+          "catalog": {
+            "type": "string",
+            "description": "The name of the catalog.",
+            "examples": [
+              "postgres"
+            ]
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema.",
+            "examples": [
+              "public"
+            ]
+          }
+        },
+        "required": [
+          "host"
+        ]
+      },
+      "PubSubServer": {
+        "type": "object",
+        "title": "PubSubServer",
+        "properties": {
+          "project": {
+            "type": "string",
+            "description": "The GCP project name."
+          },
+          "topic": {
+            "type": "string",
+            "description": "The topic name."
+          }
+        },
+        "required": [
+          "project",
+          "topic"
+        ]
+      },
+      "RedshiftServer": {
+        "type": "object",
+        "title": "RedshiftServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "An optional string describing the server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema."
+          },
+          "region": {
+            "type": "string",
+            "description": "AWS region of Redshift server.",
+            "examples": ["us-east-1"]
+          },
+          "account": {
+            "type": "string",
+            "description": "The account used by the server."
+          }
+        },
+        "required": [
+          "host",
+          "database",
+          "schema"
+        ]
+      },
+      "S3Server": {
+        "type": "object",
+        "title": "S3Server",
+        "properties": {
+          "location": {
+            "type": "string",
+            "format": "uri",
+            "description": "S3 URL, starting with `s3://`",
+            "examples": [
+              "s3://datacontract-example-orders-latest/data/{model}/*.json"
+            ]
+          },
+          "endpointUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "The server endpoint for S3-compatible servers.",
+            "examples": ["https://minio.example.com"]
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "parquet",
+              "delta",
+              "json",
+              "csv"
+            ],
+            "description": "File format."
+          },
+          "delimiter": {
+            "type": "string",
+            "enum": [
+              "new_line",
+              "array"
+            ],
+            "description": "Only for format = json. How multiple json documents are delimited within one file"
+          }
+        },
+        "required": [
+          "location"
+        ]
+      },
+      "SftpServer": {
+        "type": "object",
+        "title": "SftpServer",
+        "properties": {
+          "location": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^sftp://.*",
+            "description": "SFTP URL, starting with `sftp://`",
+            "examples": [
+              "sftp://123.123.12.123/{model}/*.json"
+            ]
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "parquet",
+              "delta",
+              "json",
+              "csv"
+            ],
+            "description": "File format."
+          },
+          "delimiter": {
+            "type": "string",
+            "enum": [
+              "new_line",
+              "array"
+            ],
+            "description": "Only for format = json. How multiple json documents are delimited within one file"
+          }
+        },
+        "required": [
+          "location"
+        ]
+      },
+      "SnowflakeServer": {
+        "type": "object",
+        "title": "SnowflakeServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host to the Snowflake server"
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port to the Snowflake server."
+          },
+          "account": {
+            "type": "string",
+            "description": "The Snowflake account used by the server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema."
+          },
+          "warehouse": {
+            "type": "string",
+            "description": "The name of the cluster of resources that is a Snowflake virtual warehouse."
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "account",
+          "database",
+          "warehouse",
+          "schema"
+        ]
+      },
+      "SqlserverServer": {
+        "type": "object",
+        "title": "SqlserverServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host to the database server",
+            "examples": [
+              "localhost"
+            ]
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port to the database server.",
+            "default": 1433,
+            "examples": [
+              1433
+            ]
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database.",
+            "examples": [
+              "database"
+            ]
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema in the database.",
+            "examples": [
+              "dbo"
+            ]
+          }
+        },
+        "required": [
+          "host",
+          "database",
+          "schema"
+        ]
+      },
+      "SynapseServer": {
+        "type": "object",
+        "title": "SynapseServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host of the Synapse server."
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port of the Synapse server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "database"
+        ]
+      },
+      "TrinoServer": {
+        "type": "object",
+        "title": "TrinoServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The Trino host URL.",
+            "examples": [
+              "localhost"
+            ]
+          },
+          "port": {
+            "type": "integer",
+            "description": "The Trino port."
+          },
+          "catalog": {
+            "type": "string",
+            "description": "The name of the catalog.",
+            "examples": [
+              "hive"
+            ]
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema in the database.",
+            "examples": [
+              "my_schema"
+            ]
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "catalog",
+          "schema"
+        ]
+      },
+      "VerticaServer": {
+        "type": "object",
+        "title": "VerticaServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host of the Vertica server."
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port of the Vertica server."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          },
+          "schema": {
+            "type": "string",
+            "description": "The name of the schema."
+          }
+        },
+        "required": [
+          "host",
+          "port",
+          "database",
+          "schema"
+        ]
+      }
+    },
+    "SchemaElement": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the element."
+        },
+        "physicalType": {
+          "type": "string",
+          "description": "The physical element data type in the data source.",
+          "examples": ["table", "view", "topic", "file"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the element."
+        },
+        "businessName": {
+          "type": "string",
+          "description": "The business name of the element."
         },
         "authoritativeDefinitions": {
           "$ref": "#/$defs/AuthoritativeDefinitions"
         },
-        "dataGranularity": {
+        "tags": {
+          "$ref": "#/$defs/Tags"
+        }
+      }
+    },
+    "SchemaObject": {
+      "type": "object",
+      "properties": {
+        "logicalType": {
           "type": "string",
-          "description": "Granular level of the data in the table. Example would be `pmt_txn_id`.",
-          "examples": ["pmt_txn_id"]
+          "description": "The logical element data type.",
+          "enum": ["object"]
         },
-        "columns": {
+        "physicalName": {
+          "type": "string",
+          "description": "Physical name.",
+          "examples": ["table_1_2_0"]
+        },
+        "dataGranularityDescription": {
+          "type": "string",
+          "description": "Granular level of the data in the object.",
+          "examples": ["Aggregation by country"]
+        },
+        "properties": {
           "type": "array",
-          "description": "Array. A list of columns in the table.",
+          "description": "A list of properties for the object.",
           "items": {
-            "$ref": "#/$defs/Column"
+            "$ref": "#/$defs/SchemaProperty"
           }
         },
         "quality": {
-          "type": "array",
-          "description": "Data quality rules with all the relevant information for rule setup and execution.",
-          "items": {
-            "$ref": "#/$defs/DataQuality"
-          }
+          "$ref": "#/$defs/DataQualityChecks"
         }
       },
-      "required": ["table"]
+      "allOf": [
+        {
+          "$ref": "#/$defs/SchemaElement"
+        }
+      ],
+      "required": ["name"],
+      "unevaluatedProperties": false
     },
-    "Column": {
+    "SchemaBaseProperty": {
       "type": "object",
       "properties": {
-        "column": {
-          "type": "string",
-          "description": "The name of the column."
-        },
-        "isPrimaryKey": {
+        "primaryKey": {
           "type": "boolean",
-          "description": "Boolean value specifying whether the column is primary or not. Default is false."
+          "description": "Boolean value specifying whether the element is primary or not. Default is false."
         },
         "primaryKeyPosition": {
           "type": "integer",
           "default": -1,
-          "description": "If column is a primary key, the position of the primary key column. Starts from 1. Example of `account_id, name` being primary key columns, `account_id` has primaryKeyPosition 1 and `name` primaryKeyPosition 2. Default to -1."
-        },
-        "businessName": {
-          "type": "string",
-          "description": "The business name of the column."
+          "description": "If element is a primary key, the position of the primary key element. Starts from 1. Example of `account_id, name` being primary key columns, `account_id` has primaryKeyPosition 1 and `name` primaryKeyPosition 2. Default to -1."
         },
         "logicalType": {
           "type": "string",
-          "description": "The logical column data type.",
+          "description": "The logical element data type.",
           "enum": ["string", "date", "number", "integer", "object", "array", "boolean"]
         },
         "logicalTypeOptions": {
@@ -248,90 +1438,72 @@
         },
         "physicalType": {
           "type": "string",
-          "description": "The physical column data type in the data source. For example, VARCHAR(2), DOUBLE, INT."
+          "description": "The physical element data type in the data source. For example, VARCHAR(2), DOUBLE, INT."
         },
-        "description": {
-          "type": "string",
-          "description": "Description of the column."
-        },
-        "isNullable": {
+        "required": {
           "type": "boolean",
           "default": false,
-          "description": "Indicates if the column may contain Null values; possible values are true and false. Default is false."
+          "description": "Indicates if the element may contain Null values; possible values are true and false. Default is false."
         },
-        "isUnique": {
+        "unique": {
           "type": "boolean",
           "default": false,
-          "description": "Indicates if the column contains unique values; possible values are true and false. Default is false."
+          "description": "Indicates if the element contains unique values; possible values are true and false. Default is false."
         },
-        "partitionStatus": {
+        "partitioned": {
           "type": "boolean",
           "default": false,
-          "description": "Indicates if the column is partitioned; possible values are true and false."
+          "description": "Indicates if the element is partitioned; possible values are true and false."
         },
         "partitionKeyPosition": {
           "type": "integer",
           "default": -1,
-          "description": "If column is used for partitioning, the position of the partition column. Starts from 1. Example of `country, year` being partition columns, `country` has partitionKeyPosition 1 and `year` partitionKeyPosition 2. Default to -1."
-        },
-        "clusterStatus": {
-          "type": "boolean",
-          "default": false,
-          "description": "Indicates of the column is clustered; possible values are true and false."
-        },
-        "clusterKeyPosition": {
-          "type": "integer",
-          "default": -1,
-          "description": "If column is used for clustering, the position of the cluster column. Starts from 1. Example of `year, date` being cluster columns, `year` has clusterKeyPosition 1 and `date` clusterKeyPosition 2. Default to -1."
+          "description": "If element is used for partitioning, the position of the partition element. Starts from 1. Example of `country, year` being partition columns, `country` has partitionKeyPosition 1 and `year` partitionKeyPosition 2. Default to -1."
         },
         "classification": {
           "type": "string",
-          "description": "Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the column; expected values are 1, 2, 3, 4, or 5.",
+          "description": "Can be anything, like confidential, restricted, and public to more advanced categorization. Some companies like PayPal, use data classification indicating the class of data in the element; expected values are 1, 2, 3, 4, or 5.",
           "examples": ["confidential", "restricted", "public"]
         },
-        "authoritativeDefinitions": {
-          "$ref": "#/$defs/AuthoritativeDefinitions"
-        },
-        "encryptedColumnName": {
+        "encryptedName": {
           "type": "string",
-          "description": "The column name within the table that contains the encrypted column value. For example, unencrypted column `email_address` might have an encryptedColumnName of `email_address_encrypt`."
+          "description": "The element name within the dataset that contains the encrypted element value. For example, unencrypted element `email_address` might have an encryptedName of `email_address_encrypt`."
         },
-        "transformSourceTables": {
+        "transformSourceObjects": {
           "type": "array",
-          "description": "List of sources used in column transformation.",
+          "description": "List of objects in the data source used in the transformation.",
           "items": {
             "type": "string"
           }
         },
         "transformLogic": {
           "type": "string",
-          "description": "Logic used in the column transformation."
+          "description": "Logic used in the element transformation."
         },
         "transformDescription": {
           "type": "string",
           "description": "Describes the transform logic in very simple terms."
         },
-        "sampleValues": {
+        "examples": {
           "type": "array",
-          "description": "List of sample column values.",
+          "description": "List of sample element values.",
           "items": {
-            "type": "string"
+            "$ref": "#/$defs/AnyType"
           }
         },
-        "criticalDataElementStatus": {
+        "criticalDataElement": {
           "type": "boolean",
           "default": false,
           "description": "True or false indicator; If element is considered a critical data element (CDE) then true else false."
         },
-        "tags": {
-          "type": "array",
-          "description": "A list of tags that may be assigned to the dataset, table or column; the tags keyword may appear at any level.",
-          "items": {
-            "type": "string"
-          }
+        "quality": {
+          "$ref": "#/$defs/DataQualityChecks"
         }
       },
       "allOf": [
+        {
+          "$ref": "#/$defs/SchemaElement"
+        },
         {
           "if": {
             "properties": {
@@ -343,6 +1515,7 @@
           "then": {
             "properties": {
               "logicalTypeOptions": {
+                "type": "object",
                 "properties": {
                   "minLength": {
                     "type": "integer",
@@ -356,7 +1529,6 @@
                   },
                   "pattern": {
                     "type": "string",
-                    "format": "regex",
                     "description": "Regular expression pattern to define valid value. Follows regular expression syntax from ECMA-262 (https://262.ecma-international.org/5.1/#sec-15.10.1)."
                   },
                   "format": {
@@ -369,7 +1541,8 @@
               }
             }
           }
-        }, {
+        },
+        {
           "if": {
             "properties": {
               "logicalType": {
@@ -380,6 +1553,7 @@
           "then": {
             "properties": {
               "logicalTypeOptions": {
+                "type": "object",
                 "properties": {
                   "format": {
                     "type": "string",
@@ -425,6 +1599,7 @@
           "then": {
             "properties": {
               "logicalTypeOptions": {
+                "type": "object",
                 "properties": {
                   "multipleOf": {
                     "type": "number",
@@ -476,6 +1651,7 @@
           "then": {
             "properties": {
               "logicalTypeOptions": {
+                "type": "object",
                 "properties": {
                   "multipleOf": {
                     "type": "number",
@@ -523,6 +1699,7 @@
           "then": {
             "properties": {
               "logicalTypeOptions": {
+                "type": "object",
                 "properties": {
                   "maxProperties": {
                     "type": "integer",
@@ -561,6 +1738,7 @@
           "then": {
             "properties": {
               "logicalTypeOptions": {
+                "type": "object",
                 "properties": {
                   "maxItems": {
                     "type": "integer",
@@ -580,63 +1758,94 @@
                   }
                 },
                 "additionalProperties": false
+              },
+              "items": {
+                "$ref": "#/$defs/SchemaItemProperty",
+                "description": "List of items in an array (only applicable when `logicalType: array`)."
               }
             }
           }
         }
-      ],
-      "required": ["column", "logicalType", "physicalType"]
+      ]
+    },
+    "SchemaProperty": {
+      "type": "object",
+      "$ref": "#/$defs/SchemaBaseProperty",
+      "required": ["name"],
+      "unevaluatedProperties": false
+    },
+    "SchemaItemProperty": {
+      "type": "object",
+      "$ref": "#/$defs/SchemaBaseProperty",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "description": "A list of properties for the object.",
+          "items": {
+            "$ref": "#/$defs/SchemaProperty"
+          }
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags that may be assigned to the elements (object or property); the tags keyword may appear at any level.",
+      "items": {
+        "type": "string"
+      }
     },
     "DataQuality": {
       "type": "object",
       "properties": {
-        "code": {
+        "type": {
           "type": "string",
-          "description": "The Rosewall data quality code(s) indicating which quality checks need to be performed at the dataset, table or column level; The quality keyword may appear at any level; Some quality checks require parameters such so the check can be completed (eg, list of fields used to identify a distinct row) therefore some quality checks may be followed by a single value or an array; See appendix for link to quality checks."
+          "description": "The type of quality check.",
+          "enum": ["text", "predefined", "sql", "custom"],
+          "default": "predefined"
         },
-        "templateName": {
+        "name": {
           "type": "string",
-          "description": "The template name which indicates what is the equivalent template from the tool."
+          "description": "Name of the data quality check."
         },
         "description": {
           "type": "string",
           "description": "Describe the quality check to be completed."
         },
-        "toolName": {
-          "type": "string",
-          "description": "Name of the tool used to complete the quality check; Most will be Elevate initially."
-        },
-        "toolRuleName": {
-          "type": "string",
-          "description": "Name of the quality tool's rule created to complete the quality check."
-        },
         "dimension": {
           "type": "string",
-          "description": "The key performance indicator (KPI) or dimension for data quality."
-        },
-        "columns": {
-          "type": "string",
-          "description": "List of columns to be used in the quality check."
-        },
-        "column": {
-          "type": "string",
-          "description": "To be used in lieu of quality.columns when only a single column is required for the quality check."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of quality check."
+          "description": "The key performance indicator (KPI) or dimension for data quality.",
+          "enum": ["accuracy", "completeness", "conformity", "consistency", "coverage", "timeliness", "uniqueness"]
         },
         "severity": {
           "type": "string",
-          "description": "The severance of the quality rule."
+          "description": "The severance of the quality rule.",
+          "examples": ["info", "warning", "error"]
         },
         "businessImpact": {
           "type": "string",
-          "description": "Consequences of the rule failure."
+          "description": "Consequences of the rule failure.",
+          "examples": ["operational", "regulatory"]
         },
-        "scheduleCronExpression": {
+        "method": {
           "type": "string",
-          "description": "Rule execution schedule details."
+          "examples": ["reconciliation"]
+        },
+        "schedule": {
+          "type": "string",
+          "description": "Rule execution schedule details.",
+          "examples": ["0 20 * * *"]
+        },
+        "scheduler": {
+          "type": "string",
+          "description": "The name or type of scheduler used to start the data quality check.",
+          "examples": ["cron"]
+        },
+        "authoritativeDefinitions": {
+          "$ref": "#/$defs/AuthoritativeDefinitions"
+        },
+        "tags": {
+          "$ref": "#/$defs/Tags"
         },
         "customProperties": {
           "type": "array",
@@ -646,7 +1855,95 @@
           }
         }
       },
-      "required": ["templateName", "toolName"]
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "predefined"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/DataQualityPredefined"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "sql"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/DataQualitySql"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "custom"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/DataQualityCustom"
+          }
+        }
+      ]
+    },
+    "DataQualityChecks": {
+      "type": "array",
+      "description": "Data quality rules with all the relevant information for rule setup and execution.",
+      "items": {
+        "$ref": "#/$defs/DataQuality"
+      }
+    },
+    "DataQualityPredefined": {
+      "type": "object",
+      "properties": {
+        "rule": {
+          "type": "string",
+          "description": "Define a data quality check based on the predefined rules as per ODCS."
+        }
+      },
+      "required": ["rule"]
+    },
+    "DataQualitySql": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Query string that adheres to the dialect of the provided server.",
+          "examples": ["SELECT COUNT(*) FROM ${table} WHERE ${column} IS NOT NULL"]
+        }
+      },
+      "required": ["query"]
+    },
+    "DataQualityCustom": {
+      "type": "object",
+      "properties": {
+        "engine": {
+          "type": "string",
+          "description": "Name of the engine which executes the data quality checks.",
+          "examples": ["soda", "great-expectations", "monte-carlo", "dbt"]
+        },
+        "implementation": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "required": ["engine", "implementation"]
     },
     "AuthoritativeDefinitions": {
       "type": "array",
@@ -667,6 +1964,45 @@
         "required": ["url", "type"]
       }
     },
+    "Support": {
+      "type": "array",
+      "description": "Top level for support channels.",
+      "items": {
+        "$ref": "#/$defs/SupportItem"
+      }
+    },
+    "SupportItem": {
+      "type": "object",
+      "properties": {
+        "channel": {
+          "type": "string",
+          "description": "Channel name or identifier."
+        },
+        "url": {
+          "type": "string",
+          "description": "Access URL using normal [URL scheme](https://en.wikipedia.org/wiki/URL#Syntax) (https, mailto, etc.)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the channel, free text."
+        },
+        "tool": {
+          "type": "string",
+          "description": "Name of the tool, value can be `email`, `slack`, `teams`, `discord`, `ticket`, or `other`.",
+          "examples": ["email", "slack", "teams", "discord", "ticket", "other"]
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope can be: `interactive`, `announcements`, `issues`.",
+          "examples": ["interactive", "announcements", "issues"]
+        },
+        "invitationUrl": {
+          "type": "string",
+          "description": "Some tools uses invitation URL for requesting or subscribing. Follows the [URL scheme](https://en.wikipedia.org/wiki/URL#Syntax)."
+        }
+      },
+      "required": ["channel", "url"]
+    },
     "Pricing": {
       "type": "object",
       "properties": {
@@ -684,28 +2020,30 @@
         }
       }
     },
-    "Stakeholder": {
+    "Team": {
       "type": "object",
       "properties": {
         "username": {
           "type": "string",
-          "description": "The stakeholder's username or email."
+          "description": "The team's username or email."
         },
         "role": {
           "type": "string",
-          "description": "The stakeholder's job role; Examples might be owner, data steward. There is no limit on the role."
+          "description": "The team's job role; Examples might be owner, data steward. There is no limit on the role."
         },
         "dateIn": {
           "type": "string",
-          "description": "The date when the user became a stakeholder."
+          "format": "date",
+          "description": "The date when the user became a team."
         },
         "dateOut": {
           "type": "string",
-          "description": "The date when the user ceased to be a stakeholder"
+          "format": "date",
+          "description": "The date when the user ceased to be a team"
         },
         "replacedByUsername": {
           "type": "string",
-          "description": "The username of the user who replaced the stakeholder"
+          "description": "The username of the user who replaced the team"
         }
       }
     },
@@ -714,22 +2052,26 @@
       "properties": {
         "role": {
           "type": "string",
-          "description": "Name of the IAM role that provides access to the dataset; the value will generally come directly from the \"BQ dataset to IAM roles mapping\" document."
+          "description": "Name of the IAM role that provides access to the dataset."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the IAM role and its permissions."
         },
         "access": {
           "type": "string",
-          "description": "The type of access provided by the IAM role; the value will generally come directly from the \"BQ dataset to IAM roles mapping\" document."
+          "description": "The type of access provided by the IAM role."
         },
         "firstLevelApprovers": {
           "type": "string",
-          "description": "The name(s) of the first level approver(s) of the role; the value will generally come directly from the \"BQ dataset to IAM roles mapping\" document."
+          "description": "The name(s) of the first-level approver(s) of the role."
         },
         "secondLevelApprovers": {
           "type": "string",
-          "description": "The name(s) of the second level approver(s) of the role; the value will generally come directly from the \"BQ dataset to IAM roles mapping\" document."
+          "description": "The name(s) of the second-level approver(s) of the role."
         }
       },
-      "required": ["role", "access"]
+      "required": ["role"]
     },
     "ServiceLevelAgreementProperty": {
       "type": "object",
@@ -739,34 +2081,36 @@
           "description": "Specific property in SLA, check the periodic table. May requires units (more details to come)."
         },
         "value": {
-          "oneOf": [
+          "anyOf": [
             {
               "type": "string"
             },
             {
               "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
             }
           ],
           "description": "Agreement value. The label will change based on the property itself."
         },
         "valueExt": {
-          "oneOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            }
-          ],
+          "$ref": "#/$defs/AnyNonCollectionType",
           "description": "Extended agreement value. The label will change based on the property itself."
         },
         "unit": {
           "type": "string",
           "description": "**d**, day, days for days; **y**, yr, years for years, etc. Units use the ISO standard."
         },
-        "column": {
+        "element": {
           "type": "string",
-          "description": "Column(s) to check on. Multiple columns should be extremely rare and, if so, separated by commas."
+          "description": "Element(s) to check on. Multiple elements should be extremely rare and, if so, separated by commas."
         },
         "driver": {
           "type": "string",
@@ -776,6 +2120,13 @@
       },
       "required": ["property", "value"]
     },
+    "CustomProperties": {
+      "type": "array",
+      "description": "A list of key/value pairs for custom properties.",
+      "items": {
+        "$ref": "#/$defs/CustomProperty"
+      }
+    },
     "CustomProperty": {
       "type": "object",
       "properties": {
@@ -784,10 +2135,54 @@
           "description": "The name of the key. Names should be in camel case–the same as if they were permanent properties in the contract."
         },
         "value": {
-          "type": "object",
+          "$ref": "#/$defs/AnyType",
           "description": "The value of the key."
         }
       }
+    },
+    "AnyType": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "AnyNonCollectionType": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
     }
   }
 }
