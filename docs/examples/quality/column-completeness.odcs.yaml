@@ -20,9 +20,8 @@ schema:
       logicalType: number
       physicalType: int
       quality:
-      - templateName: NullCheck
-        toolName: ClimateQuantumDataQualityPackage
-        description: This column should not contain null values
+      - description: This column should not contain null values
         dimension: completeness
         severity: error
+        rule: nullCheck
         businessImpact: operational

@@ -1798,53 +1798,54 @@
     "DataQuality": {
       "type": "object",
       "properties": {
-        "code": {
+        "type": {
           "type": "string",
-          "description": "The Rosewall data quality code(s) indicating which quality checks need to be performed at the dataset, table or column level; The quality keyword may appear at any level; Some quality checks require parameters such so the check can be completed (eg, list of fields used to identify a distinct row) therefore some quality checks may be followed by a single value or an array; See appendix for link to quality checks."
+          "description": "The type of quality check.",
+          "enum": ["text", "predefined", "sql", "custom"],
+          "default": "predefined"
         },
-        "templateName": {
+        "name": {
           "type": "string",
-          "description": "The template name which indicates what is the equivalent template from the tool."
+          "description": "Name of the data quality check."
         },
         "description": {
           "type": "string",
           "description": "Describe the quality check to be completed."
         },
-        "toolName": {
-          "type": "string",
-          "description": "Name of the tool used to complete the quality check; Most will be Elevate initially."
-        },
-        "toolRuleName": {
-          "type": "string",
-          "description": "Name of the quality tool's rule created to complete the quality check."
-        },
         "dimension": {
           "type": "string",
-          "description": "The key performance indicator (KPI) or dimension for data quality."
-        },
-        "columns": {
-          "type": "string",
-          "description": "List of columns to be used in the quality check."
-        },
-        "column": {
-          "type": "string",
-          "description": "To be used in lieu of quality.columns when only a single column is required for the quality check."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of quality check."
+          "description": "The key performance indicator (KPI) or dimension for data quality.",
+          "enum": ["accuracy", "completeness", "conformity", "consistency", "coverage", "timeliness", "uniqueness"]
         },
         "severity": {
           "type": "string",
-          "description": "The severance of the quality rule."
+          "description": "The severance of the quality rule.",
+          "examples": ["info", "warning", "error"]
         },
         "businessImpact": {
           "type": "string",
-          "description": "Consequences of the rule failure."
+          "description": "Consequences of the rule failure.",
+          "examples": ["operational", "regulatory"]
         },
-        "scheduleCronExpression": {
+        "method": {
           "type": "string",
-          "description": "Rule execution schedule details."
+          "examples": ["reconciliation"]
+        },
+        "schedule": {
+          "type": "string",
+          "description": "Rule execution schedule details.",
+          "examples": ["0 20 * * *"]
+        },
+        "scheduler": {
+          "type": "string",
+          "description": "The name or type of scheduler used to start the data quality check.",
+          "examples": ["cron"]
+        },
+        "authoritativeDefinitions": {
+          "$ref": "#/$defs/AuthoritativeDefinitions"
+        },
+        "tags": {
+          "$ref": "#/$defs/Tags"
         },
         "customProperties": {
           "type": "array",
@@ -1854,7 +1855,46 @@
           }
         }
       },
-      "required": ["templateName", "toolName"]
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "predefined"
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/$defs/DataQualityPredefined"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "sql"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/DataQualitySql"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "custom"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/DataQualityCustom"
+          }
+        }
+      ]
     },
     "DataQualityChecks": {
       "type": "array",
@@ -1862,6 +1902,48 @@
       "items": {
         "$ref": "#/$defs/DataQuality"
       }
+    },
+    "DataQualityPredefined": {
+      "type": "object",
+      "properties": {
+        "rule": {
+          "type": "string",
+          "description": "Define a data quality check based on the predefined rules as per ODCS."
+        }
+      },
+      "required": ["rule"]
+    },
+    "DataQualitySql": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Query string that adheres to the dialect of the provided server.",
+          "examples": ["SELECT COUNT(*) FROM ${table} WHERE ${column} IS NOT NULL"]
+        }
+      },
+      "required": ["query"]
+    },
+    "DataQualityCustom": {
+      "type": "object",
+      "properties": {
+        "engine": {
+          "type": "string",
+          "description": "Name of the engine which executes the data quality checks.",
+          "examples": ["soda", "great-expectations", "monte-carlo", "dbt"]
+        },
+        "implementation": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "required": ["engine", "implementation"]
     },
     "AuthoritativeDefinitions": {
       "type": "array",
