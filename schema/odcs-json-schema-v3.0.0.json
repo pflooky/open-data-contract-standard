@@ -1723,6 +1723,13 @@
                   }
                 },
                 "additionalProperties": false
+              },
+              "properties": {
+                "type": "array",
+                "description": "A list of properties for the object.",
+                "items": {
+                  "$ref": "#/$defs/SchemaProperty"
+                }
               }
             }
           }
