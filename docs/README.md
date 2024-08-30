@@ -73,11 +73,11 @@ tags: null
 | status                  | Status           | Yes      | Current status of the data contract.                                                     |
 | tenant                  | Tenant           | No       | Indicates the property the data is primarily associated with. Value is case insensitive. |
 | domain                  | Domain           | No       | Name of the logical data domain.                                                         |
-| dataProduct             | Data Product     | No       | Name of the data product.                                                            |
-| description             | Description      | No       | Object containing the descriptions.                                                                                  |
-| description.purpose     | Purpose          | No       | What is the intended purpose for the provided data.                                      |
-| description.limitations | Limitations      | No       | Technical, compliance, and legal limitations for using the data.                         |
-| description.usage       | Usage            | No       | How to use the data.                                                                     |
+| dataProduct             | Data Product     | No       | Name of the data product.                                                                |
+| description             | Description      | No       | Object containing the descriptions.                                                      |
+| description.purpose     | Purpose          | No       | Intended purpose for the provided data.                                                  |
+| description.limitations | Limitations      | No       | Technical, compliance, and legal limitations for data use.                               |
+| description.usage       | Usage            | No       | Recommended usage of the data.                                                           |
 
 
 ## <a id="schema"/> Schema 
@@ -115,12 +115,9 @@ schema:
     dataGranularityDescription: Aggregation on columns txn_ref_dt, pmt_txn_id
     properties:
       - name: txn_ref_dt
-        primaryKey: false 
-        primaryKeyPosition: -1
         businessName: transaction reference date
         logicalType: date
         physicalType: date
-        required: false
         description: null
         partitioned: true
         partitionKeyPosition: 1
