@@ -512,7 +512,8 @@ The UX label is the label used in the UI and other user experiences. It is not l
 | team.dateIn             | Date In            | No       | The date when the user became a stakeholder.                                                      |
 | team.dateOut            | Date Out           | No       | The date when the user ceased to be a stakeholder                                                 |
 | team.name               | Full Name          | No       | Full name.                                                                                        |
-| team.email              | Email              | No       | Explicit email.                                                                                        |
+| team.email              | Email              | No       | Explicit email.                                                                                   |
+| team.comment            | Comment            | No       | Generic comment.                                                                                   |
 | team.replacedByUsername | Replaced By        | No       | The username of the user who replaced the stakeholder                                             |
 
 
