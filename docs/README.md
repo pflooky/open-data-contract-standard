@@ -424,7 +424,26 @@ quality:
 |quality                         |Quality                  | No     | Quality tag with all the relevant information for rule setup and execution.                  |
 |quality.name                    |Name                     | No     | A short name for the rule.                                                   |
 |quality.description             |Description              | No     | Describe the quality check to be completed.                                                   |
-|quality.dimension               |Dimension                | No     | The key performance indicator (KPI) or dimension for data quality.
+|quality.type                |  | Yes    |Valid values are `implicit` (default), `text`, `sql`, and `custom`. |
+|quality.rule                |  | No     | |
+|quality.<operator>                |  | No     | |
+|quality.unit                |  | No     | |
+|quality.validValues                |  | No     | |
+|quality.query                |  | No     | |
+|quality.engine                |  | No     | |
+|quality.implementation                |  | No     | |
+|quality.dimension               |Dimension                | No     | The key performance indicator (KPI) or dimension for data quality. Valid values are liste after the table.|
+|quality.method                  |Method                   | No     | |
+|quality.severity                |Severity                 | No     | The severity of the quality rule.               |
+|quality.businessImpact          |Business Impact          | No     | Consequences of the rule failure.                                                                                                                                  |
+|quality.customProperties        |Custom Properties        | No     | Additional properties required for rulee xecution.                                                                                                                                                            |
+|quality.tags                    |Tags                     | No     | |
+|quality.authoritativeDefinitions|Authoritative Definitions| No     | |
+|quality.scheduler               |Scheduler                | No     | |
+|quality.schedule                |Scheduler Configuration  | No     | |
+
+#### Valid values for dimension
+
   * `Accuracy` (synonym `Ac`),
   * `Completeness` (synonym `Cp`),
   * `Conformity` (synonym `Cf`),
@@ -432,15 +451,6 @@ quality:
   * `Coverage` (synonym `Cv`),
   * `Timeliness` (synonym `Tm`),
   * `Uniqueness` (synonym `Uq`).
-|
-|quality.method                  |Method                   | No     | |
-|quality.severity                |Severity                 | No     | The severity of the quality rule.               |
-|quality.businessImpact          |Business Impact          | No     | Consequences of the rule failure.                                                                                                                                                                                                                             |
-|quality.customProperties        |Custom Properties        | No     | Additional properties required for rulee xecution.                                                                                                                                                            |
-|quality.tags                    |Tags                     | No     | |
-|quality.authoritativeDefinitions|Authoritative Definitions| No     | |
-|quality.scheduler               |Scheduler                | No     | |
-|quality.schedule                |Scheduler Configuration  | No     | |
 
 
 ## <a id="support"/> Support & communication channels
