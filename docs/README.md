@@ -503,7 +503,7 @@ The UX label is the label used in the UI and other user experiences. It is not l
 
 | Key                     | UX label           | Required | Description                                                                                       |
 |-------------------------|--------------------|----------|---------------------------------------------------------------------------------------------------|
-| team                    | Stakeholders       | No       | Array.                                                                                            |
+| team                    | Team               | No       | Array.                                                                                            |
 | team.username           | Username           | No       | The stakeholder's username or email.                                                              |
 | team.role               | Role               | No       | The stakeholder's job role; Examples might be owner, data steward. There is no limit on the role. |
 | team.dateIn             | Date In            | No       | The date when the user became a stakeholder.                                                      |
