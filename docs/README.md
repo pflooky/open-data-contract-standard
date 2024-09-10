@@ -297,111 +297,150 @@ Updated in ODCS (Open Data Contract Standard) v2.2.1.
 ## Data quality 
 This section describes data quality rules & parameters. They are tightly linked to the schema described in the previous section.
 
-### Example of data quality at the object level
+Data quality rules support different levels/stages of data quality attributes:
+  - __Text__: A human-readable text that describes the quality of the data.
+  - __Implicit__ rules: A maintained library of commonly-used predefined quality attributes such as `rowCount`, `unique`, `freshness`, and more.
+  - __SQL__: An individual SQL query that returns a value that can be compared. Can be extended to `Python` or other.
+  - __Custom__: Quality attributes that are vendor-specific, such as Soda, Great Expectations, dbt tests, or Montecarlo monitors.
 
-Note:
-* This example relies on a data quality tool called Elevate. It should be easily transformed to any other tool. If you have questions, please raise an [issue](https://github.com/AIDAUserGroup/open-data-contract-standard/issues).
-* The Open Data Contract Standard has a provision for supporting multiple data quality tools.
+### Text
+A human-readable text that describes the quality of the data. Later in the development process, these might be translated into an executable check (such as `sql`), an implicit rule, or checked through an AI engine.
 
-```YAML
-schema:
-  - name: tab1
-    logicalType: object
-# ...
-    quality:
-      - code: countCheck # Required, name of the rule
-        templateName: CountCheck # NEW in v2.1.0 Required
-        description: Ensure row count is within expected volume range       # Optional
-        toolName: Elevate # Required
-        toolRuleName: DQ.rw.tab1.CountCheck # NEW in v2.1.0 Optional (Available only to the users who can change in source code edition)
-        dimension: completeness                                             # Optional
-        type: reconciliation                                                # Optional NEW in v2.1.0 default value for column level check - dataQuality and for table level reconciliation
-        severity: error                                                     # Optional NEW in v2.1.0, default value is error
-        businessImpact: operational                                         # Optional NEW in v2.1.0
-        scheduleCronExpression: 0 20 * * *                                  # Optional NEW in v2.1.0 default schedule - every day 10 a.m. UTC
-      - code: distinctCheck    
-        description: enforce distinct values
-        toolName: Elevate
-        templateName: DistinctCheck
-        dimension: completeness
-        toolRuleName: DQ.rw.tab1.DistinctCheck
-        columns:
-          - txn_ref_dt
-          - rcvr_id
-        column: null
-        type: reconciliation
-        severity: error
-        businessImpact: operational
-        scheduleCronExpression: 0 20 * * *
-        customProperties:                     
-          - property: FIELD_NAME
-            value: rcvr_id
-          - property: FILTER_CONDITIONS
-            value: 1>0
-      - code: piiCheck
-        description: null
-        toolName: Elevate
-        templateName: PIICheck
-        toolRuleName: DQ.rw.tab1_2_0_0.piiCheck
-        type: dataQuality
-        severity: error
-        businessImpact: operational
-        scheduleCronExpression: 0 20 * * *
-        customProperties:                     
-          - property: FIELD_NAME
-            value:
-          - property: FILTER_CONDITIONS
-            value:
+```yaml
+quality:
+  - type: text
+    description: The email address was verified by the system.
 ```
 
-### Example of data quality at the element level
+### Implicit data quality rules
+ODCS will provide a set of predefined (or implicit) rules commonly used in data quality checks, designed to be compatible with all major data quality engines. This simplifies the work for data engineers by eliminating the need to manually write SQL queries.
 
-```YAML
-schema:
-  - name: tab1
-    logicalType: object
-      - name: rcvr_id
-        primaryKey: true # NEW in v2.1.0, Optional, default value is false, indicates whether the column is primary key in the table.
-        businessName: receiver id
-# ...
-        quality:
-          - code: nullCheck
-            templateName: NullCheck
-            description: column should not contain null values
-            toolName: Elevate
-            toolRuleName: DQ.rw.tab1_2_0_0.rcvr_cntry_code.NullCheck
-            dimension: completeness # dropdown 7 values
-            type: dataQuality
-            severity: error
-            businessImpact: operational
-            scheduleCronExpression: 0 20 * * *
-            customProperties:
-              - property: FIELD_NAME
-                value:
-              - property: COMPARE_TO
-                value:
-              - property: COMPARISON_TYPE
-                value: Greater than
+#### Property-level
+Those examples apply at the property level, such as column, field, etc.
+
+##### Duplicate count on rows
+No more than 10 duplicate names.
+
+```yaml
+quality:
+- type: implicit # optional and default value for data quality rules
+  rule: duplicateCount
+  mustBeLessThan: 10
+  name: Fewer than 10 duplicate names
+  unit: rows
 ```
+
+##### Duplicate count on %
+Duplicates should be less than 1%.
+
+```yaml
+quality:
+- rule: duplicateCount
+  mustBeLessThan: 1
+  unit: percent
+```
+
+##### Valid values
+Valid values from a static list.
+
+```yaml
+quality:
+- rule: validValues
+  validValues: ['pounds']
+```
+
+#### Object-level
+This example applies at the object level (like a table or a view).
+
+##### Row count
+The number of rows must be between 100 and 120.
+
+```yaml
+quality:
+  - rule: rowCount
+    mustBeBetween: [100, 120]
+    name: Verify row count range
+```
+
+### SQL
+A single SQL query that returns either a numeric or boolean value for comparison. The query must be written in the SQL dialect specific to the provided server.
+
+```yaml
+quality:
+  - type: sql 
+    query: |
+      SELECT COUNT(*) FROM ${table} WHERE ${column} IS NOT NULL
+    mustBeLessThan: 3600    
+```
+
+### Custom
+Custom rules allow for vendor-specific checks, including tools like Soda, Great Expectations, dbt-tests, Montecarlo, and others. Any format for properties is acceptable, whether it's written in YAML, JSON, XML, or even uuencoded binary. They are an intermediate step before the vendor accepts ODCS natively.
+
+#### Soda Example
+
+```yaml
+quality:
+- type: custom
+  engine: soda
+  implementation: |
+        type: duplicate_percent  # Block
+        columns:                 # passed as-is
+          - carrier              # to the tool
+          - shipment_numer       # (Soda in this situation)
+        must_be_less_than: 1.0   #
+```
+
+#### Great Expectation Example
+
+```yaml
+quality:
+- type: custom
+  engine: great-expectations
+  implementation: |
+    type: expect_table_row_count_to_be_between # Block
+    kwargs:                                    # passed as-is
+      minValue: 10000                          # to the tool
+      maxValue: 50000                          # (GX in this situation)
+```
+
+### Scheduling
+The data contract can contain scheduling information for executing the rules. You can use `schedule` and `scheduler` for those operation. In previous versions of ODCS, the only allowed scheduler was cron and its syntax was `scheduleCronExpression`. 
+
+```yaml
+quality:
+  - type: sql 
+    query: |
+      SELECT COUNT(*) FROM ${table} WHERE ${column} IS NOT NULL
+    mustBeLessThan: 3600    
+    scheduler: cron
+    schedule: 0 20 * * *
+```
+
 
 ### Definitions
 
-| Key                            | UX label            | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|--------------------------------|---------------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| quality                        | Quality             | No       | Quality tag with all the relevant information for rule setup and execution.                                                                                                                                                                                                                                                                                                                                                              |
-| quality.code                   | Quality Code        | No       | The Rosewall data quality code(s) indicating which quality checks need to be performed at the dataset, table, or column level. The quality keyword may appear at any level. Some quality checks require parameters, so the check can be completed (e.g., a list of fields used to identify a distinct row). Therefore, some quality checks may be followed by a single value or an array. See the appendix for a link to quality checks. |
-| quality.templateName           | Template Name       | Yes      | The template name that indicates what is the equivalent template from the tool.                                                                                                                                                                                                                                                                                                                                                          |
-| quality.description            | Description         | No       | Describe the quality check to be completed.                                                                                                                                                                                                                                                                                                                                                                                              |
-| quality.toolName               | Tool Name           | Yes      | Name of the tool used to complete the quality check; Most will be Elevate initially.                                                                                                                                                                                                                                                                                                                                                     |
-| quality.toolRuleName           | Tool Rule Name      | No       | Name of the quality tool's rule created to complete the quality check.                                                                                                                                                                                                                                                                                                                                                                   |
-| quality.dimension              | Dimension           | No       | The key performance indicator (KPI) or dimension for data quality.                                                                                                                                                                                                                                                                                                                                                                       |
-| quality.columns                | Columns             | No       | List of columns to be used in the quality check.                                                                                                                                                                                                                                                                                                                                                                                         |
-| quality.column                 | Column              | No       | To be used in lieu of quality.columns when only a single column is required for the quality check.                                                                                                                                                                                                                                                                                                                                       |
-| quality.type                   | Type                | No       | The type of quality check.                                                                                                                                                                                                                                                                                                                                                                                                               |
-| quality.severity               | Severity            | No       | The severity of the quality rule.                                                                                                                                                                                                                                                                                                                                                                                                        |
-| quality.businessImpact         | Business Impact     | No       | Consequences of the rule failure.                                                                                                                                                                                                                                                                                                                                                                                                        |
-| quality.scheduleCronExpression | Schedule Expression | No       | Rule execution schedule details.                                                                                                                                                                                                                                                                                                                                                                                                         |
-| quality.customProperties       | Custom Properties   | No       | Additional properties required for rule execution.                                                                                                                                                                                                                                                                                                                                                                                       |
+|Key                             |UX label                 |Required| Description                                     |
+|--------------------------------|-------------------------|--------|-------------------------------------------------|
+|quality                         |Quality                  | No     | Quality tag with all the relevant information for rule setup and execution.                  |
+|quality.name                    |Name                     | No     | A short name for the rule.                                                   |
+|quality.description             |Description              | No     | Describe the quality check to be completed.                                                   |
+|quality.dimension               |Dimension                | No     | The key performance indicator (KPI) or dimension for data quality.
+  * `Accuracy` (synonym `Ac`),
+  * `Completeness` (synonym `Cp`),
+  * `Conformity` (synonym `Cf`),
+  * `Consistency` (synonym `Cs`),
+  * `Coverage` (synonym `Cv`),
+  * `Timeliness` (synonym `Tm`),
+  * `Uniqueness` (synonym `Uq`).
+|
+|quality.method                  |Method                   | No     | |
+|quality.severity                |Severity                 | No     | The severity of the quality rule.               |
+|quality.businessImpact          |Business Impact          | No     | Consequences of the rule failure.                                                                                                                                                                                                                             |
+|quality.customProperties        |Custom Properties        | No     | Additional properties required for rulee xecution.                                                                                                                                                            |
+|quality.tags                    |Tags                     | No     | |
+|quality.authoritativeDefinitions|Authoritative Definitions| No     | |
+|quality.scheduler               |Scheduler                | No     | |
+|quality.schedule                |Scheduler Configuration  | No     | |
 
 
 ## <a id="support"/> Support & communication channels
