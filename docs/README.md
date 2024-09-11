@@ -470,6 +470,28 @@ The operator specifies the condition to validate the rule.
 |mustBeBetween          |list of two numbers|	`⊂`         |`mustBeBetween: [0, 100]`   |
 |mustNotBeBetween       |list of two numbers|	`⊄`         |`mustNotBeBetween: [0, 100]`|
 
+`mustBeBetween` is the equivalent to `mustBeGreaterThan` and `mustBeLessThan`.
+
+```yaml
+quality:
+  - type: sql 
+    query: |
+      SELECT COUNT(*) FROM ${table} WHERE ${column} IS NOT NULL
+    mustBeBetween: [0, 100]    
+```
+
+is equivalent to:
+
+```yaml
+quality:
+  - type: sql 
+    query: |
+      SELECT COUNT(*) FROM ${table} WHERE ${column} IS NOT NULL
+    mustBeGreaterThan: 0
+    mustBeLessThan: 100    
+```
+
+
 #### Implicit Rules
 Bitol has the ambition of creating a standard set of implicit data quality rules. Join the working group around [RFC #0012](https://github.com/bitol-io/tsc/blob/main/rfcs/0012-implicit-dq-rules.md).
 
