@@ -459,16 +459,16 @@ Those data quality dimensions are used for classification and reporting in data 
 #### Valid Properties for Operator
 The operator specifies the condition to validate the rule.
 
-|Operator               |Expected Value     |Math Symbol  |Example                     |
-|-----------------------|-------------------|-------------|----------------------------|
-|mustBe	                |number             | `=`         |`mustBe: 5`                 |
-|mustNotBe              |number             | `<>`, `≠`   |`mustNotBe: 3.14`           |
-|mustBeGreaterThan      |number             | `>`         |`mustBeGreaterThan: 59`     |
-|mustBeGreaterOrEqualTo |number             | `>=`, `≥`   |`mustBeGreaterOrEqualTo: 60`|
-|mustBeLessThan         |number             | `<`         |`mustBeLessThan: 1000`      |
-|mustBeLessOrEqualTo    |number             | `<=`, `≤`   |`mustBeLessOrEqualTo: 999`  |
-|mustBeBetween          |list of two numbers|	`⊂`         |`mustBeBetween: [0, 100]`   |
-|mustNotBeBetween       |list of two numbers|	`⊄`         |`mustNotBeBetween: [0, 100]`|
+|Operator                 |Expected Value     |Math Symbol  |Example                     |
+|-------------------------|-------------------|-------------|----------------------------|
+|`mustBe`	                |number             | `=`         |`mustBe: 5`                 |
+|`mustNotBe`              |number             | `<>`, `≠`   |`mustNotBe: 3.14`           |
+|`mustBeGreaterThan`      |number             | `>`         |`mustBeGreaterThan: 59`     |
+|`mustBeGreaterOrEqualTo` |number             | `>=`, `≥`   |`mustBeGreaterOrEqualTo: 60`|
+|`mustBeLessThan`         |number             | `<`         |`mustBeLessThan: 1000`      |
+|`mustBeLessOrEqualTo`    |number             | `<=`, `≤`   |`mustBeLessOrEqualTo: 999`  |
+|`mustBeBetween`          |list of two numbers|	`⊂`         |`mustBeBetween: [0, 100]`   |
+|`mustNotBeBetween`       |list of two numbers|	`⊄`         |`mustNotBeBetween: [0, 100]`|
 
 `mustBeBetween` is the equivalent to `mustBeGreaterThan` and `mustBeLessThan`.
 
