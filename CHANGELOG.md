@@ -53,7 +53,7 @@ This document tracks the history and evolution of the **Open Data Contract Stand
   * Restrict `dataset.table.columns.column.logicalType` to be one of `string`, `date`, `number`, `integer`, `object`, `array`, `boolean`.
   * Add `dataset.table.columns.column.logicalTypeOptions`.
 * **Changes** to Data Quality:
-  * Significant changes have been applied to support more tools and use cases.
+  * Significant changes have been applied to support more tools and use cases. Please review the new section.
   * If needed, `templateName` is a custom property.
   * `toolName` is obsolete, replaced by `type=custom; engine: <engine name>`.
   * `scheduleCronExpression` is replaced by `schedule` and `scheduler`. `scheduleCronExpression: 0 20 * * *` becomes `schedule: 0 20 * * *` and `scheduler: cron`.
