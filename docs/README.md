@@ -419,30 +419,34 @@ quality:
 
 ### Definitions
 
-|Key                             |UX label                 |Required| Description                                     |
-|--------------------------------|-------------------------|--------|-------------------------------------------------|
-|quality                         |Quality                  | No     | Quality tag with all the relevant information for rule setup and execution.                  |
-|quality.name                    |Name                     | No     | A short name for the rule.                                                   |
-|quality.description             |Description              | No     | Describe the quality check to be completed.                                                   |
-|quality.type                |  | Yes    |Valid values are `implicit` (default), `text`, `sql`, and `custom`. |
-|quality.rule                |  | No     | |
-|quality.<operator>                |  | No     | |
-|quality.unit                |  | No     | |
-|quality.validValues                |  | No     | |
-|quality.query                |  | No     | |
-|quality.engine                |  | No     | |
-|quality.implementation                |  | No     | |
-|quality.dimension               |Dimension                | No     | The key performance indicator (KPI) or dimension for data quality. Valid values are liste after the table.|
-|quality.method                  |Method                   | No     | |
-|quality.severity                |Severity                 | No     | The severity of the quality rule.               |
-|quality.businessImpact          |Business Impact          | No     | Consequences of the rule failure.                                                                                                                                  |
-|quality.customProperties        |Custom Properties        | No     | Additional properties required for rulee xecution.                                                                                                                                                            |
-|quality.tags                    |Tags                     | No     | |
-|quality.authoritativeDefinitions|Authoritative Definitions| No     | |
-|quality.scheduler               |Scheduler                | No     | |
-|quality.schedule                |Scheduler Configuration  | No     | |
+Acronyms:
+* DQ: data quality.
 
-#### Valid values for dimension
+|Key                             |UX label                  |Required| Description                                                                                                                                                          |
+|--------------------------------|--------------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|quality                         |Quality                   | No     | Quality tag with all the relevant information for rule setup and execution.                                                                                          |
+|quality.name                    |Name                      | No     | A short name for the rule.                                                                                                                                           |
+|quality.description             |Description               | No     | Describe the quality check to be completed.                                                                                                                          |
+|quality.type                    |Type                      | No     | Type of DQ rule. Valid values are `implicit` (default), `text`, `sql`, and `custom`.                                                                                 |
+|quality.rule                    |Rule name                 | No     | Required for `implicit` DQ rules: the name of the rule to be executed.                                                                                               |
+|quality.\<operator>             |See below                 | No     | Multiple values are allowed for the **property**, the value is the one to compare to.                                                                                |
+|quality.unit                    |Unit                      | No     | Unit the rule is using, popular values are `rows` or `percent`, but any value is allowed.                                                                            |
+|quality.validValues             |Valid values              | No     | Static list of valid values.                                                                                                                                         |
+|quality.query                   |SQL Query                 | No     | Required for `sql` DQ rules: the SQL query to be executed. Note that it should match the target SQL engine/database, no transalation service are provided here.      |
+|quality.engine                  |Third-party DQ Engine     | No     | Required for `custom` DQ rule: name of the third-party engine being used. Any value is authorized here but common values are `soda`, `gx`, `montecarlo`, etc.        |
+|quality.implementation          |Third-party Implementation| No     | A text (non-parsed) block of code required for the third-party DQ engine to run.                                                                                     |
+|quality.dimension               |Dimension                 | No     | The key performance indicator (KPI) or dimension for data quality. Valid values are liste after the table.                                                           |
+|quality.method                  |Method                    | No     | Values are open and include `reconciliation`.                                                                                                                        |
+|quality.severity                |Severity                  | No     | The severity of the DQ rule.                                                                                                                                         |
+|quality.businessImpact          |Business Impact           | No     | Consequences of the rule failure.                                                                                                                                    |
+|quality.customProperties        |Custom Properties         | No     | Additional properties required for rulee execution. Follows the same structure as any custom properties block.                                                       |
+|quality.tags                    |Tags                      | No     | Tags. Follows the same structure as any tags property.                                                                                                               |
+|quality.authoritativeDefinitions|Authoritative Definitions | No     | Authoritative definitions indicate the link to external definition. Follows the same structure as any authoritative definitions block.                               |
+|quality.scheduler               |Scheduler                 | No     | Name of the scheduler, can be `cron` or any tool your organization support.                                                                                          |
+|quality.schedule                |Scheduler Configuration   | No     | Configuration information for the scheduling tool, for `cron` a possible value is `0 20 * * *`.                                                                      |
+
+#### Valid Values for Dimension
+Those data quality dimensions are used for classification and reporting in data quality. Valid values are:
 
   * `Accuracy` (synonym `Ac`),
   * `Completeness` (synonym `Cp`),
@@ -451,6 +455,23 @@ quality:
   * `Coverage` (synonym `Cv`),
   * `Timeliness` (synonym `Tm`),
   * `Uniqueness` (synonym `Uq`).
+
+#### Valid Properties for Operator
+The operator specifies the condition to validate the rule.
+
+|Operator               |Expected Value     |Math Symbol  |Example                     |
+|-----------------------|-------------------|-------------|----------------------------|
+|mustBe	                |number             | `=`         |`mustBe: 5`                 |
+|mustNotBe              |number             | `<>`, `≠`   |`mustNotBe: 3.14`           |
+|mustBeGreaterThan      |number             | `>`         |`mustBeGreaterThan: 59`     |
+|mustBeGreaterOrEqualTo |number             | `>=`, `≥`   |`mustBeGreaterOrEqualTo: 60`|
+|mustBeLessThan         |number             | `<`         |`mustBeLessThan: 1000`      |
+|mustBeLessOrEqualTo    |number             | `<=`, `≤`   |`mustBeLessOrEqualTo: 999`  |
+|mustBeBetween          |list of two numbers|	`⊂`         |`mustBeBetween: [0, 100]`   |
+|mustNotBeBetween       |list of two numbers|	`⊄`         |`mustNotBeBetween: [0, 100]`|
+
+#### Implicit Rules
+Bitol has the ambition of creating a standard set of implicit data quality rules. Join the working group around [RFC #0012](https://github.com/bitol-io/tsc/blob/main/rfcs/0012-implicit-dq-rules.md).
 
 
 ## <a id="support"/> Support & communication channels
