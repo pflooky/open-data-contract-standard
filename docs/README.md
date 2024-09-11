@@ -363,13 +363,13 @@ quality:
 ```
 
 ### SQL
-A single SQL query that returns either a numeric or boolean value for comparison. The query must be written in the SQL dialect specific to the provided server.
+A single SQL query that returns either a numeric or boolean value for comparison. The query must be written in the SQL dialect specific to the provided server. `${object}` and `${property}` are automatically replaced by the current object (in the case of SQL on a relational database, the table or view name) and the current property name (in the case of SQL on a relational database, the column).
 
 ```yaml
 quality:
   - type: sql 
     query: |
-      SELECT COUNT(*) FROM ${table} WHERE ${column} IS NOT NULL
+      SELECT COUNT(*) FROM ${object} WHERE ${property} IS NOT NULL
     mustBeLessThan: 3600    
 ```
 
@@ -395,12 +395,12 @@ quality:
 ```yaml
 quality:
 - type: custom
-  engine: great-expectations
+  engine: greatExpectations
   implementation: |
     type: expect_table_row_count_to_be_between # Block
     kwargs:                                    # passed as-is
       minValue: 10000                          # to the tool
-      maxValue: 50000                          # (GX in this situation)
+      maxValue: 50000                          # (Great Expectations in this situation)
 ```
 
 ### Scheduling
@@ -410,7 +410,7 @@ The data contract can contain scheduling information for executing the rules. Yo
 quality:
   - type: sql 
     query: |
-      SELECT COUNT(*) FROM ${table} WHERE ${column} IS NOT NULL
+      SELECT COUNT(*) FROM ${object} WHERE ${property} IS NOT NULL
     mustBeLessThan: 3600    
     scheduler: cron
     schedule: 0 20 * * *
@@ -422,39 +422,39 @@ quality:
 Acronyms:
 * DQ: data quality.
 
-|Key                             |UX label                  |Required| Description                                                                                                                                                          |
-|--------------------------------|--------------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|quality                         |Quality                   | No     | Quality tag with all the relevant information for rule setup and execution.                                                                                          |
-|quality.name                    |Name                      | No     | A short name for the rule.                                                                                                                                           |
-|quality.description             |Description               | No     | Describe the quality check to be completed.                                                                                                                          |
-|quality.type                    |Type                      | No     | Type of DQ rule. Valid values are `implicit` (default), `text`, `sql`, and `custom`.                                                                                 |
-|quality.rule                    |Rule name                 | No     | Required for `implicit` DQ rules: the name of the rule to be executed.                                                                                               |
-|quality.\<operator>             |See below                 | No     | Multiple values are allowed for the **property**, the value is the one to compare to.                                                                                |
-|quality.unit                    |Unit                      | No     | Unit the rule is using, popular values are `rows` or `percent`, but any value is allowed.                                                                            |
-|quality.validValues             |Valid values              | No     | Static list of valid values.                                                                                                                                         |
-|quality.query                   |SQL Query                 | No     | Required for `sql` DQ rules: the SQL query to be executed. Note that it should match the target SQL engine/database, no transalation service are provided here.      |
-|quality.engine                  |Third-party DQ Engine     | No     | Required for `custom` DQ rule: name of the third-party engine being used. Any value is authorized here but common values are `soda`, `gx`, `montecarlo`, etc.        |
-|quality.implementation          |Third-party Implementation| No     | A text (non-parsed) block of code required for the third-party DQ engine to run.                                                                                     |
-|quality.dimension               |Dimension                 | No     | The key performance indicator (KPI) or dimension for data quality. Valid values are liste after the table.                                                           |
-|quality.method                  |Method                    | No     | Values are open and include `reconciliation`.                                                                                                                        |
-|quality.severity                |Severity                  | No     | The severity of the DQ rule.                                                                                                                                         |
-|quality.businessImpact          |Business Impact           | No     | Consequences of the rule failure.                                                                                                                                    |
-|quality.customProperties        |Custom Properties         | No     | Additional properties required for rulee execution. Follows the same structure as any custom properties block.                                                       |
-|quality.tags                    |Tags                      | No     | Tags. Follows the same structure as any tags property.                                                                                                               |
-|quality.authoritativeDefinitions|Authoritative Definitions | No     | Authoritative definitions indicate the link to external definition. Follows the same structure as any authoritative definitions block.                               |
-|quality.scheduler               |Scheduler                 | No     | Name of the scheduler, can be `cron` or any tool your organization support.                                                                                          |
-|quality.schedule                |Scheduler Configuration   | No     | Configuration information for the scheduling tool, for `cron` a possible value is `0 20 * * *`.                                                                      |
+|Key                             |UX label                  |Required| Description                                                                                                                                                                         |
+|--------------------------------|--------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|quality                         |Quality                   | No     | Quality tag with all the relevant information for rule setup and execution.                                                                                                         |
+|quality.name                    |Name                      | No     | A short name for the rule.                                                                                                                                                          |
+|quality.description             |Description               | No     | Describe the quality check to be completed.                                                                                                                                         |
+|quality.type                    |Type                      | No     | Type of DQ rule. Valid values are `implicit` (default), `text`, `sql`, and `custom`.                                                                                                |
+|quality.rule                    |Rule name                 | No     | Required for `implicit` DQ rules: the name of the rule to be executed.                                                                                                              |
+|quality.\<operator>             |See below                 | No     | Multiple values are allowed for the **property**, the value is the one to compare to.                                                                                               |
+|quality.unit                    |Unit                      | No     | Unit the rule is using, popular values are `rows` or `percent`, but any value is allowed.                                                                                           |
+|quality.validValues             |Valid values              | No     | Static list of valid values.                                                                                                                                                        |
+|quality.query                   |SQL Query                 | No     | Required for `sql` DQ rules: the SQL query to be executed. Note that it should match the target SQL engine/database, no transalation service are provided here.                     |
+|quality.engine                  |Third-party DQ Engine     | No     | Required for `custom` DQ rule: name of the third-party engine being used. Any value is authorized here but common values are `soda`, `greatExpectations`, `montecarlo`, etc.        |
+|quality.implementation          |Third-party Implementation| No     | A text (non-parsed) block of code required for the third-party DQ engine to run.                                                                                                    |
+|quality.dimension               |Dimension                 | No     | The key performance indicator (KPI) or dimension for data quality. Valid values are listed after the table.                                                                         |
+|quality.method                  |Method                    | No     | Values are open and include `reconciliation`.                                                                                                                                       |
+|quality.severity                |Severity                  | No     | The severity of the DQ rule.                                                                                                                                                        |
+|quality.businessImpact          |Business Impact           | No     | Consequences of the rule failure.                                                                                                                                                   |
+|quality.customProperties        |Custom Properties         | No     | Additional properties required for rulee execution. Follows the same structure as any custom properties block.                                                                      |
+|quality.tags                    |Tags                      | No     | Tags. Follows the same structure as any tags property.                                                                                                                              |
+|quality.authoritativeDefinitions|Authoritative Definitions | No     | Authoritative definitions indicate the link to external definition. Follows the same structure as any authoritative definitions block.                                              |
+|quality.scheduler               |Scheduler                 | No     | Name of the scheduler, can be `cron` or any tool your organization support.                                                                                                         |
+|quality.schedule                |Scheduler Configuration   | No     | Configuration information for the scheduling tool, for `cron` a possible value is `0 20 * * *`.                                                                                     |
 
 #### Valid Values for Dimension
 Those data quality dimensions are used for classification and reporting in data quality. Valid values are:
 
-  * `Accuracy` (synonym `Ac`),
-  * `Completeness` (synonym `Cp`),
-  * `Conformity` (synonym `Cf`),
-  * `Consistency` (synonym `Cs`),
-  * `Coverage` (synonym `Cv`),
-  * `Timeliness` (synonym `Tm`),
-  * `Uniqueness` (synonym `Uq`).
+  * `accuracy` (synonym `ac`),
+  * `completeness` (synonym `cp`),
+  * `conformity` (synonym `cf`),
+  * `consistency` (synonym `cs`),
+  * `coverage` (synonym `cv`),
+  * `timeliness` (synonym `tm`),
+  * `uniqueness` (synonym `uq`).
 
 #### Valid Properties for Operator
 The operator specifies the condition to validate the rule.
