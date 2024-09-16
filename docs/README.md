@@ -698,7 +698,256 @@ slaProperties:
 | slaProperties.driver   | Driver                 | No                             | Describes the importance of the SLA from the list of: `regulatory`, `analytics`, or `operational`.  |
 
 ## Infrastructure & servers
-TBD
+
+
+This section describes the different types of servers available in the Open Data Contract Standard (ODCS) JSON Schema. Each server type is documented with specific field descriptions and an example in YAML.
+
+### General Server Structure
+
+Each server in the schema has the following structure:
+
+```yaml
+servers:
+  - type: <server-type>
+    description: <server-description>
+    environment: <server-environment>
+    roles:
+      - <role-details>
+    customProperties:
+      - <custom-properties>
+```
+
+#### Common Server Properties
+
+- **type**: The type of server. Valid values include various server technologies like `athena`, `bigquery`, `postgres`, etc.
+- **description**: A description of the server.
+- **environment**: The environment where the server operates (e.g., `prod`, `dev`, `uat`).
+- **roles**: An array of roles that have access to the server.
+- **customProperties**: Any additional custom properties specific to the server.
+
+---
+
+### Athena
+
+#### Fields specific to Athena:
+- **stagingDir**: The Amazon S3 path where Amazon Athena stores query results and metadata.
+- **schema**: The schema within the data source.
+- **catalog**: The catalog name for the Athena server (defaults to `awsdatacatalog`).
+- **regionName**: The AWS region for the Athena service.
+
+#### YAML Example:
+
+```yaml
+servers:
+  - type: athena
+    description: Amazon Athena server for querying S3 data
+    environment: prod
+    stagingDir: s3://my_storage_account_name/my_container/path
+    schema: my_schema
+    catalog: awsdatacatalog
+    regionName: eu-west-1
+```
+
+---
+
+### Azure
+
+#### Fields specific to Azure:
+- **location**: The Azure Blob Storage or Data Lake Storage URI.
+- **format**: The file format stored in Azure (`parquet`, `delta`, `json`, `csv`).
+- **delimiter**: For JSON format only, defines how multiple JSON documents are delimited (`new_line`, `array`).
+
+#### YAML Example:
+
+```yaml
+servers:
+  - type: azure
+    description: Azure Blob Storage or Data Lake Storage
+    environment: preprod
+    location: az://my_storage_account_name.blob.core.windows.net/my_container/path/*.parquet
+    format: parquet
+    delimiter: new_line
+```
+
+---
+
+### BigQuery
+
+#### Fields specific to BigQuery:
+- **project**: The GCP project name.
+- **dataset**: The BigQuery dataset name.
+
+#### YAML Example:
+
+```yaml
+servers:
+  - type: bigquery
+    description: Google BigQuery server
+    environment: prod
+    project: my_project
+    dataset: my_dataset
+```
+
+---
+
+### ClickHouse
+
+#### Fields specific to ClickHouse:
+- **host**: The hostname or IP address of the ClickHouse server.
+- **port**: The port number of the ClickHouse server.
+- **database**: The name of the database.
+
+#### YAML Example:
+
+```yaml
+servers:
+  - type: clickhouse
+    description: ClickHouse server for analytics
+    environment: dev
+    host: clickhouse.example.com
+    port: 8123
+    database: my_database
+```
+
+---
+
+### Databricks
+
+#### Fields specific to Databricks:
+- **host**: The Databricks server hostname.
+- **catalog**: The name of the catalog (either Hive or Unity).
+- **schema**: The schema within the catalog.
+
+#### YAML Example:
+
+```yaml
+servers:
+  - type: databricks
+    description: Databricks server for analytics
+    environment: prod
+    host: dbc-abcdefgh-1234.cloud.databricks.com
+    catalog: my_catalog
+    schema: my_schema
+```
+
+---
+
+### Denodo
+
+#### Fields specific to Denodo:
+- **host**: The hostname or IP address of the Denodo server.
+- **port**: The port number of the Denodo server.
+- **database**: The name of the database.
+
+#### YAML Example:
+
+```yaml
+servers:
+  - type: denodo
+    description: Denodo server for data virtualization
+    environment: dev
+    host: denodo.example.com
+    port: 9999
+    database: my_database
+```
+
+---
+
+### PostgreSQL
+
+#### Fields specific to PostgreSQL:
+- **host**: The hostname or IP address of the PostgreSQL server.
+- **port**: The port number of the PostgreSQL server.
+- **database**: The name of the database.
+- **schema**: The schema within the PostgreSQL database.
+
+#### YAML Example:
+
+```yaml
+servers:
+  - type: postgres
+    description: PostgreSQL database server
+    environment: prod
+    host: postgres.example.com
+    port: 5432
+    database: my_database
+    schema: public
+```
+
+---
+
+### Snowflake
+
+#### Fields specific to Snowflake:
+- **host**: The hostname of the Snowflake server.
+- **port**: The port number of the Snowflake server.
+- **account**: The Snowflake account name.
+- **database**: The database name.
+- **warehouse**: The name of the Snowflake virtual warehouse.
+- **schema**: The schema within the Snowflake database.
+
+#### YAML Example:
+
+```yaml
+servers:
+  - type: snowflake
+    description: Snowflake data warehouse
+    environment: prod
+    host: snowflake.example.com
+    port: 443
+    account: my_account
+    database: my_database
+    warehouse: my_warehouse
+    schema: public
+```
+
+---
+
+### S3
+
+#### Fields specific to S3:
+- **location**: The S3 URL where data is stored (must start with `s3://`).
+- **format**: The file format (`parquet`, `json`, `csv`, etc.).
+- **delimiter**: For JSON format only, defines how multiple JSON documents are delimited (`new_line`, `array`).
+
+#### YAML Example:
+
+```yaml
+servers:
+  - type: s3
+    description: Amazon S3 storage server
+    environment: uat
+    location: s3://datacontract-example-orders-latest/data/*.json
+    format: json
+    delimiter: new_line
+```
+
+---
+
+### Kafka
+
+#### Fields specific to Kafka:
+- **host**: The bootstrap server URL of the Kafka cluster.
+- **topic**: The topic name in the Kafka server.
+- **format**: The message format in Kafka (`json`, `avro`, `protobuf`, `xml`).
+
+#### YAML Example:
+
+```yaml
+servers:
+  - type: kafka
+    description: Apache Kafka server
+    environment: prod
+    host: kafka.example.com
+    topic: my_topic
+    format: json
+```
+
+---
+
+Each server type can be customized with different properties such as `host`, `port`, `database`, and `schema`, depending on the server technology in use. Refer to the specific documentation for each server type for additional configurations.
+
+
 
 ## <a id="custom-properties"/> Custom Properties
 This section covers custom properties you may find in a data contract.
