@@ -141,7 +141,7 @@
           "description": "Type of the server.",
           "enum": [
             "athena", "azure", "bigquery", "clickhouse", "databricks", "denodo", "dremio",
-            "duckdb", "glue", "googlecloudsql", "ibmdb2", "kafka", "kinesis", "local", "mssql",
+            "duckdb", "glue", "googlecloudsql", "ibmdb2", "kafka", "kinesis", "local",
             "mysql", "oracle", "postgres", "presto", "pubsub",
             "redshift", "s3", "sftp", "snowflake", "sqlserver", "synapse", "trino", "vertica"
           ]
