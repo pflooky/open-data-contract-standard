@@ -925,13 +925,13 @@ Each server type can be customized with different properties such as `host`, `po
 
 ## Redshift Server
 
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | An optional string describing the server.                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
-| **schema**   | Schema      | Yes        | The name of the schema.                                              |
-| **region**   | Region      | No         | AWS region of Redshift server.                                              |
-| **account**   | Account      | No         | The account used by the server.                                              |
+| Key          | UX Label        | Required | Description                                                |
+|--------------|-----------------|----------|------------------------------------------------------------|
+| **database**   | Database      | Yes      | The name of the database.                                              |
+| **schema**   | Schema      | Yes      | The name of the schema.                                              |
+| **host**   | Host      | No        | An optional string describing the server.                                              |
+| **region**   | Region      | No       | AWS region of Redshift server.                                              |
+| **account**   | Account      | No       | The account used by the server.                                              |
 
 ## S3 Server
 
