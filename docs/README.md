@@ -751,7 +751,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 - [duckdb](#duckdb-server)
 - [glue](#glue-server)
 - [cloudsql](#googlecloudsql-server)
-- [infomix](#informix-server)
+- [informix](#informix-server)
 - [kafka](#kafka-server)
 - [kinesis](#kinesis-server)
 - [local](#local-server)
