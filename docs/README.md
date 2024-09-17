@@ -769,7 +769,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 - [trino](#trino-server)
 - [vertica](#vertica-server)
 
-#### Athena Server
+#### <a id="Athena-server"/>Amazon Athena Server
 [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html) is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL. With a few actions in the AWS Management Console, you can point Athena at your data stored in Amazon S3 and begin using standard SQL to run ad-hoc queries and get results in seconds.
 
 | Key          | UX Label        | Required   | Description                                                |
@@ -779,7 +779,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | catalog   | Catalog      | No         | Identify the name of the Data Source, also referred to as a Catalog.                                              |
 | regionName   | Regionname      | No         | The region your AWS account uses.                                              |
 
-#### Azure Server
+#### <a id="Azure-server"/>Azure Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
@@ -787,16 +787,15 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | format   | Format      | Yes        | File format.                                              |
 | delimiter   | Delimiter      | No         | Only for format = json. How multiple json documents are delimited within one file                                              |
 
-#### BigQuery Server
+#### <a id="BigQuery-server"/>Google BigQuery
 [BigQuery](https://cloud.google.com/bigquery) is a fully managed, AI-ready data analytics platform that helps you maximize value from your data and is designed to be multi-engine, multi-format, and multi-cloud.
-
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| project   | Project      | Yes        | The GCP project name.                                              |
+| project   | Project      | Yes        | The Google Cloud Platform (GCP) project name.                                              |
 | dataset   | Dataset      | Yes        | The GCP dataset name.                                              |
 
-#### ClickHouse Server
+#### <a id="ClickHouse-server"/>ClickHouse Server
 [ClickHouse](https://clickhouse.com/) is an open-source column-oriented database management system that allows generating analytical data reports in real-time.
 
 | Key          | UX Label        | Required   | Description                                                |
@@ -806,11 +805,12 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | database   | Database      | Yes        | The name of the database.                                              |
 
 #### <a id="googlecloudsql-server"/>Google Cloud SQL
+[Google Cloud SQL](https://cloud.google.com/sql) is a fully managed, cost-effective relational database service for PostgreSQL, MySQL, and SQL Server.
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| host   | Host      | Yes        | The host of the Google Cloud Sql server.                                              |
-| port   | Port      | Yes        | The port of the Google Cloud Sql server.                                              |
+| host   | Host      | Yes        | The host of the Google Cloud SQL server.                                              |
+| port   | Port      | Yes        | The port of the Google Cloud SQL server.                                              |
 | database   | Database      | Yes        | The name of the database.                                              |
 | schema   | Schema      | Yes        | The name of the schema.                                              |
 
@@ -1073,15 +1073,15 @@ This section covers other properties you may find in a data contract.
 ### Example
 
 ```YAML
-contractCreatedTs: 2022-11-15 02:59:43
+contractCreatedTs: 2024-09-17T11:58:08Z
 ```
 
 
 ### Other properties definition
 
-| Key                       | UX label             | Required | Description                                                  |
-|---------------------------|----------------------|----------|--------------------------------------------------------------|
-| contractCreatedTs         | Contract Created UTC | No       | Timestamp in UTC of when the data contract was created.      |
+| Key                       | UX label             | Required | Description                                                             |
+|---------------------------|----------------------|----------|-------------------------------------------------------------------------|
+| contractCreatedTs         | Contract Created UTC | No       | Timestamp in UTC of when the data contract was created, using ISO 8601. |
 
 ## Full example
 
