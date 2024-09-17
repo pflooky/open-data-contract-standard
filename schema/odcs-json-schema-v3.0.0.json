@@ -1759,8 +1759,8 @@
         "type": {
           "type": "string",
           "description": "The type of quality check.",
-          "enum": ["text", "predefined", "sql", "custom"],
-          "default": "predefined"
+          "enum": ["text", "library", "sql", "custom"],
+          "default": "library"
         },
         "name": {
           "type": "string",
@@ -1818,12 +1818,12 @@
           "if": {
             "properties": {
               "type": {
-                "const": "predefined"
+                "const": "library"
               }
             }
           },
           "then": {
-            "$ref": "#/$defs/DataQualityPredefined"
+            "$ref": "#/$defs/DataQualityLibrary"
           }
         },
         {
@@ -1861,7 +1861,7 @@
         "$ref": "#/$defs/DataQuality"
       }
     },
-    "DataQualityPredefined": {
+    "DataQualityLibrary": {
       "type": "object",
       "properties": {
         "rule": {
