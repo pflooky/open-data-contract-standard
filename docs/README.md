@@ -751,7 +751,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 - [duckdb](#duckdb-server)
 - [glue](#glue-server)
 - [cloudsql](#googlecloudsql-server)
-- [infomix](#informix)
+- [infomix](#informix-server)
 - [kafka](#kafka-server)
 - [kinesis](#kinesis-server)
 - [local](#local-server)
@@ -769,7 +769,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 - [trino](#trino-server)
 - [vertica](#vertica-server)
 
-#### <a id="Athena-server"/>Amazon Athena Server
+#### <a id="athena-server"/>Amazon Athena Server
 [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html) is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL. With a few actions in the AWS Management Console, you can point Athena at your data stored in Amazon S3 and begin using standard SQL to run ad-hoc queries and get results in seconds.
 
 | Key          | UX Label        | Required   | Description                                                |
@@ -779,7 +779,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | catalog   | Catalog      | No         | Identify the name of the Data Source, also referred to as a Catalog.                                              |
 | regionName   | Regionname      | No         | The region your AWS account uses.                                              |
 
-#### <a id="Azure-server"/>Azure Server
+#### <a id="azure-server"/>Azure Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
@@ -787,7 +787,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | format   | Format      | Yes        | File format.                                              |
 | delimiter   | Delimiter      | No         | Only for format = json. How multiple json documents are delimited within one file                                              |
 
-#### <a id="BigQuery-server"/>Google BigQuery
+#### <a id="bigquery-server"/>Google BigQuery
 [BigQuery](https://cloud.google.com/bigquery) is a fully managed, AI-ready data analytics platform that helps you maximize value from your data and is designed to be multi-engine, multi-format, and multi-cloud.
 
 | Key          | UX Label        | Required   | Description                                                |
@@ -795,7 +795,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | project   | Project      | Yes        | The Google Cloud Platform (GCP) project name.                                              |
 | dataset   | Dataset      | Yes        | The GCP dataset name.                                              |
 
-#### <a id="ClickHouse-server"/>ClickHouse Server
+#### <a id="clickhouse-server"/>ClickHouse Server
 [ClickHouse](https://clickhouse.com/) is an open-source column-oriented database management system that allows generating analytical data reports in real-time.
 
 | Key          | UX Label        | Required   | Description                                                |
@@ -814,7 +814,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | database   | Database      | Yes        | The name of the database.                                              |
 | schema   | Schema      | Yes        | The name of the schema.                                              |
 
-#### Databricks Server
+#### <a id="databricks-server"/>Databricks Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
@@ -822,7 +822,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | schema   | Schema      | Yes        | The schema name in the catalog                                              |
 | host   | Host      | No         | The Databricks host                                              |
 
-#### IBM Db2 Server
+#### <a id="ibmdb2-server"/>IBM Db2 Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
@@ -831,7 +831,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | database   | Database      | Yes        | The name of the database.                                              |
 | schema   | Schema      | No         | The name of the schema.                                              |
 
-#### Denodo Server
+#### <a id="denodo-server"/>Denodo Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
@@ -839,7 +839,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | port   | Port      | Yes        | The port of the Denodo server.                                              |
 | database   | Database      | No         | The name of the database.                                              |
 
-#### Dremio Server
+#### <a id="dremio-server"/>Dremio Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
@@ -847,7 +847,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | port   | Port      | Yes        | The port of the Dremio server.                                              |
 | schema   | Schema      | No         | The name of the schema.                                              |
 
-#### DuckDB Server
+#### <a id="duckdb-server"/>DuckDB Server
 [DuckDB](https://duckdb.org/) supports a feature-rich SQL dialect complemented with deep integrations into client APIs.
 
 | Key          | UX Label        | Required   | Description                                                |
