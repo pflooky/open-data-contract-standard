@@ -353,19 +353,6 @@
           "if": {
             "properties": {
               "type": {
-                "const": "mssql"
-              }
-            },
-            "required": ["type"]
-          },
-          "then": {
-            "$ref": "#/$defs/ServerSource/MSSqlServer"
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "type": {
                 "const": "mysql"
               }
             },
@@ -911,38 +898,6 @@
           "format"
         ]
       },
-      "MSSqlServer": {
-        "type": "object",
-        "title": "MSSqlServer",
-        "properties": {
-          "host": {
-            "type": "string",
-            "description": "The host of the MS Sql server."
-          },
-          "port": {
-            "type": "integer",
-            "description": "The port of the MS Sql server."
-          },
-          "database": {
-            "type": "string",
-            "description": "The name of the database."
-          },
-          "schema": {
-            "type": "string",
-            "description": "The name of the schema."
-          },
-          "driver": {
-            "type": "string",
-            "description": "Version of ODBC driver to use."
-          }
-        },
-        "required": [
-          "host",
-          "port",
-          "database",
-          "schema"
-        ]
-      },
       "MySqlServer": {
         "type": "object",
         "title": "MySqlServer",
@@ -1213,11 +1168,8 @@
           }
         },
         "required": [
-          "host",
-          "port",
           "account",
           "database",
-          "warehouse",
           "schema"
         ]
       },

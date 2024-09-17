@@ -883,16 +883,6 @@ Each server type can be customized with different properties such as `host`, `po
 | **path**   | Path      | Yes        | The relative or absolute path to the data file(s).                                              |
 | **format**   | Format      | Yes        | The format of the file(s)                                              |
 
-## Mssql Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host of the MS Sql server.                                              |
-| **port**   | Port      | Yes        | The port of the MS Sql server.                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
-| **schema**   | Schema      | Yes        | The name of the schema.                                              |
-| **driver**   | Driver      | No         | Version of ODBC driver to use.                                              |
-
 ## Mysql Server
 
 | Key          | UX Label        | Required   | Description                                                |
