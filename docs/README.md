@@ -299,12 +299,12 @@ This section describes data quality rules & parameters. They are tightly linked 
 
 Data quality rules support different levels/stages of data quality attributes:
   - __Text__: A human-readable text that describes the quality of the data.
-  - __Default__ rules: A maintained library of commonly-used predefined quality attributes such as `rowCount`, `unique`, `freshness`, and more.
+  - __Library__ rules: A maintained library of commonly-used predefined quality attributes such as `rowCount`, `unique`, `freshness`, and more.
   - __SQL__: An individual SQL query that returns a value that can be compared. Can be extended to `Python` or other.
   - __Custom__: Quality attributes that are vendor-specific, such as Soda, Great Expectations, dbt tests, or Montecarlo monitors.
 
 ### Text
-A human-readable text that describes the quality of the data. Later in the development process, these might be translated into an executable check (such as `sql`), a default rule, or checked through an AI engine.
+A human-readable text that describes the quality of the data. Later in the development process, these might be translated into an executable check (such as `sql`), a library rule, or checked through an AI engine.
 
 ```yaml
 quality:
@@ -312,7 +312,7 @@ quality:
     description: The email address was verified by the system.
 ```
 
-### Default data quality rules
+### Library
 ODCS will provide a set of predefined rules commonly used in data quality checks, designed to be compatible with all major data quality engines. This simplifies the work for data engineers by eliminating the need to manually write SQL queries.
 
 #### Property-level
@@ -323,7 +323,7 @@ No more than 10 duplicate names.
 
 ```yaml
 quality:
-- type: default # optional and default value for data quality rules
+- type: library # optional and default value for data quality rules
   rule: duplicateCount
   mustBeLessThan: 10
   name: Fewer than 10 duplicate names
@@ -427,8 +427,8 @@ Acronyms:
 |quality                         |Quality                   | No     | Quality tag with all the relevant information for rule setup and execution.                                                                                                         |
 |quality.name                    |Name                      | No     | A short name for the rule.                                                                                                                                                          |
 |quality.description             |Description               | No     | Describe the quality check to be completed.                                                                                                                                         |
-|quality.type                    |Type                      | No     | Type of DQ rule. Valid values are `default` (default), `text`, `sql`, and `custom`.                                                                                                |
-|quality.rule                    |Rule name                 | No     | Required for `default` DQ rules: the name of the rule to be executed.                                                                                                              |
+|quality.type                    |Type                      | No     | Type of DQ rule. Valid values are `library` (default), `text`, `sql`, and `custom`.                                                                                                |
+|quality.rule                    |Rule name                 | No     | Required for `library` DQ rules: the name of the rule to be executed.                                                                                                              |
 |quality.\<operator>             |See below                 | No     | Multiple values are allowed for the **property**, the value is the one to compare to.                                                                                               |
 |quality.unit                    |Unit                      | No     | Unit the rule is using, popular values are `rows` or `percent`, but any value is allowed.                                                                                           |
 |quality.validValues             |Valid values              | No     | Static list of valid values.                                                                                                                                                        |
@@ -492,8 +492,8 @@ quality:
 ```
 
 
-#### Default Rules
-Bitol has the ambition of creating a standard set of default data quality rules. Join the working group around [RFC #0012](https://github.com/bitol-io/tsc/blob/main/rfcs/0012-implicit-dq-rules.md).
+#### Library Rules
+Bitol has the ambition of creating a library of common data quality rules. Join the working group around [RFC #0012](https://github.com/bitol-io/tsc/blob/main/rfcs/0012-implicit-dq-rules.md).
 
 
 ## <a id="support"/> Support & communication channels
