@@ -701,13 +701,13 @@ slaProperties:
 
 The `servers` element describes where the data protected by this data contract is *physically* located. That metadata helps to know where the data is so that a data consumer can discover the data and a platform engineer can automate access.
 
-A `server` describes a single dataset on a specific environment and a specific technology. The `servers` element can contain multiple servers, each with its own configuration.
+An entry in `servers` describes a single dataset on a specific environment and a specific technology. The `servers` element can contain multiple servers, each with its own configuration.
 
 The typical ways of using the top level `servers` element are as follows:
 - **Single Server:** The data contract protects a specific dataset at a specific location. *Example:* a CSV file on an SFTP server.
-- **Multiple Environments:** The data contract makes sure that the data is protected in all environments. *Example:* a data product with data in a dev, uat, and prod environment on Databricks.
-- **Different Technologies:** The data contract makes sure that regardless of the offered technology, it still holds. *Example:* a data product offers its data in a kafka topic and in a BigQuery table that should have the same structure and content.
-- **Different Technologies and Multiple Environments:** The data contract makes sure that regardless of the offered technology and environment, it still holds. *Example:* a data product offers its data in a kafka topic and in a BigQuery table that should have the same structure and content in dev, uat, and prod.
+- **Multiple Environments:** The data contract makes sure that the data is protected in all environments. *Example:* a data product with data in a dev(elopment), UAT, and prod(uction) environment on Databricks.
+- **Different Technologies:** The data contract makes sure that regardless of the offered technology, it still holds. *Example:* a data product offers its data in a Kafka topic and in a BigQuery table that should have the same structure and content.
+- **Different Technologies and Multiple Environments:** The data contract makes sure that regardless of the offered technology and environment, it still holds. *Example:* a data product offers its data in a Kafka topic and in a BigQuery table that should have the same structure and content in dev(elopment), UAT, and prod(uction).
 
 ### General Server Structure
 
@@ -730,7 +730,7 @@ servers:
 - **type**: The type of server. Valid values include various server technologies like `athena`, `bigquery`, `postgresql`, etc.
 - **description**: A description of the server.
 - **environment**: The environment where the server operates (e.g., `prod`, `dev`, `uat`). There are no set values.
-- **roles**: An array of roles that have access to the server.
+- **roles**: An optional array of roles that have access to the server.
 - **customProperties**: Any additional custom properties specific to the server.
 
 ### Specific Server Properties
@@ -869,11 +869,9 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| host         | Host      | Yes        | The host to the PostgreSQL server                                              |
-| port         | Port      | Yes        | The port to the PostgreSQL server.                                              |
-| database     | Database      | Yes        | The name of the database.                                              |
-| schema       | Schema      | No        | The name of the schema in the database.                                              |
-
+| host         | Host            | Yes        | The host to the Informix server.                           |
+| port         | Port            | No         | The port to the Informix server. Defaults to 9088.         |
+| database     | Database        | Yes        | The name of the database.                                  |
 
 #### <a id="kafka-server"/>Kafka Server
 
@@ -902,8 +900,8 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| host   | Host      | Yes        | The host of the MySql server.                                              |
-| port   | Port      | Yes        | The port of the MySql server.                                              |
+| host      | Host      | Yes        | The host of the MySql server.                                           |
+| port   | Port      | No        | The port of the MySql server. Defaults to 3306.                         |
 | database   | Database      | Yes        | The name of the database.                                              |
 
 #### <a id="oracle-server"/>Oracle
@@ -912,7 +910,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 |--------------|-----------------|------------|------------------------------------------------------------|
 | host   | Host      | Yes        | The host to the Oracle server                                              |
 | port   | Port      | Yes        | The port to the Oracle server.                                              |
-| serviceName   | Servicename      | Yes        | The name of the service.                                              |
+| serviceName   | Service Name      | Yes        | The name of the service.                                              |
 
 #### <a id="postgresql-server"/>PostgreSQL
 [PostgreSQL](https://www.postgresql.org/) is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
@@ -920,7 +918,7 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
 | host         | Host      | Yes        | The host to the PostgreSQL server                                              |
-| port         | Port      | Yes        | The port to the PostgreSQL server.                                              |
+| port         | Port      | No        | The port to the PostgreSQL server. Defaults to 5432.                                   |
 | database     | Database      | Yes        | The name of the database.                                              |
 | schema       | Schema      | No        | The name of the schema in the database.                                              |
 
@@ -966,7 +964,7 @@ Secure File Transfer Protocol (SFTP) is a network protocol that enables secure a
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| location   | Location      | Yes        | SFTP URL, starting with `sftp://`                                             |
+| location   | Location      | Yes        | SFTP URL, starting with `sftp://`. The URL should include the port number.                                             |
 | format   | Format      | No         | File format.                                              |
 | delimiter   | Delimiter      | No         | Only for format = json. How multiple json documents are delimited within one file                                              |
 
@@ -987,9 +985,9 @@ Secure File Transfer Protocol (SFTP) is a network protocol that enables secure a
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
 | host   | Host      | Yes        | The host to the database server                                              |
+| port   | Port      | No         | The port to the database server. Defaults to 1433.                                             |
 | database   | Database      | Yes        | The name of the database.                                              |
 | schema   | Schema      | Yes        | The name of the schema in the database.                                              |
-| port   | Port      | No         | The port to the database server.                                              |
 
 #### <a id="synapse-server"/>Synapse Server
 
@@ -1019,26 +1017,27 @@ Secure File Transfer Protocol (SFTP) is a network protocol that enables secure a
 
 #### <a id="custom-server"/>Custom Server
 
-| Key          | UX Label          | Required   | Description                                                |
-|--------------|-------------------|------------|------------------------------------------------------------|
-| account      | Account           | No         | Account used by the server.                                |
-| catalog      | Catalog           | No         | Name of the catalog.                                              |
-| database     | Database          | No         | Name of the database.                                              |
-| dataset      | Dataset           | No         | Name of the dataset.                                              |
-| delimiter    | Delimiter         | No         | Delimiter.                                                 |
-| endpointUrl  | Endpoint URL      | No         | Server endpoint.                                              |
-| format       | Format            | No         | File format.                                               |
-| host         | Host              | No         | Host name or IP address.                                              |
-| location     | Location          | No         | A URL to a location.                                              |
-| path         | Path              | No         | Relative or absolute path to the data file(s).                                              |
-| project      | Project           | No         | Project name.                                              |
-| region       | Region            | No         | Cloud region.                                              |
-| regionName   | Regionname        | No         | Region name.                                               |
-| schema       | Schema            | No         | Name of the schema.                                              |
-| serviceName  | Servicename       | No         | Name of the service.                                              |
-| stagingDir   | Staging directory | No         | Staging directory.                                              |
+| Key          | UX Label          | Required   | Description                                                         |
+|--------------|-------------------|------------|---------------------------------------------------------------------|
+| account      | Account           | No         | Account used by the server.                                         |
+| catalog      | Catalog           | No         | Name of the catalog.                                                |
+| database     | Database          | No         | Name of the database.                                               |
+| dataset      | Dataset           | No         | Name of the dataset.                                                |
+| delimiter    | Delimiter         | No         | Delimiter.                                                          |
+| endpointUrl  | Endpoint URL      | No         | Server endpoint.                                                    |
+| format       | Format            | No         | File format.                                                        |
+| host         | Host              | No         | Host name or IP address.                                            |
+| location     | Location          | No         | A URL to a location.                                                |
+| path         | Path              | No         | Relative or absolute path to the data file(s).                              |
+| port         | Port              | No         | Port to the server. No default value is assumed for custom servers. |
+| project      | Project           | No         | Project name.                                                        |
+| region       | Region            | No         | Cloud region.                                                        |
+| regionName   | Regionname        | No         | Region name.                                                         |
+| schema       | Schema            | No         | Name of the schema.                                                        |
+| serviceName  | Servicename       | No         | Name of the service.                                                        |
+| stagingDir   | Staging directory | No         | Staging directory.                                                        |
 | stream       | Stream            | No         | Name of the data stream.                                              |
-| topic        | Topic             | No         | Topic name.                                              |
+| topic        | Topic             | No         | Topic name.                                                                  |
 | warehouse    | Warehouse         | No         | Name of the cluster or warehouse.                                              |
 
 If you need another property, use [custom properties](#custom-properties).
