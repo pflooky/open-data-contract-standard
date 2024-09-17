@@ -98,7 +98,7 @@ schema:
           - rule: nullCheck
             description: column should not contain null values
             dimension: completeness # dropdown 7 values
-            type: predefined
+            type: library
             severity: error
             businessImpact: operational
             schedule: 0 20 * * *
@@ -112,7 +112,7 @@ schema:
                 value: Greater than
     quality:
       - rule: countCheck
-        type: predefined
+        type: library
         description: Ensure row count is within expected volume range
         dimension: completeness
         method: reconciliation

@@ -1756,15 +1756,20 @@
     "DataQuality": {
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of quality check.",
-          "enum": ["text", "library", "sql", "custom"],
-          "default": "library"
+        "authoritativeDefinitions": {
+          "$ref": "#/$defs/AuthoritativeDefinitions"
         },
-        "name": {
+        "businessImpact": {
           "type": "string",
-          "description": "Name of the data quality check."
+          "description": "Consequences of the rule failure.",
+          "examples": ["operational", "regulatory"]
+        },
+        "customProperties": {
+          "type": "array",
+          "description": "Additional properties required for rule execution.",
+          "items": {
+            "$ref": "#/$defs/CustomProperty"
+          }
         },
         "description": {
           "type": "string",
@@ -1775,19 +1780,13 @@
           "description": "The key performance indicator (KPI) or dimension for data quality.",
           "enum": ["accuracy", "completeness", "conformity", "consistency", "coverage", "timeliness", "uniqueness"]
         },
-        "severity": {
-          "type": "string",
-          "description": "The severance of the quality rule.",
-          "examples": ["info", "warning", "error"]
-        },
-        "businessImpact": {
-          "type": "string",
-          "description": "Consequences of the rule failure.",
-          "examples": ["operational", "regulatory"]
-        },
         "method": {
           "type": "string",
           "examples": ["reconciliation"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the data quality check."
         },
         "schedule": {
           "type": "string",
@@ -1799,18 +1798,24 @@
           "description": "The name or type of scheduler used to start the data quality check.",
           "examples": ["cron"]
         },
-        "authoritativeDefinitions": {
-          "$ref": "#/$defs/AuthoritativeDefinitions"
+        "severity": {
+          "type": "string",
+          "description": "The severance of the quality rule.",
+          "examples": ["info", "warning", "error"]
         },
         "tags": {
           "$ref": "#/$defs/Tags"
         },
-        "customProperties": {
-          "type": "array",
-          "description": "Additional properties required for rule execution.",
-          "items": {
-            "$ref": "#/$defs/CustomProperty"
-          }
+        "type": {
+          "type": "string",
+          "description": "The type of quality check. 'text' is human-readable text that describes the quality of the data. 'library' is a set of maintained predefined quality attributes such as row count or unique. 'sql' is an individual SQL query that returns a value that can be compared. 'custom' is quality attributes that are vendor-specific, such as Soda or Great Expectations.",
+          "enum": ["text", "library", "sql", "custom"],
+          "default": "library"
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit the rule is using, popular values are `rows` or `percent`, but any value is allowed.",
+          "examples": ["rows", "percent"]
         }
       },
       "allOf": [
@@ -1866,7 +1871,50 @@
       "properties": {
         "rule": {
           "type": "string",
-          "description": "Define a data quality check based on the predefined rules as per ODCS."
+          "description": "Define a data quality check based on the predefined rules as per ODCS.",
+          "examples": ["duplicateCount", "validValues", "rowCount"]
+        },
+        "mustBe": {
+          "description": "Must be equal to the value to be valid. When using numbers, it is equivalent to '='."
+        },
+        "mustNotBe": {
+          "description": "Must not be equal to the value to be valid. When using numbers, it is equivalent to '!='."
+        },
+        "mustBeGreaterThan": {
+          "type": "number",
+          "description": "Must be greater than the value to be valid. It is equivalent to '>'."
+        },
+        "mustBeGreaterOrEqualTo": {
+          "type": "number",
+          "description": "Must be greater than or equal to the value to be valid. It is equivalent to '>='."
+        },
+        "mustBeLessThan": {
+          "type": "number",
+          "description": "Must be less than the value to be valid. It is equivalent to '<'."
+        },
+        "mustBeLessOrEqualTo": {
+          "type": "number",
+          "description": "Must be less than or equal to the value to be valid. It is equivalent to '<='."
+        },
+        "mustBeBetween": {
+          "type": "array",
+          "description": "Must be between the two numbers to be valid. Smallest number first in the array.",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "number"
+          }
+        },
+        "mustNotBeBetween": {
+          "type": "array",
+          "description": "Must not be between the two numbers to be valid. Smallest number first in the array.",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "number"
+          }
         }
       },
       "required": ["rule"]
