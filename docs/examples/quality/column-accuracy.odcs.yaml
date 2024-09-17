@@ -19,7 +19,7 @@ schema:
       logicalType: number
       physicalType: float(3,2)
       quality:
-      - type: predefined
+      - type: library
         rule: between
         description: 'This name should contain positive values under 500'
         dimension: accuracy
