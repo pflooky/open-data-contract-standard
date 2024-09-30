@@ -697,17 +697,17 @@ slaProperties:
 | slaProperties.element  | Element(s)             | No                             | Element(s) to check on. Multiple elements should be extremely rare and, if so, separated by commas. |
 | slaProperties.driver   | Driver                 | No                             | Describes the importance of the SLA from the list of: `regulatory`, `analytics`, or `operational`.  |
 
-## Infrastructure & servers
+## <a id="servers"/> Infrastructure & Servers
 
 The `servers` element describes where the data protected by this data contract is *physically* located. That metadata helps to know where the data is so that a data consumer can discover the data and a platform engineer can automate access.
 
-A `server` describes a single dataset on a specific environment and a specific technology. The `servers` element can contain multiple servers, each with its own configuration.
+An entry in `servers` describes a single dataset on a specific environment and a specific technology. The `servers` element can contain multiple servers, each with its own configuration.
 
 The typical ways of using the top level `servers` element are as follows:
 - **Single Server:** The data contract protects a specific dataset at a specific location. *Example:* a CSV file on an SFTP server.
-- **Multiple Environments:** The data contract makes sure that the data is protected in all environments. *Example:* a data product with data in a dev, uat, and prod environment on Databricks.
-- **Different Technologies:** The data contract makes sure that regardless of the offered technology, it still holds. *Example:* a data product offers its data in a kafka topic and in a BigQuery table that should have the same structure and content.
-- **Different Technologies and Multiple Environments:** The data contract makes sure that regardless of the offered technology and environment, it still holds. *Example:* a data product offers its data in a kafka topic and in a BigQuery table that should have the same structure and content in dev, uat, and prod.
+- **Multiple Environments:** The data contract makes sure that the data is protected in all environments. *Example:* a data product with data in a dev(elopment), UAT, and prod(uction) environment on Databricks.
+- **Different Technologies:** The data contract makes sure that regardless of the offered technology, it still holds. *Example:* a data product offers its data in a Kafka topic and in a BigQuery table that should have the same structure and content.
+- **Different Technologies and Multiple Environments:** The data contract makes sure that regardless of the offered technology and environment, it still holds. *Example:* a data product offers its data in a Kafka topic and in a BigQuery table that should have the same structure and content in dev(elopment), UAT, and prod(uction).
 
 ### General Server Structure
 
@@ -727,35 +727,37 @@ servers:
 
 #### Common Server Properties
 
-- **type**: The type of server. Valid values include various server technologies like `athena`, `bigquery`, `postgres`, etc.
+- **type**: The type of server. Valid values include various server technologies like `athena`, `bigquery`, `postgresql`, etc.
 - **description**: A description of the server.
-- **environment**: The environment where the server operates (e.g., `prod`, `dev`, `uat`).
-- **roles**: An array of roles that have access to the server.
+- **environment**: The environment where the server operates (e.g., `prod`, `dev`, `uat`). There are no set values.
+- **roles**: An optional array of roles that have access to the server.
 - **customProperties**: Any additional custom properties specific to the server.
 
 ### Specific Server Properties
 
 Each server type can be customized with different properties such as `host`, `port`, `database`, and `schema`, depending on the server technology in use. Refer to the specific documentation for each server type for additional configurations.
 
-#### Server Types
+### Specific Server Properties & Types
 
+If your server is not in the list, please use [custom](#custom-server) and suggest it as an improvement. Possible values for `type` are:
 - [athena](#athena-server)
 - [azure](#azure-server)
 - [bigquery](#bigquery-server)
 - [clickhouse](#clickhouse-server)
 - [databricks](#databricks-server)
+- [db2](#ibmdb2-server)
 - [denodo](#denodo-server)
 - [dremio](#dremio-server)
 - [duckdb](#duckdb-server)
 - [glue](#glue-server)
-- [googlecloudsql](#googlecloudsql-server)
-- [ibmdb2](#ibmdb2-server)
+- [cloudsql](#googlecloudsql-server)
+- [informix](#informix-server)
 - [kafka](#kafka-server)
 - [kinesis](#kinesis-server)
 - [local](#local-server)
 - [mysql](#mysql-server)
 - [oracle](#oracle-server)
-- [postgres](#postgres-server)
+- [postgresql](#postgres-server)
 - [presto](#presto-server)
 - [pubsub](#pubsub-server)
 - [redshift](#redshift-server)
@@ -767,237 +769,278 @@ Each server type can be customized with different properties such as `host`, `po
 - [trino](#trino-server)
 - [vertica](#vertica-server)
 
----
-
-
-## Athena Server
+#### <a id="athena-server"/>Amazon Athena Server
+[Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html) is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL. With a few actions in the AWS Management Console, you can point Athena at your data stored in Amazon S3 and begin using standard SQL to run ad-hoc queries and get results in seconds.
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **schema**   | Schema      | Yes        | Identify the schema in the data source in which your tables exist.                                              |
-| **stagingDir**   | Stagingdir      | No         | Amazon Athena automatically stores query results and metadata information for each query that runs in a query result location that you can specify in Amazon S3.                                              |
-| **catalog**   | Catalog      | No         | Identify the name of the Data Source, also referred to as a Catalog.                                              |
-| **regionName**   | Regionname      | No         | The region your AWS account uses.                                              |
+| schema   | Schema      | Yes        | Identify the schema in the data source in which your tables exist.                                              |
+| stagingDir   | Stagingdir      | No         | Amazon Athena automatically stores query results and metadata information for each query that runs in a query result location that you can specify in Amazon S3.                                              |
+| catalog   | Catalog      | No         | Identify the name of the Data Source, also referred to as a Catalog.                                              |
+| regionName   | Regionname      | No         | The region your AWS account uses.                                              |
 
-## Azure Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **location**   | Location      | Yes        | Fully qualified path to Azure Blob Storage or Azure Data Lake Storage (ADLS), supports globs.                                              |
-| **format**   | Format      | Yes        | File format.                                              |
-| **delimiter**   | Delimiter      | No         | Only for format = json. How multiple json documents are delimited within one file                                              |
-
-## Bigquery Server
+#### <a id="azure-server"/>Azure Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **project**   | Project      | Yes        | The GCP project name.                                              |
-| **dataset**   | Dataset      | Yes        | The GCP dataset name.                                              |
+| location   | Location      | Yes        | Fully qualified path to Azure Blob Storage or Azure Data Lake Storage (ADLS), supports globs.                                              |
+| format   | Format      | Yes        | File format.                                              |
+| delimiter   | Delimiter      | No         | Only for format = json. How multiple json documents are delimited within one file                                              |
 
-## Clickhouse Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host of the ClickHouse server.                                              |
-| **port**   | Port      | Yes        | The port to the ClickHouse server.                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
-
-## Databricks Server
+#### <a id="bigquery-server"/>Google BigQuery
+[BigQuery](https://cloud.google.com/bigquery) is a fully managed, AI-ready data analytics platform that helps you maximize value from your data and is designed to be multi-engine, multi-format, and multi-cloud.
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **catalog**   | Catalog      | Yes        | The name of the Hive or Unity catalog                                              |
-| **schema**   | Schema      | Yes        | The schema name in the catalog                                              |
-| **host**   | Host      | No         | The Databricks host                                              |
+| project   | Project      | Yes        | The Google Cloud Platform (GCP) project name.                                              |
+| dataset   | Dataset      | Yes        | The GCP dataset name.                                              |
 
-## Denodo Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host of the Denodo server.                                              |
-| **port**   | Port      | Yes        | The port of the Denodo server.                                              |
-| **database**   | Database      | No         | The name of the database.                                              |
-
-## Dremio Server
+#### <a id="clickhouse-server"/>ClickHouse Server
+[ClickHouse](https://clickhouse.com/) is an open-source column-oriented database management system that allows generating analytical data reports in real-time.
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host of the Dremio server.                                              |
-| **port**   | Port      | Yes        | The port of the Dremio server.                                              |
-| **schema**   | Schema      | No         | The name of the schema.                                              |
+| host   | Host      | Yes        | The host of the ClickHouse server.                                              |
+| port   | Port      | Yes        | The port to the ClickHouse server.                                              |
+| database   | Database      | Yes        | The name of the database.                                              |
 
-## Duckdb Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **database**   | Database      | Yes        | Path to duckdb database file.                                              |
-| **schema**   | Schema      | No         | The name of the schema.                                              |
-
-## Glue Server
+#### <a id="googlecloudsql-server"/>Google Cloud SQL
+[Google Cloud SQL](https://cloud.google.com/sql) is a fully managed, cost-effective relational database service for PostgreSQL, MySQL, and SQL Server.
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **account**   | Account      | Yes        | The AWS Glue account                                              |
-| **database**   | Database      | Yes        | The AWS Glue database name                                              |
-| **location**   | Location      | No         | The AWS S3 path. Must be in the form of a URL.                                              |
-| **format**   | Format      | No         | The format of the files                                              |
+| host   | Host      | Yes        | The host of the Google Cloud SQL server.                                              |
+| port   | Port      | Yes        | The port of the Google Cloud SQL server.                                              |
+| database   | Database      | Yes        | The name of the database.                                              |
+| schema   | Schema      | Yes        | The name of the schema.                                              |
 
-## Googlecloudsql Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host of the Google Cloud Sql server.                                              |
-| **port**   | Port      | Yes        | The port of the Google Cloud Sql server.                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
-| **schema**   | Schema      | Yes        | The name of the schema.                                              |
-
-## Ibmdb2 Server
+#### <a id="databricks-server"/>Databricks Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host of the IBM DB2 server.                                              |
-| **port**   | Port      | Yes        | The port of the IBM DB2 server.                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
-| **schema**   | Schema      | No         | The name of the schema.                                              |
+| catalog   | Catalog      | Yes        | The name of the Hive or Unity catalog                                              |
+| schema   | Schema      | Yes        | The schema name in the catalog                                              |
+| host   | Host      | No         | The Databricks host                                              |
 
-## Kafka Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The bootstrap server of the kafka cluster.                                              |
-| **topic**   | Topic      | Yes        | The topic name.                                              |
-| **format**   | Format      | No         | The format of the messages.                                              |
-
-## Kinesis Server
+#### <a id="ibmdb2-server"/>IBM Db2 Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **stream**   | Stream      | Yes        | The name of the Kinesis data stream.                                              |
-| **region**   | Region      | No         | AWS region.                                              |
-| **format**   | Format      | No         | The format of the record                                              |
+| host   | Host      | Yes        | The host of the IBM DB2 server.                                              |
+| port   | Port      | Yes        | The port of the IBM DB2 server.                                              |
+| database   | Database      | Yes        | The name of the database.                                              |
+| schema   | Schema      | No         | The name of the schema.                                              |
 
-## Local Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **path**   | Path      | Yes        | The relative or absolute path to the data file(s).                                              |
-| **format**   | Format      | Yes        | The format of the file(s)                                              |
-
-## Mysql Server
+#### <a id="denodo-server"/>Denodo Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host of the MySql server.                                              |
-| **port**   | Port      | Yes        | The port of the MySql server.                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
+| host   | Host      | Yes        | The host of the Denodo server.                                              |
+| port   | Port      | Yes        | The port of the Denodo server.                                              |
+| database   | Database      | No         | The name of the database.                                              |
 
-## Oracle Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host to the oracle server                                              |
-| **port**   | Port      | Yes        | The port to the oracle server.                                              |
-| **serviceName**   | Servicename      | Yes        | The name of the service.                                              |
-
-## Postgres Server
+#### <a id="dremio-server"/>Dremio Server
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host to the Postgres server                                              |
-| **port**   | Port      | Yes        | The port to the Postgres server.                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
-| **schema**   | Schema      | Yes        | The name of the schema in the database.                                              |
+| host   | Host      | Yes        | The host of the Dremio server.                                              |
+| port   | Port      | Yes        | The port of the Dremio server.                                              |
+| schema   | Schema      | No         | The name of the schema.                                              |
 
-## Presto Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host to the Presto server                                              |
-| **catalog**   | Catalog      | No         | The name of the catalog.                                              |
-| **schema**   | Schema      | No         | The name of the schema.                                              |
-
-## Pubsub Server
+#### <a id="duckdb-server"/>DuckDB Server
+[DuckDB](https://duckdb.org/) supports a feature-rich SQL dialect complemented with deep integrations into client APIs.
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **project**   | Project      | Yes        | The GCP project name.                                              |
-| **topic**   | Topic      | Yes        | The topic name.                                              |
+| database   | Database      | Yes        | Path to duckdb database file.                                              |
+| schema   | Schema      | No         | The name of the schema.                                              |
 
-## Redshift Server
+#### <a id="glue-server"/>Amazon Glue 
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| account   | Account      | Yes        | The AWS Glue account                                              |
+| database   | Database      | Yes        | The AWS Glue database name                                              |
+| location   | Location      | No         | The AWS S3 path. Must be in the form of a URL.                                              |
+| format   | Format      | No         | The format of the files                                              |
+
+#### <a id="informix-server"/>IBM Informix & HCL Informix
+[IBM Informix](https://www.ibm.com/products/informix) is a high performance, always-on, highly scalable and easily embeddable enterprise-class database optimized for the most demanding transactional and analytics workloads. As an object-relational engine, IBM Informix seamlessly integrates the best of relational and object-oriented capabilities enabling the flexible modeling of complex data structures and relationships.
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| host         | Host            | Yes        | The host to the Informix server.                           |
+| port         | Port            | No         | The port to the Informix server. Defaults to 9088.         |
+| database     | Database        | Yes        | The name of the database.                                  |
+
+#### <a id="kafka-server"/>Kafka Server
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| host   | Host      | Yes        | The bootstrap server of the kafka cluster.                                              |
+| topic   | Topic      | Yes        | The topic name.                                              |
+| format   | Format      | No         | The format of the messages.                                              |
+
+#### <a id="kinesis-server"/>Amazon Kinesis
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| stream   | Stream      | Yes        | The name of the Kinesis data stream.                                              |
+| region   | Region      | No         | AWS region.                                              |
+| format   | Format      | No         | The format of the record                                              |
+
+#### <a id="local-server"/>Local Files
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| path   | Path      | Yes        | The relative or absolute path to the data file(s).                                              |
+| format   | Format      | Yes        | The format of the file(s)                                              |
+
+#### <a id="mysql-server"/>MySQL Server
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| host      | Host      | Yes        | The host of the MySql server.                                           |
+| port   | Port      | No        | The port of the MySql server. Defaults to 3306.                         |
+| database   | Database      | Yes        | The name of the database.                                              |
+
+#### <a id="oracle-server"/>Oracle
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| host   | Host      | Yes        | The host to the Oracle server                                              |
+| port   | Port      | Yes        | The port to the Oracle server.                                              |
+| serviceName   | Service Name      | Yes        | The name of the service.                                              |
+
+#### <a id="postgresql-server"/>PostgreSQL
+[PostgreSQL](https://www.postgresql.org/) is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| host         | Host      | Yes        | The host to the PostgreSQL server                                              |
+| port         | Port      | No        | The port to the PostgreSQL server. Defaults to 5432.                                   |
+| database     | Database      | Yes        | The name of the database.                                              |
+| schema       | Schema      | No        | The name of the schema in the database.                                              |
+
+#### <a id="presto-server"/>Presto Server
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| host   | Host      | Yes        | The host to the Presto server                                              |
+| catalog   | Catalog      | No         | The name of the catalog.                                              |
+| schema   | Schema      | No         | The name of the schema.                                              |
+
+#### <a id="pubsub-server"/>Google Pub/Sub
+[Google Cloud](https://cloud.google.com/pubsub) service to Ingest events for streaming into BigQuery, data lakes or operational databases.
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| project   | Project      | Yes        | The GCP project name.                                              |
+| topic   | Topic      | Yes        | The topic name.                                              |
+
+#### <a id="redshift-server"/>Amazon Redshift Server
+[Amazon Redshift](https://aws.amazon.com/redshift/) is a power data driven decisions with the best price-performance cloud data warehouse.
 
 | Key          | UX Label        | Required | Description                                                |
 |--------------|-----------------|----------|------------------------------------------------------------|
-| **database**   | Database      | Yes      | The name of the database.                                              |
-| **schema**   | Schema      | Yes      | The name of the schema.                                              |
-| **host**   | Host      | No        | An optional string describing the server.                                              |
-| **region**   | Region      | No       | AWS region of Redshift server.                                              |
-| **account**   | Account      | No       | The account used by the server.                                              |
+| database   | Database      | Yes      | The name of the database.                                              |
+| schema   | Schema      | Yes      | The name of the schema.                                              |
+| host   | Host      | No        | An optional string describing the server.                                              |
+| region   | Region      | No       | AWS region of Redshift server.                                              |
+| account   | Account      | No       | The account used by the server.                                              |
 
-## S3 Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **location**   | Location      | Yes        | S3 URL, starting with `s3://`                                              |
-| **endpointUrl**   | Endpointurl      | No         | The server endpoint for S3-compatible servers.                                              |
-| **format**   | Format      | No         | File format.                                              |
-| **delimiter**   | Delimiter      | No         | Only for format = json. How multiple json documents are delimited within one file                                              |
-
-## Sftp Server
+#### <a id="s3-server"/>Amazon S3 Server and Compatible Servers
+[Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/s3/) is an object storage service offering industry-leading scalability, data availability, security, and performance. Millions of customers of all sizes and industries store, manage, analyze, and protect any amount of data for virtually any use case, such as data lakes, cloud-native applications, and mobile apps. Other vendors have implemented a compatible implementation of S3.
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **location**   | Location      | Yes        | SFTP URL, starting with `sftp://`                                              |
-| **format**   | Format      | No         | File format.                                              |
-| **delimiter**   | Delimiter      | No         | Only for format = json. How multiple json documents are delimited within one file                                              |
+| location   | Location      | Yes        | S3 URL, starting with `s3://`                                              |
+| endpointUrl   | Endpointurl      | No         | The server endpoint for S3-compatible servers.                                              |
+| format   | Format      | No         | File format.                                              |
+| delimiter   | Delimiter      | No         | Only for format = json. How multiple json documents are delimited within one file                                              |
 
-## Snowflake Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host to the Snowflake server                                              |
-| **port**   | Port      | Yes        | The port to the Snowflake server.                                              |
-| **account**   | Account      | Yes        | The Snowflake account used by the server.                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
-| **warehouse**   | Warehouse      | Yes        | The name of the cluster of resources that is a Snowflake virtual warehouse.                                              |
-| **schema**   | Schema      | Yes        | The name of the schema.                                              |
-
-## Sqlserver Server
+#### <a id="sftp-server"/>SFTP Server
+Secure File Transfer Protocol (SFTP) is a network protocol that enables secure and encrypted file transfers between a client and a server.
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host to the database server                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
-| **schema**   | Schema      | Yes        | The name of the schema in the database.                                              |
-| **port**   | Port      | No         | The port to the database server.                                              |
+| location   | Location      | Yes        | SFTP URL, starting with `sftp://`. The URL should include the port number.                                             |
+| format   | Format      | No         | File format.                                              |
+| delimiter   | Delimiter      | No         | Only for format = json. How multiple json documents are delimited within one file                                              |
 
-## Synapse Server
-
-| Key          | UX Label        | Required   | Description                                                |
-|--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host of the Synapse server.                                              |
-| **port**   | Port      | Yes        | The port of the Synapse server.                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
-
-## Trino Server
+#### <a id="snowflake-server"/>Snowflake
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The Trino host URL.                                              |
-| **port**   | Port      | Yes        | The Trino port.                                              |
-| **catalog**   | Catalog      | Yes        | The name of the catalog.                                              |
-| **schema**   | Schema      | Yes        | The name of the schema in the database.                                              |
+| host   | Host      | Yes        | The host to the Snowflake server                                              |
+| port   | Port      | Yes        | The port to the Snowflake server.                                              |
+| account   | Account      | Yes        | The Snowflake account used by the server.                                              |
+| database   | Database      | Yes        | The name of the database.                                              |
+| warehouse   | Warehouse      | Yes        | The name of the cluster of resources that is a Snowflake virtual warehouse.                                              |
+| schema   | Schema      | Yes        | The name of the schema.                                              |
 
-## Vertica Server
+#### <a id="sqlserver-server"/>Microsoft SQL Server
+[Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) is a proprietary relational database management system developed by Microsoft. 
 
 | Key          | UX Label        | Required   | Description                                                |
 |--------------|-----------------|------------|------------------------------------------------------------|
-| **host**   | Host      | Yes        | The host of the Vertica server.                                              |
-| **port**   | Port      | Yes        | The port of the Vertica server.                                              |
-| **database**   | Database      | Yes        | The name of the database.                                              |
-| **schema**   | Schema      | Yes        | The name of the schema.                                              |
+| host   | Host      | Yes        | The host to the database server                                              |
+| port   | Port      | No         | The port to the database server. Defaults to 1433.                                             |
+| database   | Database      | Yes        | The name of the database.                                              |
+| schema   | Schema      | Yes        | The name of the schema in the database.                                              |
 
+#### <a id="synapse-server"/>Synapse Server
 
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| host   | Host      | Yes        | The host of the Synapse server.                                              |
+| port   | Port      | Yes        | The port of the Synapse server.                                              |
+| database   | Database      | Yes        | The name of the database.                                              |
 
+#### <a id="trino-server"/>Trino Server
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| host   | Host      | Yes        | The Trino host URL.                                              |
+| port   | Port      | Yes        | The Trino port.                                              |
+| catalog   | Catalog      | Yes        | The name of the catalog.                                              |
+| schema   | Schema      | Yes        | The name of the schema in the database.                                              |
+
+#### <a id="vertica-server"/>Vertica Server
+
+| Key          | UX Label        | Required   | Description                                                |
+|--------------|-----------------|------------|------------------------------------------------------------|
+| host   | Host      | Yes        | The host of the Vertica server.                                              |
+| port   | Port      | Yes        | The port of the Vertica server.                                              |
+| database   | Database      | Yes        | The name of the database.                                              |
+| schema   | Schema      | Yes        | The name of the schema.                                              |
+
+#### <a id="custom-server"/>Custom Server
+
+| Key          | UX Label          | Required   | Description                                                         |
+|--------------|-------------------|------------|---------------------------------------------------------------------|
+| account      | Account           | No         | Account used by the server.                                         |
+| catalog      | Catalog           | No         | Name of the catalog.                                                |
+| database     | Database          | No         | Name of the database.                                               |
+| dataset      | Dataset           | No         | Name of the dataset.                                                |
+| delimiter    | Delimiter         | No         | Delimiter.                                                          |
+| endpointUrl  | Endpoint URL      | No         | Server endpoint.                                                    |
+| format       | Format            | No         | File format.                                                        |
+| host         | Host              | No         | Host name or IP address.                                            |
+| location     | Location          | No         | A URL to a location.                                                |
+| path         | Path              | No         | Relative or absolute path to the data file(s).                              |
+| port         | Port              | No         | Port to the server. No default value is assumed for custom servers. |
+| project      | Project           | No         | Project name.                                                        |
+| region       | Region            | No         | Cloud region.                                                        |
+| regionName   | Regionname        | No         | Region name.                                                         |
+| schema       | Schema            | No         | Name of the schema.                                                        |
+| serviceName  | Servicename       | No         | Name of the service.                                                        |
+| stagingDir   | Staging directory | No         | Staging directory.                                                        |
+| stream       | Stream            | No         | Name of the data stream.                                              |
+| topic        | Topic             | No         | Topic name.                                                                  |
+| warehouse    | Warehouse         | No         | Name of the cluster or warehouse.                                              |
+
+If you need another property, use [custom properties](#custom-properties).
 
 
 ## <a id="custom-properties"/> Custom Properties
@@ -1030,16 +1073,19 @@ This section covers other properties you may find in a data contract.
 ### Example
 
 ```YAML
-contractCreatedTs: 2022-11-15 02:59:43
+contractCreatedTs: 2024-09-17T11:58:08Z
 ```
 
 
 ### Other properties definition
 
-| Key                       | UX label             | Required | Description                                                  |
-|---------------------------|----------------------|----------|--------------------------------------------------------------|
-| contractCreatedTs         | Contract Created UTC | No       | Timestamp in UTC of when the data contract was created.      |
+| Key                       | UX label             | Required | Description                                                             |
+|---------------------------|----------------------|----------|-------------------------------------------------------------------------|
+| contractCreatedTs         | Contract Created UTC | No       | Timestamp in UTC of when the data contract was created, using ISO 8601. |
 
 ## Full example
 
 [Check full example here.](examples/all/full-example.yaml)
+
+
+All trademarks are the property of their respective owners. 
