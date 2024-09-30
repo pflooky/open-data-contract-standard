@@ -739,6 +739,7 @@ Each server type can be customized with different properties such as `host`, `po
 
 #### Server Types
 
+- [api](#api-server)
 - [athena](#athena-server)
 - [azure](#azure-server)
 - [bigquery](#bigquery-server)
@@ -768,6 +769,12 @@ Each server type can be customized with different properties such as `host`, `po
 - [vertica](#vertica-server)
 
 ---
+
+## API Server
+
+| Key            | UX Label   | Required   | Description                                                                                                                                                      |
+|----------------|------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **location**   | Location   | Yes        | URL to the API                                                                                                                                                   |
 
 
 ## Athena Server

@@ -140,10 +140,10 @@
           "type": "string",
           "description": "Type of the server.",
           "enum": [
-            "athena", "azure", "bigquery", "clickhouse", "databricks", "denodo", "dremio",
-            "duckdb", "glue", "googlecloudsql", "ibmdb2", "kafka", "kinesis", "local",
-            "mysql", "oracle", "postgres", "presto", "pubsub",
-            "redshift", "s3", "sftp", "snowflake", "sqlserver", "synapse", "trino", "vertica"
+            "api", "athena", "azure", "bigquery", "clickhouse", "databricks", "denodo", "dremio",
+            "duckdb", "glue", "cloudsql", "db2", "informix", "kafka", "kinesis", "local",
+            "mysql", "oracle", "postgresql", "postgres", "presto", "pubsub",
+            "redshift", "s3", "sftp", "snowflake", "sqlserver", "synapse", "trino", "vertica", "custom"
           ]
         },
         "description": {
@@ -167,6 +167,19 @@
         }
       },
       "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "api"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/ApiServer"
+          }
+        },
         {
           "if": {
             "properties": {
@@ -288,7 +301,7 @@
           "if": {
             "properties": {
               "type": {
-                "const": "googlecloudsql"
+                "const": "cloudsql"
               }
             },
             "required": ["type"]
@@ -301,13 +314,40 @@
           "if": {
             "properties": {
               "type": {
-                "const": "ibmdb2"
+                "const": "db2"
               }
             },
             "required": ["type"]
           },
           "then": {
             "$ref": "#/$defs/ServerSource/IBMDB2Server"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "informix"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/InformixServer"
+          }
+        },
+
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "custom"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/CustomServer"
           }
         },
         {
@@ -373,6 +413,19 @@
           },
           "then": {
             "$ref": "#/$defs/ServerSource/OracleServer"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "postgresql"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "$ref": "#/$defs/ServerSource/PostgresServer"
           }
         },
         {
@@ -522,6 +575,23 @@
       "required": ["server", "type"]
     },
     "ServerSource": {
+      "ApiServer": {
+        "type": "object",
+        "title": "AthenaServer",
+        "properties": {
+          "location": {
+            "type": "string",
+            "format": "uri",
+            "description": "The url to the API.",
+            "examples": [
+              "https://api.example.com/v1"
+            ]
+          }
+        },
+        "required": [
+          "location"
+        ]
+      },
       "AthenaServer": {
         "type": "object",
         "title": "AthenaServer",
@@ -814,6 +884,116 @@
           "port",
           "database"
         ]
+      },
+      "InformixServer": {
+        "type": "object",
+        "title": "InformixServer",
+        "properties": {
+          "host": {
+            "type": "string",
+            "description": "The host to the Informix server. "
+          },
+          "port": {
+            "type": "integer",
+            "description": "The port to the Informix server. Defaults to 9088."
+          },
+          "database": {
+            "type": "string",
+            "description": "The name of the database."
+          }
+        },
+        "required": [
+          "host",
+          "database"
+        ]
+      },
+      "CustomServer": {
+        "type": "object",
+        "title": "CustomServer",
+        "properties": {
+          "account": {
+            "type": "string",
+            "description": "Account used by the server."
+          },
+          "catalog": {
+            "type": "string",
+            "description": "Name of the catalog."
+          },
+          "database": {
+            "type": "string",
+            "description": "Name of the database."
+          },
+          "dataset": {
+            "type": "string",
+            "description": "Name of the dataset."
+          },
+          "delimiter": {
+            "type": "string",
+            "description": "Delimiter."
+          },
+          "endpointUrl": {
+            "type": "string",
+            "description": "Server endpoint.",
+            "format": "uri"
+          },
+          "format": {
+            "type": "string",
+            "description": "File format."
+          },
+          "host": {
+            "type": "string",
+            "description": "Host name or IP address."
+          },
+          "location": {
+            "type": "string",
+            "description": "A URL to a location.",
+            "format": "uri"
+          },
+          "path": {
+            "type": "string",
+            "description": "Relative or absolute path to the data file(s)."
+          },
+          "port": {
+            "type": "integer",
+            "description": "Port to the server. No default value is assumed for custom servers."
+          },
+          "project": {
+            "type": "string",
+            "description": "Project name."
+          },
+          "region": {
+            "type": "string",
+            "description": "Cloud region."
+          },
+          "regionName": {
+            "type": "string",
+            "description": "Region name."
+          },
+          "schema": {
+            "type": "string",
+            "description": "Name of the schema."
+          },
+          "serviceName": {
+            "type": "string",
+            "description": "Name of the service."
+          },
+          "stagingDir": {
+            "type": "string",
+            "description": "Staging directory."
+          },
+          "stream": {
+            "type": "string",
+            "description": "Name of the data stream."
+          },
+          "topic": {
+            "type": "string",
+            "description": "Topic name."
+          },
+          "warehouse": {
+            "type": "string",
+            "description": "Name of the cluster or warehouse."
+          }
+        }
       },
       "KafkaServer": {
         "type": "object",
