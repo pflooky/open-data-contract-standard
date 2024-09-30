@@ -740,6 +740,8 @@ Each server type can be customized with different properties such as `host`, `po
 ### Specific Server Properties & Types
 
 If your server is not in the list, please use [custom](#custom-server) and suggest it as an improvement. Possible values for `type` are:
+
+- [api](#api-server)
 - [athena](#athena-server)
 - [azure](#azure-server)
 - [bigquery](#bigquery-server)
@@ -768,6 +770,13 @@ If your server is not in the list, please use [custom](#custom-server) and sugge
 - [synapse](#synapse-server)
 - [trino](#trino-server)
 - [vertica](#vertica-server)
+
+## API Server
+
+| Key            | UX Label   | Required   | Description                                                                                                                                                      |
+|----------------|------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **location**   | Location   | Yes        | URL to the API                                                                                                                                                   |
+
 
 #### <a id="athena-server"/>Amazon Athena Server
 [Amazon Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html) is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL. With a few actions in the AWS Management Console, you can point Athena at your data stored in Amazon S3 and begin using standard SQL to run ad-hoc queries and get results in seconds.
