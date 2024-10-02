@@ -202,7 +202,9 @@ support:
   - channel: '#product-help' # Simple Slack communication channel
     tool: slack
     url: https://aidaug.slack.com/archives/C05UZRSBKLY
-
+  - channel: datacontract-ann # Simple distribution list
+    tool: email
+    url: mailto:datacontract-ann@bitol.io
 
 
 # Tags
