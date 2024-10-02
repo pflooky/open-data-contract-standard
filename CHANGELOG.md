@@ -6,7 +6,7 @@ image: "https://raw.githubusercontent.com/bitol-io/artwork/main/horizontal/color
 
 This document tracks the history and evolution of the **Open Data Contract Standard**.
 
-# v3.0.0 - 2024-xx-xx - IN PROGRESS
+# v3.0.0 - 2024-10-05 - IN REVIEW
 
 * **New section**: Support & communication channels.  
 * **Changes** to fundamentals :
@@ -88,7 +88,8 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 * Add in mkdocs for creating a [documentation website](https://bitol-io.github.io/open-data-contract-standard/). Check [building-doc.md](building-doc.md).
 * Add vendors page [vendors.md](vendors.md). Feel free to add anyone there.
 
-# v2.2.1 - 2023-12-18 - APPROVED
+
+# v2.2.1 - 2023-12-18 - REPLACED BY V2.2.2
 
 * Reformat quality examples to be valid YAML.
 * Type of definition for authority have standard values: `businessDefinition`, `transformationImplementation`, `videoTutorial`, `tutorial`, and `implementation`.
@@ -97,7 +98,8 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 * Integrated as part of [Bitol](https://lfaidata.foundation/projects/bitol/).
 * Reformat Markdown tables.
 
-# v2.2.0 - 2023-07-27 - APPROVED
+
+# v2.2.0 - 2023-07-27 - REPLACED BY V2.2.1
 
 * New name to Open Data Contract Standard.
 * `templateName` is now called `standardVersion`, v2.2.0 parsers should account for this change and support both to avoid a breaking change.
@@ -106,12 +108,14 @@ This document tracks the history and evolution of the **Open Data Contract Stand
 * Various improvements and typo corrections.
 * Finalization of fork under AIDA User Group.
 
-# v2.1.1 - 2023-04-26 - APPROVED
+
+# v2.1.1 - 2023-04-26 - REPLACED BY V2.2.0
 
 * Open source version.
 * Additional value field `valueExt` in SLA.
 
-# v2.1.0 - 2023-03-23 - APPROVED
+
+# v2.1.0 - 2023-03-23 - REPLACED BY V2.1.1
 
 ## Data Quality
 The data contract adds elements specifically for interfacing with the Data Quality tooling. 
@@ -137,7 +141,7 @@ The service-level agreements not previously used are more detailed to follow the
 ## Other
 Removed the weight for system ratings from the data contract. Their default values remain.
 
-# v2.0.0 - SUPERSEED BY V2.1.0
+# v2.0.0 - REPLACED BY V2.1.0
 
 ## Guidelines & Evolution
 * [Type case](https://google.github.io/styleguide/jsoncstyleguide.xml?showone=Property_Name_Format#Property_Name_Format)
