@@ -594,16 +594,6 @@ team:
 The UX label is the label used in the UI and other user experiences. It is not limited to BlueRacket.
 
 | Key                     | UX label           | Required | Description                                                                                       |
-|-------------------------|--------------------|----------|---------------------------------------------------------------------------------------------------|
-| team                    | Team               | No       | Array.                                                                                            |
-| team.username           | Username           | No       | The stakeholder's username or email.                                                              |
-| team.role               | Role               | No       | The stakeholder's job role; Examples might be owner, data steward. There is no limit on the role. |
-| team.dateIn             | Date In            | No       | The date when the user became a stakeholder.                                                      |
-| team.dateOut            | Date Out           | No       | The date when the user ceased to be a stakeholder                                                 |
-| team.name               | Full Name          | No       | Full name.                                                                                        |
-| team.email              | Email              | No       | Explicit email.                                                                                   |
-| team.comment            | Comment            | No       | Generic comment.                                                                                   |
-| team.replacedByUsername | Replaced By        | No       | The username of the user who replaced the stakeholder                                             |
 
 
 ## Roles
@@ -1094,7 +1084,7 @@ contractCreatedTs: 2024-09-17T11:58:08Z
 
 ## Full example
 
-[Check full example here.](examples/all/full-example.yaml)
+[Check full example here.](examples/all/full-example.odcs.yaml)
 
 
 All trademarks are the property of their respective owners. 
