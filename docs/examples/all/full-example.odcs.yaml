@@ -13,10 +13,11 @@ description:
 tenant: ClimateQuantumInc
 
 kind: DataContract
-apiVersion: v3.0.0 # Standard version (follows semantic versioning, previously known as templateVersion)
+apiVersion: v3.0.0 # Standard version (follows semantic versioning)
 
 type: tables
 
+# Infrastructure & servers
 servers:
   - server: my-postgres
     type: postgres
@@ -121,11 +122,13 @@ schema:
         schedule: 0 20 * * *
         scheduler: cron
 
+
 # Pricing
 price:
   priceAmount: 9.95
   priceCurrency: USD
   priceUnit: megabyte
+
 
 # Team
 team:
@@ -141,6 +144,7 @@ team:
     role: Owner
     comment: Keeper of the grail
     dateIn: "2022-10-01"
+
 
 # Roles
 roles:
@@ -192,6 +196,7 @@ slaProperties:
     element: tab1.txn_ref_dt
     driver: analytics
 
+
 # Support
 support:
   - channel: '#product-help' # Simple Slack communication channel
@@ -204,9 +209,11 @@ support:
     description: General Product Feedback (Public) 
     url: https://product-feedback.com
 
+
 # Tags
 tags:
   - transactions
+
 
 # Custom properties
 customProperties:
