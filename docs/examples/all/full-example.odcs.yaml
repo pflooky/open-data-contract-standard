@@ -205,7 +205,9 @@ support:
   - channel: datacontract-ann # Simple distribution list
     tool: email
     url: mailto:datacontract-ann@bitol.io
-
+ - channel: Feedback  # Product Feedback
+    description: General Product Feedback (Public) 
+    url: https://product-feedback.com
 
 # Tags
 tags:
