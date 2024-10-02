@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "title": "Open Data Contract Standard (OCDS)",
+  "title": "Open Data Contract Standard (ODCS)",
   "description": "An open data contract specification to establish agreement between data producers and consumers.",
   "type": "object",
   "properties": {
