@@ -50,8 +50,8 @@ This document tracks the history and evolution of the **Open Data Contract Stand
   * `criticalDataElementStatus` is now `criticalDataElement`.
   * `clusterKeyPosition` is not supported anymore, if needed, consider a custom property.
   * `transformSourceTables` is now `transformSourceObjects`
-  * Restrict `dataset.table.columns.column.logicalType` to be one of `string`, `date`, `number`, `integer`, `object`, `array`, `boolean`.
-  * Add `dataset.table.columns.column.logicalTypeOptions`.
+  * Restrict `schema.*.logicalType` to be one of `string`, `date`, `number`, `integer`, `object`, `array`, `boolean`.
+  * Add `schema.*.logicalTypeOptions`.
 * **Changes** to Data Quality:
   * Significant changes have been applied to support more tools and use cases. Please review the new section.
   * If needed, `templateName` is a custom property.
